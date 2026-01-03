@@ -15,8 +15,7 @@ site:
   title: "Philipp Schoenegger"
   tagline: "I work on Microsoft AI's Futures team in the Office of the CEO."
   intro: |
-    My current research focuses on the economic impacts of advanced artificial intelligence, 
-    AI consciousness and its societal impacts, and forecasting AI progress among other related topics.
+    My current research focuses on the economic impacts of advanced artificial intelligence, AI consciousness and its societal impacts, and forecasting AI progress among other related topics. Connect on [Twitter](https://x.com/SchoeneggerPhil), [LinkedIn](https://www.linkedin.com/in/philipp-schoenegger-755117211/), or reach out via [email](mailto:contact.schoenegger@gmail.com).
 
 # ============================================================================
 # MAIN NAVIGATION SECTIONS
@@ -28,17 +27,18 @@ sections:
   - id: research
     title: Research
     intro: |
-      My research spans AI, economics, philosophy, psychology and more. 
-      It has been cited over 1,500 times with an h-index of 15.
+      My research is inter- and multi-disciplinary, primarily at the intersection of AI, economics, philosophy, and psychology. I have studied AI evaluations, forecasting, charitable giving, experimental philosophy, and more. My work has been cited >1,500 times with an h-index of 15. See my [Google Scholar](https://scholar.google.com/citations?user=kDAq8DcAAAAJ&hl=en&oi=ao) for a full list of publications.
     children:
       # AI Research
       - id: ai
         title: Artificial Intelligence
+        intro: |
+          My main research focus is at the intersection of AI and social science, examining forecasting capabilities (geopolitics, economics, and more) as well as persuasion capabilities.
         children:
           - id: ai-evaluations
             title: Evaluations
             intro: |
-              My AI evaluations research examines prediction capabilities (focusing on geopolitical and economic forecasting), persuasion, and personality predictions.
+              My AI evaluations research began with forecasting, which is an excellent metric for tracking AI capabilities because predictions are by definition out of the training distribution and ground truth cannot be revealed at test time. Persuasion capabilities are equally important to research as they represent a central pathway through which AI systems can influence human decision-making. My research suggested that models are at best indistinguishable from human crowds for forecasting, but likely still below, while persuasion and personality prediction capabilities are definitively at human and even expert level.
             publications:
               - year: 2024
                 title: "Diminished Diversity-of-Thought in a Standard Large Language Model"
@@ -74,7 +74,7 @@ sections:
           - id: ai-posttraining
             title: Posttraining & Prompt Engineering
             intro: |
-              My posttraining work, largely with [Lightning Rod Labs](https://www.lightningrod.ai/), used GRPO to improve forecasting capabilities of small models, while separate prompt engineering research examined its effects on forecasting.
+              My posttraining work with [Lightning Rod Labs](https://www.lightningrod.ai/) used reinforcement learning from verifiable rewards (RLVR), specifically GRPO, to improve forecasting capabilities of small models. While prompt engineering promises to be very effective given its low cost, we did not find strong effects in our research.
             publications:
               - year: 2025
                 title: "LLMs Can Teach Themselves to Better Predict the Future"
@@ -95,7 +95,7 @@ sections:
           - id: ai-other
             title: Other
             intro: |
-              With my team at Microsoft AI, I examined the usage patterns of Copilot in 2025.
+              We conducted a descriptive analysis of Copilot usage patterns throughout 2025, examining temporal and modal dynamics of how users interact with AI assistants.
             publications:
               - year: 2025
                 title: "It's About Time: The Temporal and Modal Dynamics of Copilot Usage"
@@ -106,11 +106,13 @@ sections:
       # Economics Research
       - id: economics
         title: Economics
+        intro: |
+          I trained as a behavioural economist, focusing on charitable giving and forecasting causal effects.
         children:
           - id: econ-behavioural
             title: Behavioural Economics
             intro: |
-              My behavioural economics research focused on charitable giving and moral decision-making.
+              My behavioural economics research focused on charitable giving and moral decision-making. Key findings include that moral arguments can boost charitable giving, even when they increase the perceived demandingness of donations.
             publications:
               - year: 2022
                 title: "Sure-Thing vs. Probabilistic Charitable Giving: Experimental Evidence on the Role of Individual Differences in Risky and Ambiguous Charitable Decision-Making"
@@ -131,7 +133,7 @@ sections:
           - id: econ-decision
             title: Decision Science
             intro: |
-              My decision science research examines long-run causal effect forecasting and methods for improving low-probability judgements.
+              My decision science research examines forecasting of long-run causal effects and methods for improving low-probability judgements, connecting economic methodology with prediction science.
             publications:
               - year: 2024
                 title: "Forecasting Long-Run Causal Effects"
@@ -147,11 +149,13 @@ sections:
       # Philosophy Research
       - id: philosophy
         title: Philosophy
+        intro: |
+          My philosophical background spans from experimental philosophy and empirical methods to political theory, with a focus on practical applications of philosophical research.
         children:
           - id: phil-experimental
             title: Experimental Philosophy
             intro: |
-              My experimental philosophy research spans methods (Bayesian Truth Serum) and empirical experiments in population ethics and moral psychology.
+              My experimental philosophy research spans methods (Bayesian Truth Serum) and empirical experiments in population ethics and moral psychology. I developed applications of BTS for incentive-compatible elicitation in philosophical surveys and tested its practical implementation.
             publications:
               - year: 2023
                 title: "Concrete Over Abstract: Experimental Evidence of Reflective Equilibrium in Population Ethics"
@@ -193,7 +197,7 @@ sections:
           - id: phil-political
             title: Political Theory
             intro: |
-              My political theory research focuses on liberalism, particularly the work of John Locke.
+              My political theory research focuses on liberalism, particularly the work of John Locke. I examined Locke's theory of prerogative, its relationship to natural law and democratic theory, and the epistemological foundations of liberal thought.
             publications:
               - year: 2024
                 title: "On the Epistemological Similarities of Market Liberalism and Standpoint Theory"
@@ -214,11 +218,13 @@ sections:
       # Psychology Research
       - id: psychology
         title: Psychology
+        intro: |
+          My psychological research reflects broad interests across multiple subfields, often conducted through team collaborations with large international research consortia.
         children:
           - id: psych-personality
             title: Personality Psychology
             intro: |
-              My personality psychology research developed and validated scales for measuring antinatalist attitudes.
+              My personality psychology research developed and validated scales for measuring antinatalist attitudes, as well as exploring its relationship to dark triad traits.
             publications:
               - year: 2023
                 title: "Introduction and Validation of the Short Antinatalism Scale (S-ANS)"
@@ -232,9 +238,9 @@ sections:
                 url: "https://doi.org/10.1080/09515089.2021.1946026"
 
           - id: psych-social
-            title: Selected Social Psychology
+            title: Social Psychology
             intro: |
-              With a large international research consortium, I contributed to studies examining the social psychology of the COVID-19 pandemic.
+              With a large international research consortium, I contributed to studies examining the social psychology of the COVID-19 pandemic and national identity.
             publications:
               - year: 2022
                 title: "Predicting Attitudinal and Behavioral Responses to COVID-19 Pandemic Using Machine Learning"
@@ -253,7 +259,7 @@ sections:
                 url: "https://doi.org/10.1038/s41467-021-27668-9"
 
           - id: psych-environmental
-            title: Selected Environmental Psychology
+            title: Environmental Psychology
             intro: |
               My environmental psychology research examined moral hazards in geoengineering with Kian Mintz-Woo, as well as global behavioural interventions for climate change as part of a large international consortium.
             publications:
@@ -295,6 +301,8 @@ sections:
   # --------------------------------------------------------------------------
   - id: positions
     title: Previous Positions
+    intro: |
+      My career spans both academic and non-academic roles, moving from Austria to St Andrews for my PhD, then to the Forecasting Research Institute and LSE, and now to Microsoft AI.
     children:
       # Academic Positions
       - id: academic
@@ -302,9 +310,9 @@ sections:
         children:
           - id: lse
             title: London School of Economics
-            period: "2022-2024"
+            period: "2023-2025"
             intro: |
-              From 2022-2024, I was a post-doctoral researcher at the [London School of Economics](https://www.lse.ac.uk/), working at the [Behavioural Lab](https://www.lse.ac.uk/behavioural-lab/?entryId=2319c173-7bdc-45d3-9a69-d12fd54340d7&nodeId=e2e64854-5d30-44fa-a289-a5ef76104f3e) with Barbara Fasolo and Matteo Galizzi. I worked at the intersection of applied AI and behavioural science, with funding from [Longview Philanthropy](https://www.longview.org/), the [LSE Department of Management](https://www.lse.ac.uk/management), the [Wharton-INSEAD Alliance](https://insead.wharton.upenn.edu/), and the [Wharton AI & Analytics Initiative](https://ai-analytics.wharton.upenn.edu/). I taught at [LSE](https://www.lse.ac.uk/) and [INSEAD](https://www.insead.edu/), and presented at the [UK Ministry of Defence](https://www.gov.uk/government/organisations/ministry-of-defence), [King's College London](https://www.kcl.ac.uk/), and the [TBD Conference](https://www.thetbdconference.com/).
+              From 2023-2025, I was a post-doctoral researcher at the [London School of Economics](https://www.lse.ac.uk/), working at the [Behavioural Lab](https://www.lse.ac.uk/behavioural-lab/?entryId=2319c173-7bdc-45d3-9a69-d12fd54340d7&nodeId=e2e64854-5d30-44fa-a289-a5ef76104f3e) with Barbara Fasolo and Matteo Galizzi. I worked at the intersection of applied AI and behavioural science. My position was funded by [Longview Philanthropy](https://www.longview.org/) for AI forecasting research, with additional support from the [LSE Department of Management](https://www.lse.ac.uk/management) for behavioural science work, the [Wharton-INSEAD Alliance](https://insead.wharton.upenn.edu/) for teaching and research collaboration, and the [Wharton AI & Analytics Initiative](https://ai-analytics.wharton.upenn.edu/) for AI-focused research. I taught at [LSE](https://www.lse.ac.uk/) and [INSEAD](https://www.insead.edu/), and presented at the [UK Ministry of Defence](https://www.gov.uk/government/organisations/ministry-of-defence), [King's College London](https://www.kcl.ac.uk/), and the [TBD Conference](https://www.thetbdconference.com/).
             selected_media_coverage:
               - text: "Forbes"
                 url: "https://www.forbes.com/sites/tomasgorny/2024/12/02/should-businesses-trust-ai-to-predict-customer-behaviors/"
@@ -325,16 +333,19 @@ sections:
             title: Forecasting Research Institute
             period: "2023"
             intro: |
-              In 2023, I worked with Philip Tetlock at the [Forecasting Research Institute](https://forecastingresearch.org/) on AI forecasting and prediction methodology.
+              In 2023, I worked with Philip Tetlock at the [Forecasting Research Institute](https://forecastingresearch.org/) on AI forecasting, low-probability event elicitation, and prediction methodology.
 
           - id: standrews
             title: University of St Andrews
+            period: "2018-2022"
+            intro: |
+              During my time at St Andrews, my research evolved from philosophy to economics, bridging both disciplines in my doctoral work.
             children:
               - id: standrews-phd
-                title: Ph.D.
+                title: PhD
                 period: "Completed 2022"
                 intro: |
-                  In 2022, I completed a Ph.D. in Philosophy and Economics with the title 'Moral Decision-Making: Essays from Philosophy and Economics' under the supervision of Theron Pummer and Miguel Costa-Gomes at [St Andrews](https://www.st-andrews.ac.uk/). My research was funded by the Forethought Foundation, the [Centre for Effective Altruism](https://www.centreforeffectivealtruism.org/), [Giving What We Can](https://www.givingwhatwecan.org/), and the [Long-Term Future Fund](https://funds.effectivealtruism.org/funds/far-future). I presented at the [Scottish Economic Society Annual Conference](https://scotecon.org/), the [UK Experimental Philosophy Workshop](https://x-phi.uea.ac.uk/online-workshop/), the [Behavioural Economics, Society, and Technology Conference](https://research.qut.edu.au/best/), and the [London Graduate Conference in History of Political Thought](https://projects.history.qmul.ac.uk/hpt/category/london-graduate-conference-in-history-of-political-thought/).
+                  In 2022, I completed a PhD in Philosophy and Economics with the title 'Moral Decision-Making: Essays from Philosophy and Economics' under the supervision of Theron Pummer and Miguel Costa-Gomes at [St Andrews](https://www.st-andrews.ac.uk/). The dissertation comprised three philosophy papers and three economics papers, reflecting my interdisciplinary training. My research was funded by the Forethought Foundation, the [Centre for Effective Altruism](https://www.centreforeffectivealtruism.org/), [Giving What We Can](https://www.givingwhatwecan.org/), and the [Long-Term Future Fund](https://funds.effectivealtruism.org/funds/far-future). I presented at the [Scottish Economic Society Annual Conference](https://scotecon.org/), the [UK Experimental Philosophy Workshop](https://x-phi.uea.ac.uk/online-workshop/), the [Behavioural Economics, Society, and Technology Conference](https://research.qut.edu.au/best/), and the [London Graduate Conference in History of Political Thought](https://projects.history.qmul.ac.uk/hpt/category/london-graduate-conference-in-history-of-political-thought/).
                 selected_media_coverage:
                   - text: "Süddeutsche Zeitung"
                     url: "https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347"
@@ -350,50 +361,39 @@ sections:
                     url: "https://es.wikipedia.org/?curid=1309987"
 
               - id: standrews-mlitt
-                title: M.Litt.
+                title: MLitt
                 period: "Completed 2018"
                 intro: |
-                  In 2018, I completed the M.Litt. in Moral, Political, and Legal Philosophy at [St Andrews](https://www.st-andrews.ac.uk/), where I was on the 2018-2019 Dean's List.
+                  In 2018, I completed the MLitt in Moral, Political, and Legal Philosophy at [St Andrews](https://www.st-andrews.ac.uk/), where I was on the 2018-2019 Dean's List.
 
               - id: standrews-fellowships
                 title: Fellowships
                 intro: |
-                  During my time at St Andrews, I held a number of fellowships.
-                fellowships:
-                  - title: "Associate Fellow"
-                    organization: "AdvanceHE"
-                    url: "https://www.advance-he.ac.uk/fellowship/associate-fellowship"
-                  - title: "Bernard Marcus Fellow"
-                    organization: "Institute for Human Studies"
-                    url: "https://www.theihs.org/"
-                  - title: "ECCP Programme Visitor and Global Priorities Fellow"
-                    organization: "Global Priorities Institute, University of Oxford"
-                    url: "https://www.globalprioritiesinstitute.org/"
-                  - title: "Oscar Morgenstern Fellow"
-                    organization: "Mercatus Center at George Mason University"
-                    url: "https://www.mercatus.org/"
+                  During my time at St Andrews, I held fellowships at [AdvanceHE](https://www.advance-he.ac.uk/fellowship/associate-fellowship) (Associate Fellow), the [Institute for Human Studies](https://www.theihs.org/) (Bernard Marcus Fellow), the [Global Priorities Institute](https://www.globalprioritiesinstitute.org/) at the University of Oxford (ECCP Programme Visitor and Global Priorities Fellow), and the [Mercatus Center](https://www.mercatus.org/) at George Mason University (Oscar Morgenstern Fellow).
 
       # Forecasting Positions
       - id: forecasting
         title: Forecasting
+        intro: |
+          I qualified as a Pro Forecaster in 2022, and have since worked on forecasting projects spanning AI capabilities, geopolitical conflicts, and economic trends.
         children:
           - id: seldon
             title: Seldon Capital
             period: "2024-2025"
             intro: |
-              Between 2024 and 2025, I was the Forecasting Team Lead at [Seldon Capital](https://www.seldon.capital/), working on various issues in macroeconomics and technology.
+              Between 2024 and 2025, I led the forecasting team at [Seldon Capital](https://www.seldon.capital/) for a year, working on macroeconomic and technology factors including coal markets, drug overdose trends, geopolitical developments, and AI progress.
 
           - id: swift
             title: Swift Centre
             period: "2023-2025"
             intro: |
-              Between 2023 and 2025, I was a forecaster for the [Swift Centre](https://www.swiftcentre.org/), working on a wide range of questions, including forecasting for the future capabilities of frontier AI models for Google DeepMind (see our [forecasting paper](https://arxiv.org/pdf/2403.13793)).
+              Between 2023 and 2025, I was a forecaster for the [Swift Centre](https://www.swiftcentre.org/), working on questions including coal markets, drug overdose trends, geopolitical developments, and AI progress. This included forecasting for the future capabilities of frontier AI models for Google DeepMind (see our [forecasting paper](https://arxiv.org/pdf/2403.13793)).
 
           - id: metaculus
             title: Metaculus
             period: "2022-2025"
             intro: |
-              Between 2022 and 2025, I was a [Pro Forecaster](https://www.metaculus.com/pro-forecasters/) at [Metaculus](https://www.metaculus.com/). I worked on projects with the [Federation of American Scientists](https://fas.org/publication/mathematically-predicting-the-future-with-professional-forecaster-philip-schoenegger/) and the [Carnegie Endowment for International Peace](https://carnegieendowment.org/research/2025/04/forecasting-nuclear-escalation-risks-cloudy-with-a-chance-of-fallout?lang=en).
+              Between 2022 and 2025, I was a [Pro Forecaster](https://www.metaculus.com/pro-forecasters/) at [Metaculus](https://www.metaculus.com/), qualifying based on my track record, calibration, and quality of written rationales. I worked on projects with the [Federation of American Scientists](https://fas.org/publication/mathematically-predicting-the-future-with-professional-forecaster-philip-schoenegger/) and the [Carnegie Endowment for International Peace](https://carnegieendowment.org/research/2025/04/forecasting-nuclear-escalation-risks-cloudy-with-a-chance-of-fallout?lang=en).
 
       # Undergraduate
       - id: undergraduate
@@ -403,15 +403,10 @@ sections:
             title: University of Graz
             period: "2014-2018"
             intro: |
-              From 2014-2018, I was an undergraduate student at the University of Graz, earning a Mag.phil. teaching degree in Psychology, Philosophy and German, a B.A. in Philosophy, and a B.A. in German Philology. I earned two academic performance scholarships. During this time, I was an unofficial visiting student at the [University Center for Human Values](https://uchv.princeton.edu/) with Peter Singer at [Princeton University](https://www.princeton.edu/).
+              From 2014-2018, I was an undergraduate student at the University of Graz, completing three concurrent degrees: a Mag.phil. teaching degree in Psychology, Philosophy and German, a BA in Philosophy, and a BA in German Philology. I earned two academic performance scholarships. During this time, I was an unofficial visiting student at the [University Center for Human Values](https://uchv.princeton.edu/) at [Princeton University](https://www.princeton.edu/), where I wrote my thesis under the supervision of Peter Singer.
             children:
               - id: mtg
                 title: "Magic: The Gathering"
                 period: "2012-2015"
                 intro: |
-                  From 2012-2015, I was a semi-professional Magic: The Gathering player in the Legacy format, achieving a 74.6% win-rate in Grand Prix-level tournaments—the fifth highest in the world at the time. I placed 4th at GP Paris (1,587 players) and 4th at GP New Jersey (4,003 players), and was sponsored by [Team MTG Mint Card](https://www.mtgmintcard.com/team-mtgmintcard) and [MTG Madness](https://web.archive.org/web/20140208062415/https://www.mtgmadness.com/).
-                selected_articles:
-                  - text: "Eternal Central - GP Paris Top 4 Report"
-                    url: "https://www.eternalcentral.com/there-and-back-again-grand-prix-paris-top-4-report-with-miracles/"
-                  - text: "StarCityGames - GP New Jersey Story"
-                    url: "https://articles.starcitygames.com/articles/one-journey-one-miracle-a-grand-prix-new-jersey-story/"
+                  Before and during my undergraduate studies (2012-2015), I was a semi-professional Magic: The Gathering player in the Legacy format, achieving a 74.6% win-rate in Grand Prix-level tournaments, the fifth highest in the world at the time. I placed 4th at GP Paris (1,587 players) and 4th at GP New Jersey (4,003 players), and was sponsored by [Team MTG Mint Card](https://www.mtgmintcard.com/team-mtgmintcard) and [MTG Madness](https://web.archive.org/web/20140208062415/https://www.mtgmadness.com/). Tournament reports: [GP Paris Top 4](https://www.eternalcentral.com/there-and-back-again-grand-prix-paris-top-4-report-with-miracles/), [GP New Jersey Story](https://articles.starcitygames.com/articles/one-journey-one-miracle-a-grand-prix-new-jersey-story/).
