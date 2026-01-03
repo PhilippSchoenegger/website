@@ -489,21 +489,42 @@ const allItems = flattenItems(sections);
           const newIndex = getSiblingIndex(path);
           const goingRight = newIndex > oldIndex;
           
-          // Set up the new chapter with initial state
-          newChapter.classList.remove('chapter-entering');
-          newChapter.classList.add(goingRight ? 'slide-from-right' : 'slide-from-left');
+          // Create a wrapper to contain both during transition
+          const wrapper = document.createElement('div');
+          wrapper.style.position = 'relative';
+          wrapper.style.overflow = 'hidden';
           
-          // Insert new chapter right where old one was
-          oldChapter.parentNode?.insertBefore(newChapter, oldChapter);
+          // Insert wrapper where old chapter was
+          oldChapter.parentNode?.insertBefore(wrapper, oldChapter);
           
-          // Animate old chapter out
+          // Move old chapter into wrapper and set up for exit
+          wrapper.appendChild(oldChapter);
           oldChapter.classList.remove('chapter-visible');
           oldChapter.classList.add(goingRight ? 'slide-out-left' : 'slide-out-right');
           
-          // Remove old chapter and its children after animation
+          // Set up new chapter and add to wrapper
+          newChapter.classList.remove('chapter-entering');
+          newChapter.classList.add(goingRight ? 'slide-from-right' : 'slide-from-left');
+          wrapper.appendChild(newChapter);
+          
+          // Track new chapter
+          state.chapters.set(getPathKey(path), newChapter);
+          state.chapters.delete(getPathKey(previousPath));
+          
+          // Animate new chapter in
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              newChapter.classList.remove('slide-from-right', 'slide-from-left');
+              newChapter.classList.add('chapter-visible');
+            });
+          });
+          
+          // Cleanup after animation
           setTimeout(() => {
-            oldChapter.remove();
-            state.chapters.delete(getPathKey(previousPath));
+            // Move new chapter out of wrapper
+            wrapper.parentNode?.insertBefore(newChapter, wrapper);
+            // Remove wrapper (which contains old chapter)
+            wrapper.remove();
             
             // Also remove any children of the old sibling
             const oldPathKey = getPathKey(previousPath);
@@ -520,18 +541,7 @@ const allItems = flattenItems(sections);
                 state.chapters.delete(key);
               }
             });
-          }, 300);
-          
-          // Track new chapter
-          state.chapters.set(getPathKey(path), newChapter);
-          
-          // Animate new chapter in after a tiny delay for smoothness
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              newChapter.classList.remove('slide-from-right', 'slide-from-left');
-              newChapter.classList.add('chapter-visible');
-            });
-          });
+          }, 350);
           
           updateURL(path);
           updateBackToTopVisibility();

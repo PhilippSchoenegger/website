@@ -282,19 +282,29 @@ a:hover {
 }
 
 .content-chapter.slide-out-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   opacity: 0;
   transform: translateX(-100px);
   transition: 
     opacity 0.3s ease-out,
     transform 0.3s ease-out;
+  pointer-events: none;
 }
 
 .content-chapter.slide-out-right {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   opacity: 0;
   transform: translateX(100px);
   transition: 
     opacity 0.3s ease-out,
     transform 0.3s ease-out;
+  pointer-events: none;
 }
 
 /* ============================================================================
