@@ -1,8 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import NetworkBackground from '../components/NetworkBackground.astro';
-import NavigationLayer from '../components/NavigationLayer.astro';
 import PublicationList from '../components/PublicationList.astro';
 import PositionDetails from '../components/PositionDetails.astro';
 import yaml from 'js-yaml';
@@ -16,367 +13,302 @@ const content = yaml.load(fileContents) as any;
 
 const { site, sections } = content;
 
-// Helper to flatten all items for rendering sections
-interface FlatItem {
-  id: string;
-  title: string;
-  intro?: string;
-  children?: any[];
-  publications?: any[];
-  path: string[];
-  level: number;
-  [key: string]: any;
-}
+// Serialize for client-side navigation
+const sectionsJson = JSON.stringify(sections);
 
-function flattenItems(items: any[], parentPath: string[] = [], level: number = 0): FlatItem[] {
-  const result: FlatItem[] = [];
-  
+// Helper to get all items flattened with their paths
+function flattenItems(items: any[], parentPath: string[] = [], level: number = 0): any[] {
+  const result: any[] = [];
   for (const item of items) {
     const currentPath = [...parentPath, item.id];
-    result.push({
-      ...item,
-      path: currentPath,
-      level
-    });
-    
+    result.push({ ...item, path: currentPath, level });
     if (item.children) {
       result.push(...flattenItems(item.children, currentPath, level + 1));
     }
   }
-  
   return result;
 }
 
 const allItems = flattenItems(sections);
-
-// Serialize for client-side
-const sectionsJson = JSON.stringify(sections);
 ---
 
 <BaseLayout title="Philipp Schoenegger" description={site.intro}>
-  <!-- Neural Network Background -->
-  <NetworkBackground sections={sections} />
-  
-  <!-- Main scroll container -->
-  <main class="scroll-container" id="main-container">
-    <!-- Hero Section -->
-    <Hero 
-      name={site.title}
-      tagline={site.tagline}
-      intro={site.intro}
-      photoSrc="/pic.jpg"
-    />
+  <main class="main-container" id="main">
     
-    <!-- Dynamic content sections will be rendered by JavaScript -->
-    <div id="content-sections">
-      <!-- Initial top-level navigation -->
-      <section class="section section--content" id="section-root" data-level="0">
-        <div class="content-overlay">
-          <div class="section-header">
-            <h2>Explore</h2>
-            <p class="section-intro">{site.intro}</p>
-          </div>
-          <NavigationLayer items={sections} level={0} />
-        </div>
-      </section>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <img src="/pic.jpg" alt="Philipp Schoenegger" class="hero-photo" />
+      <h1 class="hero-name">{site.title}</h1>
+      <p class="hero-tagline">{site.tagline}</p>
+      <p class="hero-intro">{site.intro}</p>
       
-      <!-- Pre-render all possible sections (hidden by default, shown via JS) -->
-      {allItems.map((item) => (
-        <section 
-          class="section section--content section--hidden" 
-          id={`section-${item.path.join('-')}`}
-          data-path={JSON.stringify(item.path)}
-          data-level={item.level}
-        >
-          <div class="content-overlay">
-            <!-- Back button and breadcrumb -->
-            <button class="back-button" data-back="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
-              </svg>
-              Back
-            </button>
-            
-            <div class="breadcrumb" data-breadcrumb={JSON.stringify(item.path)}>
-              <!-- Filled by JS -->
+      <!-- Initial navigation buttons -->
+      <nav class="nav-layer" id="nav-root" data-level="0">
+        {sections.map((section: any) => (
+          <button 
+            class="nav-node" 
+            data-id={section.id}
+            data-path={JSON.stringify([section.id])}
+          >
+            <span class="node-indicator"></span>
+            {section.title}
+          </button>
+        ))}
+      </nav>
+      
+      <div class="scroll-indicator" id="scroll-hint">
+        <span>Select to explore</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </div>
+    </section>
+    
+    <!-- Dynamic content area - sections render here as user navigates -->
+    <div id="content-area">
+      <!-- Content will be inserted dynamically -->
+    </div>
+    
+    <!-- Hidden templates for all sections -->
+    <div id="section-templates" style="display: none;">
+      {allItems.map((item: any) => (
+        <template data-template-id={item.path.join('-')}>
+          <section class="section-block" data-section-path={JSON.stringify(item.path)}>
+            <div class="section-header">
+              <h2 class="section-title">{item.title}</h2>
+              {item.period && <div class="section-period">{item.period}</div>}
+              {item.intro && !item.period && <p class="section-intro">{item.intro}</p>}
             </div>
             
-            <h2>{item.title}</h2>
-            
-            {item.intro && (
-              <p class="section-intro">{item.intro}</p>
-            )}
-            
-            <!-- Position/Experience details -->
-            {(item.period || item.links || item.funding || item.media_coverage || 
+            {/* Position/Experience details */}
+            {(item.links || item.funding || item.media_coverage || 
               item.fellowships || item.achievements || item.sponsors || item.articles ||
               item.projects || item.conferences || item.teaching || item.reviewing || item.note) && (
               <PositionDetails item={item} />
             )}
             
-            <!-- Publications -->
+            {/* Publications */}
             {item.publications && item.publications.length > 0 && (
               <PublicationList publications={item.publications} />
             )}
             
-            <!-- Child navigation -->
+            {/* Child navigation */}
             {item.children && item.children.length > 0 && (
-              <NavigationLayer items={item.children} level={item.level + 1} parentPath={item.path} />
+              <Fragment>
+                <div class="connection-line"></div>
+                <nav class="nav-layer" data-parent-path={JSON.stringify(item.path)}>
+                  {item.children.map((child: any) => (
+                    <button 
+                      class="nav-node" 
+                      data-id={child.id}
+                      data-path={JSON.stringify([...item.path, child.id])}
+                    >
+                      <span class="node-indicator"></span>
+                      {child.title}
+                    </button>
+                  ))}
+                </nav>
+              </Fragment>
             )}
-          </div>
-        </section>
+          </section>
+        </template>
       ))}
     </div>
   </main>
   
-  <!-- Pass data to client -->
   <script define:vars={{ sectionsJson }}>
-    window.__SECTIONS_DATA__ = JSON.parse(sectionsJson);
+    window.__SECTIONS__ = JSON.parse(sectionsJson);
   </script>
   
-  <!-- Client-side navigation script -->
   <script>
     // State
-    let currentPath: string[] = [];
-    let isScrolling = false;
+    const visitedPaths: Set<string> = new Set();
+    const currentPathStack: string[][] = [];
     
-    // DOM elements
-    const mainContainer = document.getElementById('main-container');
-    const networkBg = document.getElementById('network-background');
-    const heroSection = document.getElementById('hero');
+    // DOM
+    const contentArea = document.getElementById('content-area')!;
+    const scrollHint = document.getElementById('scroll-hint')!;
+    const heroNav = document.getElementById('nav-root')!;
     
     // Initialize
     document.addEventListener('DOMContentLoaded', () => {
       setupNavigation();
-      setupScrollEffects();
-      setupBackButtons();
-      updateBreadcrumbs();
     });
     
     function setupNavigation() {
-      // Handle nav node clicks
-      document.querySelectorAll('.nav-node').forEach(node => {
-        node.addEventListener('click', (e) => {
-          const target = e.currentTarget as HTMLElement;
-          const pathStr = target.dataset.path;
+      // Attach click handlers to all nav nodes (including dynamically added ones)
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const navNode = target.closest('.nav-node') as HTMLElement;
+        
+        if (navNode) {
+          const pathStr = navNode.dataset.path;
           if (pathStr) {
             const path = JSON.parse(pathStr);
-            navigateToSection(path);
-          }
-        });
-      });
-    }
-    
-    function setupBackButtons() {
-      document.querySelectorAll('.back-button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          if (currentPath.length > 0) {
-            const newPath = currentPath.slice(0, -1);
-            if (newPath.length === 0) {
-              navigateToSection([]);
-            } else {
-              navigateToSection(newPath);
-            }
-          }
-        });
-      });
-    }
-    
-    function navigateToSection(path: string[]) {
-      if (isScrolling) return;
-      isScrolling = true;
-      
-      currentPath = path;
-      
-      // Hide all content sections
-      document.querySelectorAll('.section--content').forEach(section => {
-        section.classList.add('section--hidden');
-      });
-      
-      // Determine target section
-      let targetId: string;
-      if (path.length === 0) {
-        targetId = 'section-root';
-      } else {
-        targetId = `section-${path.join('-')}`;
-      }
-      
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        targetSection.classList.remove('section--hidden');
-        
-        // Update network background highlighting
-        updateNetworkHighlight(path);
-        
-        // Update breadcrumbs
-        updateBreadcrumbs();
-        
-        // Smooth scroll to section
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setTimeout(() => { isScrolling = false; }, 900);
-      } else {
-        isScrolling = false;
-      }
-      
-      // Fade non-selected siblings
-      updateNavNodeStates(path);
-    }
-    
-    function updateNavNodeStates(activePath: string[]) {
-      const activeId = activePath[activePath.length - 1];
-      const parentPath = activePath.slice(0, -1);
-      
-      document.querySelectorAll('.nav-node').forEach(node => {
-        const el = node as HTMLElement;
-        const nodePath = JSON.parse(el.dataset.path || '[]');
-        const nodeId = nodePath[nodePath.length - 1];
-        const nodeParentPath = nodePath.slice(0, -1);
-        
-        // Check if this node is a sibling of the active node
-        const isSibling = JSON.stringify(nodeParentPath) === JSON.stringify(parentPath) && 
-                          nodeId !== activeId &&
-                          activePath.length > 0;
-        
-        el.classList.toggle('faded', isSibling);
-        el.classList.toggle('active', nodeId === activeId);
-      });
-    }
-    
-    function updateNetworkHighlight(path: string[]) {
-      // Reset all nodes and connections
-      document.querySelectorAll('.network-node').forEach(node => {
-        node.classList.remove('active', 'path');
-      });
-      document.querySelectorAll('.network-connection').forEach(conn => {
-        conn.classList.remove('active');
-      });
-      document.querySelectorAll('.network-label').forEach(label => {
-        label.classList.remove('active');
-      });
-      
-      // Highlight path nodes
-      let prevId: string | null = null;
-      path.forEach(id => {
-        const node = document.querySelector(`.network-node[data-id="${id}"]`);
-        const label = node?.parentElement?.querySelector('.network-label');
-        if (node) {
-          node.classList.add('path');
-          label?.classList.add('active');
-        }
-        
-        // Highlight connection
-        if (prevId) {
-          const conn = document.querySelector(`.network-connection[data-from="${prevId}"][data-to="${id}"]`);
-          conn?.classList.add('active');
-        }
-        prevId = id;
-      });
-      
-      // Make the last node active
-      if (path.length > 0) {
-        const lastId = path[path.length - 1];
-        const node = document.querySelector(`.network-node[data-id="${lastId}"]`);
-        node?.classList.remove('path');
-        node?.classList.add('active');
-      }
-    }
-    
-    function updateBreadcrumbs() {
-      document.querySelectorAll('.breadcrumb').forEach(bc => {
-        const el = bc as HTMLElement;
-        const sectionPath = JSON.parse(el.dataset.breadcrumb || '[]');
-        
-        // Build breadcrumb HTML
-        const sections = (window as any).__SECTIONS_DATA__;
-        let html = '<span class="breadcrumb-item" data-nav-path="[]">Home</span>';
-        
-        let currentItems = sections;
-        const pathSoFar: string[] = [];
-        
-        for (const id of sectionPath) {
-          const item = currentItems.find((i: any) => i.id === id);
-          if (item) {
-            pathSoFar.push(id);
-            html += `<span class="breadcrumb-separator">›</span>`;
-            html += `<span class="breadcrumb-item" data-nav-path='${JSON.stringify(pathSoFar)}'>${item.title}</span>`;
-            currentItems = item.children || [];
+            navigateToPath(path);
           }
         }
         
-        el.innerHTML = html;
-        
-        // Add click handlers to breadcrumb items
-        el.querySelectorAll('.breadcrumb-item').forEach(item => {
-          item.addEventListener('click', (e) => {
-            const target = e.currentTarget as HTMLElement;
-            const navPath = JSON.parse(target.dataset.navPath || '[]');
-            navigateToSection(navPath);
-          });
-        });
+        // Handle path item clicks (breadcrumb navigation)
+        const pathItem = target.closest('.path-item:not(.current)') as HTMLElement;
+        if (pathItem) {
+          const pathStr = pathItem.dataset.path;
+          if (pathStr) {
+            const path = JSON.parse(pathStr);
+            navigateToPath(path, true);
+          }
+        }
       });
     }
     
-    function setupScrollEffects() {
-      if (!networkBg || !heroSection) return;
+    function navigateToPath(path: string[], isBackNav = false) {
+      const pathKey = path.join('-');
       
-      // Show network background after scrolling past hero
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.target === heroSection) {
-              networkBg.classList.toggle('visible', !entry.isIntersecting);
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
+      // Mark as visited
+      visitedPaths.add(pathKey);
       
-      observer.observe(heroSection);
+      // Hide scroll hint
+      scrollHint.style.display = 'none';
       
-      // Parallax effect on network background
-      if (mainContainer) {
-        mainContainer.addEventListener('scroll', () => {
-          const scrollY = mainContainer.scrollTop;
-          const parallaxFactor = 0.3;
-          networkBg.style.transform = `translateY(${-scrollY * parallaxFactor}px)`;
+      // Update hero nav buttons
+      updateNavButtonStates(heroNav, path);
+      
+      // If going back, remove sections after the target
+      if (isBackNav) {
+        // Find which sections to remove
+        const existingSections = contentArea.querySelectorAll('.section-block');
+        let foundTarget = false;
+        existingSections.forEach((section) => {
+          const sectionPath = JSON.parse((section as HTMLElement).dataset.sectionPath || '[]');
+          if (foundTarget) {
+            section.remove();
+          }
+          if (JSON.stringify(sectionPath) === JSON.stringify(path)) {
+            foundTarget = true;
+          }
         });
+        
+        // Update path stack
+        while (currentPathStack.length > 0) {
+          const last = currentPathStack[currentPathStack.length - 1];
+          if (JSON.stringify(last) === JSON.stringify(path)) {
+            break;
+          }
+          currentPathStack.pop();
+        }
+        
+        // Scroll to the target section
+        const targetSection = contentArea.querySelector(`[data-section-path='${JSON.stringify(path)}']`);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        return;
       }
+      
+      // Add to path stack
+      currentPathStack.push(path);
+      
+      // Get the template
+      const template = document.querySelector(`template[data-template-id="${pathKey}"]`) as HTMLTemplateElement;
+      if (!template) return;
+      
+      // Clone and insert
+      const content = template.content.cloneNode(true) as DocumentFragment;
+      
+      // Add path indicator (breadcrumb)
+      const section = content.querySelector('.section-block')!;
+      const pathIndicator = createPathIndicator(path);
+      section.insertBefore(pathIndicator, section.firstChild);
+      
+      // Append to content area
+      contentArea.appendChild(content);
+      
+      // Update nav button states in the new section
+      const newSection = contentArea.lastElementChild as HTMLElement;
+      const navLayer = newSection.querySelector('.nav-layer');
+      if (navLayer) {
+        updateNavButtonStates(navLayer as HTMLElement, []);
+      }
+      
+      // Scroll to the new section
+      newSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Mark visited in all nav layers
+      updateAllVisitedStates();
+    }
+    
+    function createPathIndicator(path: string[]): HTMLElement {
+      const container = document.createElement('div');
+      container.className = 'path-indicator';
+      
+      const sections = (window as any).__SECTIONS__;
+      let currentItems = sections;
+      const pathSoFar: string[] = [];
+      
+      // Add "Home" first
+      const homeItem = document.createElement('span');
+      homeItem.className = 'path-item';
+      homeItem.dataset.path = '[]';
+      homeItem.textContent = 'Home';
+      homeItem.addEventListener('click', () => {
+        // Clear all content and reset
+        contentArea.innerHTML = '';
+        currentPathStack.length = 0;
+        scrollHint.style.display = 'flex';
+        updateNavButtonStates(heroNav, []);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      container.appendChild(homeItem);
+      
+      // Build path items
+      for (let i = 0; i < path.length; i++) {
+        const id = path[i];
+        const item = currentItems.find((it: any) => it.id === id);
+        if (!item) break;
+        
+        pathSoFar.push(id);
+        
+        // Separator
+        const sep = document.createElement('span');
+        sep.className = 'path-separator';
+        sep.textContent = '→';
+        container.appendChild(sep);
+        
+        // Path item
+        const pathItem = document.createElement('span');
+        pathItem.className = 'path-item' + (i === path.length - 1 ? ' current' : '');
+        pathItem.dataset.path = JSON.stringify([...pathSoFar]);
+        pathItem.textContent = item.title;
+        container.appendChild(pathItem);
+        
+        currentItems = item.children || [];
+      }
+      
+      return container;
+    }
+    
+    function updateNavButtonStates(navLayer: HTMLElement, activePath: string[]) {
+      const buttons = navLayer.querySelectorAll('.nav-node');
+      buttons.forEach((btn) => {
+        const el = btn as HTMLElement;
+        const btnPath = JSON.parse(el.dataset.path || '[]');
+        const btnId = btnPath[btnPath.length - 1];
+        const activeId = activePath[activePath.length - 1];
+        
+        el.classList.toggle('active', btnId === activeId);
+        el.classList.toggle('visited', visitedPaths.has(btnPath.join('-')) && btnId !== activeId);
+      });
+    }
+    
+    function updateAllVisitedStates() {
+      document.querySelectorAll('.nav-node').forEach((btn) => {
+        const el = btn as HTMLElement;
+        const btnPath = JSON.parse(el.dataset.path || '[]');
+        const isVisited = visitedPaths.has(btnPath.join('-'));
+        const isActive = el.classList.contains('active');
+        el.classList.toggle('visited', isVisited && !isActive);
+      });
     }
   </script>
-  
-  <style>
-    .section--hidden {
-      display: none !important;
-    }
-    
-    .section-header {
-      text-align: center;
-      margin-bottom: var(--space-lg);
-    }
-    
-    .section-intro {
-      color: var(--color-text-secondary);
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-top: var(--space-md);
-      margin-bottom: var(--space-md);
-    }
-    
-    .scroll-container {
-      height: 100vh;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-    }
-    
-    /* Ensure sections stack properly */
-    #content-sections {
-      position: relative;
-    }
-    
-    /* Make content overlay more prominent when network is visible */
-    .section--content .content-overlay {
-      position: relative;
-      z-index: 10;
-    }
-  </style>
 </BaseLayout>
