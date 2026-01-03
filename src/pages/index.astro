@@ -403,7 +403,8 @@ const allItems = flattenItems(sections);
       // Check if this is a sibling change (same depth, same parent)
       const isSiblingChange = previousPath.length === path.length && 
         previousPath.length > 0 &&
-        previousPath.slice(0, -1).join('/') === path.slice(0, -1).join('/');
+        previousPath.slice(0, -1).join('/') === path.slice(0, -1).join('/') &&
+        previousPath[previousPath.length - 1] !== path[path.length - 1];
       
       // Check if this chapter already exists
       const existingChapter = getChapterElement(path);
@@ -416,6 +417,46 @@ const allItems = flattenItems(sections);
         updateURL(path);
         updateBackToTopVisibility();
         return;
+      }
+      
+      // For sibling changes, do an instant swap (replace in place)
+      if (isSiblingChange) {
+        const oldChapter = getChapterElement(previousPath);
+        const newChapter = createChapter(path);
+        
+        if (oldChapter && newChapter) {
+          // Insert new chapter right where old one was
+          oldChapter.parentNode?.insertBefore(newChapter, oldChapter);
+          
+          // Remove old chapter immediately (no animation)
+          oldChapter.remove();
+          state.chapters.delete(getPathKey(previousPath));
+          
+          // Also remove any children of the old sibling
+          const oldPathKey = getPathKey(previousPath);
+          const toRemove: string[] = [];
+          state.chapters.forEach((chapter, key) => {
+            if (key.startsWith(oldPathKey + '/')) {
+              toRemove.push(key);
+            }
+          });
+          toRemove.forEach(key => {
+            const chapter = state.chapters.get(key);
+            if (chapter) {
+              chapter.remove();
+              state.chapters.delete(key);
+            }
+          });
+          
+          // Track and show new chapter (no animation)
+          state.chapters.set(getPathKey(path), newChapter);
+          newChapter.classList.remove('chapter-entering');
+          newChapter.classList.add('chapter-visible');
+          
+          updateURL(path);
+          updateBackToTopVisibility();
+          return;
+        }
       }
       
       // Remove chapters that would conflict with new path
@@ -441,15 +482,12 @@ const allItems = flattenItems(sections);
         }
       }
       
-      // Scroll to target chapter (unless sibling change - instant swap)
+      // Scroll to target chapter
       const targetChapter = getChapterElement(path);
       if (targetChapter) {
         targetChapter.classList.remove('chapter-entering');
         targetChapter.classList.add('chapter-visible');
-        
-        if (!isSiblingChange) {
-          scrollToElement(targetChapter);
-        }
+        scrollToElement(targetChapter);
       }
       
       updateURL(path);
