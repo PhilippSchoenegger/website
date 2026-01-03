@@ -357,9 +357,9 @@ sections:
 
           - id: fri
             title: Forecasting Research Institute
-            period: "2022"
+            period: "2023"
             intro: |
-              In 2022, I worked with Philip Tetlock at the Forecasting Research Institute, 
+              In 2023, I worked with Philip Tetlock at the Forecasting Research Institute, 
               working on X and Y.
             links:
               - text: "Forecasting Research Institute"
@@ -467,9 +467,9 @@ sections:
 
           - id: metaculus
             title: Metaculus
-            period: "2022-present"
+            period: "2022-2025"
             intro: |
-              In 2022 I qualified as a Pro Forecaster at Metaculus.
+              Between 2022 and 2025 I was a Pro Forecaster at Metaculus.
             links:
               - text: "Pro Forecasters"
                 url: "https://www.metaculus.com/pro-forecasters/"

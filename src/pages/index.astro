@@ -119,6 +119,35 @@ const allItems = flattenItems(sections);
     const treeNav = document.getElementById('tree-nav')!;
     const contentDisplay = document.getElementById('content-display')!;
     
+    // Smooth scroll utility - no jumping, gentle easing
+    function smoothScrollTo(element: HTMLElement, offset = 0) {
+      const targetPosition = element.getBoundingClientRect().top + window.scrollY - offset;
+      const startPosition = window.scrollY;
+      const distance = targetPosition - startPosition;
+      const duration = Math.min(800, Math.max(400, Math.abs(distance) * 0.5)); // Adaptive duration
+      let startTime: number | null = null;
+      
+      // Easing function - ease-out-quart for smooth deceleration
+      function easeOutQuart(t: number): number {
+        return 1 - Math.pow(1 - t, 4);
+      }
+      
+      function animate(currentTime: number) {
+        if (startTime === null) startTime = currentTime;
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutQuart(progress);
+        
+        window.scrollTo(0, startPosition + distance * easedProgress);
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      }
+      
+      requestAnimationFrame(animate);
+    }
+    
     // Initialize
     document.addEventListener('DOMContentLoaded', init);
     
@@ -161,12 +190,15 @@ const allItems = flattenItems(sections);
       const sections = (window as any).__SECTIONS__;
       const level = selectedPath.length - 1;
       
-      // Remove tree levels after the selected level
+      // Remove tree levels after the selected level with fade out
       const allLevels = treeNav.querySelectorAll('.tree-level');
       allLevels.forEach((levelEl) => {
         const levelNum = parseInt((levelEl as HTMLElement).dataset.level || '0');
         if (levelNum > level) {
-          levelEl.remove();
+          const el = levelEl as HTMLElement;
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(-10px)';
+          setTimeout(() => el.remove(), 200);
         }
       });
       
@@ -194,6 +226,10 @@ const allItems = flattenItems(sections);
         newLevel.setAttribute('role', 'group');
         newLevel.setAttribute('aria-label', `${selectedItem.title} subcategories`);
         
+        // Start with opacity 0 for fade-in
+        newLevel.style.opacity = '0';
+        newLevel.style.transform = 'translateY(-10px)';
+        
         selectedItem.children.forEach((child: any) => {
           const button = document.createElement('button');
           button.className = 'tree-node';
@@ -208,9 +244,11 @@ const allItems = flattenItems(sections);
         
         treeNav.appendChild(newLevel);
         
-        // Smooth scroll to show new level
+        // Animate in after append
         requestAnimationFrame(() => {
-          newLevel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          newLevel.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+          newLevel.style.opacity = '1';
+          newLevel.style.transform = 'translateY(0)';
         });
       }
     }
@@ -220,26 +258,36 @@ const allItems = flattenItems(sections);
       const template = document.querySelector(`template[data-template-id="${pathKey}"]`) as HTMLTemplateElement;
       
       if (!template) {
-        contentDisplay.innerHTML = '';
+        // Fade out existing content
+        contentDisplay.style.opacity = '0';
+        setTimeout(() => {
+          contentDisplay.innerHTML = '';
+          contentDisplay.style.opacity = '1';
+        }, 200);
         return;
       }
       
       // Clone template content
       const content = template.content.cloneNode(true);
       
-      // Add fade-in animation class
-      contentDisplay.classList.add('updating');
+      // Fade out current content
+      contentDisplay.style.transition = 'opacity 0.2s ease-out';
+      contentDisplay.style.opacity = '0';
       
-      // Clear and update display
-      contentDisplay.innerHTML = '';
-      contentDisplay.appendChild(content);
-      
-      // Remove animation class after animation completes
-      requestAnimationFrame(() => {
-        contentDisplay.classList.remove('updating');
-        // Scroll content into view smoothly
-        contentDisplay.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+      // After fade out, update content and fade in
+      setTimeout(() => {
+        contentDisplay.innerHTML = '';
+        contentDisplay.appendChild(content);
+        
+        // Fade in new content
+        requestAnimationFrame(() => {
+          contentDisplay.style.opacity = '1';
+          
+          // Smooth scroll to content with offset to keep nav visible
+          const navHeight = treeNav.offsetHeight + 40;
+          smoothScrollTo(contentDisplay, navHeight);
+        });
+      }, 200);
     }
     
     function getItemByPath(items: any[], path: string[]): any {

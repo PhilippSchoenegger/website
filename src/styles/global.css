@@ -57,7 +57,8 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
+  /* Disable native smooth scroll - we handle it with JS for better control */
+  scroll-behavior: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
@@ -189,7 +190,8 @@ a:hover {
   justify-content: center;
   gap: var(--space-sm);
   padding: var(--space-sm) 0;
-  animation: fadeIn 0.3s ease-out;
+  /* Smooth transitions handled by JS - no CSS animation to avoid jumps */
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   /* Add subtle visual hierarchy for nested levels */
   position: relative;
 }
@@ -204,17 +206,6 @@ a:hover {
   width: 2px;
   height: 10px;
   background: linear-gradient(to bottom, var(--color-border), var(--color-accent));
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Tree nodes - horizontal buttons */
@@ -279,6 +270,8 @@ a:hover {
 .content-display {
   padding: var(--space-xl) 0;
   min-height: 200px;
+  /* Smooth opacity transitions for content changes */
+  transition: opacity 0.2s ease-out;
 }
 
 .content-display:empty {
@@ -287,18 +280,8 @@ a:hover {
 }
 
 .content-section {
-  animation: contentFadeIn 0.4s ease-out;
-}
-
-@keyframes contentFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* Subtle entrance - no jarring movements */
+  opacity: 1;
 }
 
 .content-header {
