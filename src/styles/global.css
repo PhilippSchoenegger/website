@@ -4,27 +4,29 @@
    ============================================================================ */
 
 :root {
-  /* Color palette */
-  --color-bg: #fafcff;
+  /* Unified subtle color palette - soft grays with hint of blue */
+  --color-bg: #f8f9fb;
   --color-bg-chapter: #ffffff;
-  --color-bg-chapter-alt: #f8fafc;
-  --color-surface: #f0f7ff;
-  --color-border: #e2e8f0;
-  --color-border-light: #f1f5f9;
+  --color-bg-chapter-alt: #fafbfc;
+  --color-surface: #f4f5f7;
+  --color-surface-hover: #eef0f3;
+  --color-border: #e1e4e8;
+  --color-border-light: #eaecef;
   
-  --color-text: #1e293b;
-  --color-text-secondary: #475569;
-  --color-text-muted: #64748b;
-  --color-text-faint: #94a3b8;
+  /* Text colors - consistent gray scale */
+  --color-text: #24292f;
+  --color-text-secondary: #57606a;
+  --color-text-muted: #6e7781;
+  --color-text-faint: #8c959f;
   
-  --color-accent: #0284c7;
-  --color-accent-hover: #0369a1;
-  --color-accent-light: #e0f2fe;
-  --color-accent-glow: rgba(2, 132, 199, 0.15);
+  /* Single accent color - subtle blue */
+  --color-accent: #0969da;
+  --color-accent-hover: #0550ae;
+  --color-accent-light: #ddf4ff;
+  --color-accent-subtle: #f6f8fa;
   
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Georgia', 'Times New Roman', serif;
   
   /* Spacing */
   --space-xs: 0.25rem;
@@ -208,7 +210,7 @@ a:hover {
   background: var(--color-accent);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px -8px var(--color-accent-glow);
+  box-shadow: 0 8px 20px -8px rgba(9, 105, 218, 0.3);
 }
 
 .nav-btn:active {
@@ -572,6 +574,49 @@ a:hover {
   .hero-chapter {
     min-height: auto;
   }
+  
+  .back-to-top-container {
+    display: none;
+  }
+}
+
+/* ============================================================================
+   BACK TO TOP BUTTON
+   ============================================================================ */
+
+.back-to-top-container {
+  padding: var(--space-2xl) var(--chapter-padding);
+  display: flex;
+  justify-content: center;
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.back-to-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.back-to-top-btn:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px rgba(9, 105, 218, 0.3);
+}
+
+.back-to-top-btn svg {
+  flex-shrink: 0;
 }
 
 /* ============================================================================

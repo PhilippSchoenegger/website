@@ -72,6 +72,16 @@ const allItems = flattenItems(sections);
     <main class="journey-container" id="journey-container" aria-live="polite">
       <!-- Chapters will be dynamically inserted -->
     </main>
+    
+    <!-- Back to top button -->
+    <div class="back-to-top-container" id="back-to-top" hidden>
+      <button class="back-to-top-btn" data-scroll-to="hero" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 15l-6-6-6 6"/>
+        </svg>
+        <span>Back to Top</span>
+      </button>
+    </div>
   </div>
   
   <!-- Hidden templates for all content sections -->
@@ -111,7 +121,7 @@ const allItems = flattenItems(sections);
           <!-- Chapter content -->
           <div class="chapter-body">
             <header class="chapter-header">
-              <h2 class="chapter-title">{item.title}</h2>
+              <h2 class="chapter-title">{item.title.toUpperCase()}</h2>
               {item.period && <p class="chapter-period">{item.period}</p>}
               {item.intro && <p class="chapter-intro">{item.intro}</p>}
             </header>
@@ -386,21 +396,27 @@ const allItems = flattenItems(sections);
     // NAVIGATION LOGIC
     // ============================================================================
     
-    function navigateTo(path: string[]): void {
+    function navigateTo(path: string[], skipScroll = false): void {
+      const previousPath = state.activePath;
       state.activePath = path;
+      
+      // Check if this is a sibling change (same depth, same parent)
+      const isSiblingChange = previousPath.length === path.length && 
+        previousPath.length > 0 &&
+        previousPath.slice(0, -1).join('/') === path.slice(0, -1).join('/');
       
       // Check if this chapter already exists
       const existingChapter = getChapterElement(path);
       
       if (existingChapter) {
-        // Just scroll to it - it's already visible
-        scrollToElement(existingChapter);
+        // Just scroll to it - it's already visible (unless sibling change)
+        if (!isSiblingChange) {
+          scrollToElement(existingChapter);
+        }
         updateURL(path);
+        updateBackToTopVisibility();
         return;
       }
-      
-      // Check if we're navigating to an ancestor (shouldn't happen with existing check, but safety)
-      // Or if we're navigating to a different branch at the same level
       
       // Remove chapters that would conflict with new path
       removeChaptersBelow(path);
@@ -425,15 +441,19 @@ const allItems = flattenItems(sections);
         }
       }
       
-      // Scroll to target chapter
+      // Scroll to target chapter (unless sibling change - instant swap)
       const targetChapter = getChapterElement(path);
       if (targetChapter) {
         targetChapter.classList.remove('chapter-entering');
         targetChapter.classList.add('chapter-visible');
-        scrollToElement(targetChapter);
+        
+        if (!isSiblingChange) {
+          scrollToElement(targetChapter);
+        }
       }
       
       updateURL(path);
+      updateBackToTopVisibility();
     }
     
     function scrollToPath(pathKey: string): void {
@@ -560,6 +580,14 @@ const allItems = flattenItems(sections);
     // EVENT HANDLING
     // ============================================================================
     
+    function updateBackToTopVisibility(): void {
+      const backToTop = document.getElementById('back-to-top');
+      if (backToTop) {
+        const hasChapters = state.chapters.size > 0;
+        backToTop.hidden = !hasChapters;
+      }
+    }
+    
     function handleNavClick(e: Event): void {
       const target = e.target as HTMLElement;
       
@@ -574,10 +602,10 @@ const allItems = flattenItems(sections);
         return;
       }
       
-      // Breadcrumb click
-      const breadcrumbBtn = target.closest('[data-scroll-to]') as HTMLElement;
-      if (breadcrumbBtn) {
-        const scrollTarget = breadcrumbBtn.dataset.scrollTo;
+      // Breadcrumb or back-to-top click
+      const scrollBtn = target.closest('[data-scroll-to]') as HTMLElement;
+      if (scrollBtn) {
+        const scrollTarget = scrollBtn.dataset.scrollTo;
         if (scrollTarget) {
           scrollToPath(scrollTarget);
         }
