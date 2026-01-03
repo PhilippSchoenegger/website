@@ -1,49 +1,42 @@
 /* ============================================================================
-   GROUNDBREAKING TREE NAVIGATION
-   A visual, persistent, navigable tree structure
+   IMMERSIVE CONTENT JOURNEY
+   A scrolling document that builds as you explore
    ============================================================================ */
 
 :root {
-  /* Core palette - light blue shades */
+  /* Color palette */
   --color-bg: #fafcff;
-  --color-bg-alt: #f0f7ff;
-  --color-surface: #e8f4ff;
-  --color-border: #bae6fd;
-  --color-border-light: #dbeafe;
+  --color-bg-chapter: #ffffff;
+  --color-bg-chapter-alt: #f8fafc;
+  --color-surface: #f0f7ff;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
   
-  --color-text: #0c4a6e;
-  --color-text-secondary: #0369a1;
-  --color-text-muted: #0284c7;
-  --color-text-faint: #7dd3fc;
+  --color-text: #1e293b;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-text-faint: #94a3b8;
   
-  /* Accent colors */
   --color-accent: #0284c7;
   --color-accent-hover: #0369a1;
   --color-accent-light: #e0f2fe;
-  --color-accent-glow: rgba(2, 132, 199, 0.3);
-  
-  /* Node colors by level */
-  --color-node-0: #0284c7;
-  --color-node-1: #0891b2;
-  --color-node-2: #0d9488;
-  --color-node-3: #059669;
-  --color-node-4: #16a34a;
+  --color-accent-glow: rgba(2, 132, 199, 0.15);
   
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
   
   /* Spacing */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-  --space-2xl: 5rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
   
-  /* Tree specific */
-  --tree-node-gap: 1rem;
-  --tree-level-gap: 2.5rem;
-  --tree-branch-indent: 2rem;
+  /* Layout */
+  --content-max-width: 800px;
+  --chapter-padding: clamp(1.5rem, 5vw, 4rem);
   
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -63,7 +56,7 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: auto; /* We handle scrolling in JS */
+  scroll-behavior: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -71,10 +64,9 @@ html {
 body {
   font-family: var(--font-sans);
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--color-text);
-  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
-  background-attachment: fixed;
+  background: var(--color-bg);
   min-height: 100vh;
 }
 
@@ -83,304 +75,285 @@ body {
   outline-offset: 2px;
 }
 
-/* Hidden SVG defs */
-.tree-svg-defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
 }
 
 /* ============================================================================
-   MAIN TREE CONTAINER
+   JOURNEY WRAPPER
    ============================================================================ */
 
-.tree-main {
+.journey-wrapper {
   min-height: 100vh;
-  padding: var(--space-lg);
 }
 
-.tree-canvas {
-  max-width: 1400px;
-  margin: 0 auto;
-  position: relative;
-}
-
-/* SVG overlay for connection lines */
-.tree-connections {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-  overflow: visible;
-}
-
-.connection-line {
-  stroke-linecap: round;
-  opacity: 0.6;
-  transition: opacity var(--transition-normal);
+.journey-container {
+  /* Container for all chapters */
 }
 
 /* ============================================================================
-   ROOT NODE - The person at the center
+   HERO CHAPTER - The starting point
    ============================================================================ */
 
-.tree-root {
-  position: relative;
+.hero-chapter {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-}
-
-.root-node {
-  text-align: center;
-  padding: var(--space-xl) var(--space-lg);
-  max-width: 700px;
+  padding: var(--chapter-padding);
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
   position: relative;
-  z-index: 10;
 }
 
-.root-photo {
-  width: 120px;
-  height: 120px;
+.hero-content {
+  text-align: center;
+  max-width: 650px;
+  margin-bottom: var(--space-2xl);
+}
+
+.hero-photo {
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--color-border);
+  border: 4px solid white;
   box-shadow: 
-    0 0 0 4px var(--color-bg),
-    0 8px 32px -8px var(--color-accent-glow);
-  margin-bottom: var(--space-lg);
-  transition: all var(--transition-slow);
+    0 0 0 2px var(--color-border),
+    0 20px 40px -15px rgba(0, 0, 0, 0.15);
+  margin-bottom: var(--space-xl);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
 }
 
-.root-photo:hover {
-  border-color: var(--color-accent);
+.hero-photo:hover {
   transform: scale(1.05);
+  box-shadow: 
+    0 0 0 2px var(--color-accent),
+    0 25px 50px -15px rgba(0, 0, 0, 0.2);
 }
 
-.root-name {
-  font-size: 2.5rem;
+.hero-name {
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: var(--space-sm);
   letter-spacing: -0.02em;
 }
 
-.root-tagline {
-  font-size: 1.1rem;
+.hero-tagline {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
+  line-height: 1.6;
 }
 
-.root-intro {
-  font-size: 0.95rem;
+.hero-intro {
+  font-size: 1rem;
   color: var(--color-text-muted);
-  line-height: 1.7;
-  max-width: 600px;
+  line-height: 1.8;
+}
+
+/* ============================================================================
+   NAVIGATION BUTTONS
+   ============================================================================ */
+
+.chapter-nav {
+  width: 100%;
+  max-width: var(--content-max-width);
   margin: 0 auto;
+  padding: var(--space-xl) 0;
 }
 
-/* ============================================================================
-   TREE BRANCHES - The navigation structure
-   ============================================================================ */
+.nav-label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
 
-.tree-branches {
+.nav-buttons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--tree-node-gap);
-  margin-top: var(--space-xl);
-  padding: var(--space-lg) 0;
-  position: relative;
-  z-index: 10;
+  gap: var(--space-sm);
 }
 
-.branch-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.branch-children {
-  margin-top: var(--tree-level-gap);
-}
-
-.children-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--tree-node-gap);
-  padding: var(--space-sm) 0;
-}
-
-/* ============================================================================
-   TREE NODES - Interactive buttons
-   ============================================================================ */
-
-.tree-node {
+.nav-btn {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
+  justify-content: center;
+  padding: var(--space-sm) var(--space-lg);
   background: white;
   border: 2px solid var(--color-border);
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 0.9rem;
+  border-radius: 50px;
+  font-size: 0.95rem;
   font-weight: 500;
   color: var(--color-text);
+  cursor: pointer;
   transition: all var(--transition-normal);
-  position: relative;
-  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
 }
 
-.tree-node:hover {
+.nav-btn:hover {
   border-color: var(--color-accent);
-  transform: translateY(-3px);
-  box-shadow: 
-    0 8px 24px -8px var(--color-accent-glow),
-    0 4px 12px -4px rgba(0, 0, 0, 0.1);
-}
-
-.tree-node:active {
-  transform: translateY(-1px);
-}
-
-/* Level-based coloring */
-.tree-node.level-0 {
-  border-color: var(--color-node-0);
-  background: linear-gradient(135deg, white 0%, var(--color-accent-light) 100%);
-}
-
-.tree-node.level-0:hover,
-.tree-node.level-0.selected {
-  background: var(--color-node-0);
+  background: var(--color-accent);
   color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px var(--color-accent-glow);
 }
 
-.tree-node.level-1 {
-  border-color: var(--color-node-1);
-  font-size: 0.85rem;
-  padding: var(--space-xs) var(--space-sm);
+.nav-btn:active {
+  transform: translateY(0);
 }
 
-.tree-node.level-1:hover,
-.tree-node.level-1.selected {
-  background: var(--color-node-1);
-  color: white;
-}
-
-.tree-node.level-2 {
-  border-color: var(--color-node-2);
-  font-size: 0.8rem;
-  padding: var(--space-xs) var(--space-sm);
-}
-
-.tree-node.level-2:hover,
-.tree-node.level-2.selected {
-  background: var(--color-node-2);
-  color: white;
-}
-
-.tree-node.level-3 {
-  border-color: var(--color-node-3);
-  font-size: 0.75rem;
-}
-
-.tree-node.level-3:hover,
-.tree-node.level-3.selected {
-  background: var(--color-node-3);
-  color: white;
-}
-
-/* Selected state */
-.tree-node.selected {
-  box-shadow: 
-    0 0 0 3px var(--color-accent-glow),
-    0 8px 24px -8px var(--color-accent-glow);
-}
-
-/* Expanded state */
-.tree-node.expanded .node-expand-indicator {
-  transform: rotate(0deg);
-}
-
-/* Node components */
-.node-label {
-  white-space: nowrap;
-}
-
-.node-expand-indicator {
-  font-size: 1.2em;
-  font-weight: 400;
-  opacity: 0.6;
-  transition: transform var(--transition-fast);
+/* Mobile: Stack buttons */
+@media (max-width: 600px) {
+  .nav-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .nav-btn {
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+  }
 }
 
 /* ============================================================================
-   CONTENT PANEL - Displays selected content
+   CONTENT CHAPTERS - The journey sections
    ============================================================================ */
 
-.content-panel {
-  margin-top: var(--space-2xl);
-  padding: var(--space-xl);
-  background: white;
-  border-radius: 16px;
-  box-shadow: 
-    0 4px 24px -8px rgba(0, 0, 0, 0.1),
-    0 0 0 1px var(--color-border-light);
+.content-chapter {
+  min-height: 60vh;
+  padding: var(--chapter-padding);
+  background: var(--color-bg-chapter);
+  border-top: 1px solid var(--color-border-light);
   opacity: 0;
-  transform: translateY(20px);
-  transition: all var(--transition-slow);
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  transform: translateY(40px);
+  transition: 
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.content-panel.active {
+/* Alternating chapter backgrounds */
+.content-chapter:nth-child(even) {
+  background: var(--color-bg-chapter-alt);
+}
+
+/* Animation states */
+.content-chapter.chapter-entering {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.content-chapter.chapter-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.panel-inner {
-  transition: opacity var(--transition-normal);
+.content-chapter.chapter-leaving {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: 
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
 }
 
 /* ============================================================================
-   CONTENT ARTICLE - Inside the panel
+   BREADCRUMB NAVIGATION
    ============================================================================ */
 
-.content-article {
-  /* Article styling */
-}
-
-.article-header {
-  margin-bottom: var(--space-lg);
+.chapter-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xl);
   padding-bottom: var(--space-md);
   border-bottom: 1px solid var(--color-border-light);
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.article-title {
-  font-size: 1.8rem;
-  font-weight: 600;
+.breadcrumb-home,
+.breadcrumb-item {
+  background: none;
+  border: none;
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+}
+
+.breadcrumb-home:hover,
+.breadcrumb-item:hover {
+  background: var(--color-accent-light);
+}
+
+.breadcrumb-sep {
+  color: var(--color-text-faint);
+  font-size: 0.75rem;
+}
+
+.breadcrumb-current {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* ============================================================================
+   CHAPTER BODY - Main content area
+   ============================================================================ */
+
+.chapter-body {
+  max-width: var(--content-max-width);
+  margin: 0 auto var(--space-2xl);
+}
+
+.chapter-header {
+  margin-bottom: var(--space-xl);
+}
+
+.chapter-title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
   color: var(--color-text);
   margin-bottom: var(--space-sm);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
-.article-period {
+.chapter-period {
+  display: inline-block;
   font-size: 0.9rem;
+  font-weight: 600;
   color: var(--color-accent);
-  font-weight: 500;
-  margin-bottom: var(--space-sm);
+  background: var(--color-accent-light);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 4px;
+  margin-bottom: var(--space-md);
 }
 
-.article-intro {
-  font-size: 1rem;
+.chapter-intro {
+  font-size: 1.1rem;
   color: var(--color-text-secondary);
-  line-height: 1.7;
+  line-height: 1.8;
+}
+
+.chapter-end {
+  height: 1px;
 }
 
 /* ============================================================================
@@ -391,31 +364,34 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  margin-top: var(--space-lg);
+  margin-top: var(--space-xl);
 }
 
 .publication-card {
-  padding: var(--space-md);
-  background: var(--color-bg-alt);
+  padding: var(--space-lg);
+  background: var(--color-surface);
   border: 1px solid var(--color-border-light);
-  border-radius: 10px;
+  border-radius: 12px;
   transition: all var(--transition-fast);
 }
 
 .publication-card:hover {
   border-color: var(--color-border);
-  box-shadow: 0 2px 12px -4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .publication-year {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   margin-bottom: var(--space-xs);
 }
 
 .publication-title {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: var(--space-xs);
@@ -424,7 +400,6 @@ body {
 
 .publication-title a {
   color: inherit;
-  text-decoration: none;
 }
 
 .publication-title a:hover {
@@ -432,13 +407,13 @@ body {
 }
 
 .publication-journal {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--color-text-secondary);
   font-style: italic;
 }
 
 .publication-coauthors {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--color-text-muted);
   margin-top: var(--space-xs);
 }
@@ -448,17 +423,17 @@ body {
    ============================================================================ */
 
 .detail-section {
-  margin-top: var(--space-md);
-  padding-top: var(--space-md);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
   border-top: 1px solid var(--color-border-light);
 }
 
 .detail-label {
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   margin-bottom: var(--space-sm);
 }
 
@@ -469,12 +444,13 @@ body {
 }
 
 .link-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: var(--space-xs) var(--space-sm);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border-light);
+  background: white;
+  border: 1px solid var(--color-border);
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--color-text-secondary);
   text-decoration: none;
   transition: all var(--transition-fast);
@@ -484,80 +460,78 @@ body {
   background: var(--color-accent-light);
   border-color: var(--color-accent);
   color: var(--color-accent);
-}
-
-/* ============================================================================
-   TYPOGRAPHY
-   ============================================================================ */
-
-a {
-  color: var(--color-accent);
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
+/* ============================================================================
+   SCROLL PROGRESS INDICATOR (optional visual)
+   ============================================================================ */
 
-p {
-  margin-bottom: var(--space-md);
+.journey-wrapper::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--color-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 1000;
+  transition: transform 0.1s linear;
 }
 
 /* ============================================================================
    RESPONSIVE DESIGN
    ============================================================================ */
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   :root {
-    --tree-node-gap: 0.75rem;
-    --tree-level-gap: 2rem;
+    --chapter-padding: 1.5rem;
   }
   
-  .root-name {
-    font-size: 2rem;
+  .hero-chapter {
+    min-height: auto;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
   
-  .tree-main {
+  .hero-photo {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .content-chapter {
+    min-height: auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .chapter-breadcrumb {
+    font-size: 0.8rem;
+  }
+  
+  .publication-card {
     padding: var(--space-md);
-  }
-  
-  .content-panel {
-    padding: var(--space-lg);
-    margin-top: var(--space-xl);
   }
 }
 
-@media (max-width: 600px) {
-  :root {
-    --tree-node-gap: 0.5rem;
-    --tree-level-gap: 1.5rem;
-  }
-  
-  .root-photo {
+@media (max-width: 480px) {
+  .hero-photo {
     width: 100px;
     height: 100px;
   }
   
-  .root-name {
-    font-size: 1.6rem;
+  .chapter-title {
+    font-size: 1.5rem;
   }
   
-  .root-tagline {
-    font-size: 0.95rem;
+  .chapter-intro {
+    font-size: 1rem;
   }
   
-  .tree-node {
-    font-size: 0.8rem;
-    padding: var(--space-xs) var(--space-sm);
-  }
-  
-  .content-panel {
-    padding: var(--space-md);
-    border-radius: 12px;
-  }
-  
-  .article-title {
-    font-size: 1.4rem;
+  .nav-btn {
+    font-size: 0.9rem;
   }
 }
 
@@ -573,6 +547,11 @@ p {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  
+  .content-chapter {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ============================================================================
@@ -580,21 +559,32 @@ p {
    ============================================================================ */
 
 @media print {
-  .tree-connections {
+  .chapter-nav {
     display: none;
   }
   
-  body {
-    background: white;
+  .content-chapter {
+    opacity: 1;
+    transform: none;
+    page-break-inside: avoid;
   }
   
-  .tree-node {
-    box-shadow: none;
-    border: 1px solid #ccc;
+  .hero-chapter {
+    min-height: auto;
   }
-  
-  .content-panel {
-    box-shadow: none;
-    border: 1px solid #ccc;
+}
+
+/* ============================================================================
+   DARK MODE (future enhancement)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  /* Can be enabled when ready
+  :root {
+    --color-bg: #0f172a;
+    --color-bg-chapter: #1e293b;
+    --color-text: #f1f5f9;
+    ...
   }
+  */
 }
