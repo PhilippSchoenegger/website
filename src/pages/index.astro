@@ -254,6 +254,31 @@ const allItems = flattenItems(sections);
       return state.chapters.get(getPathKey(path)) || null;
     }
     
+    // Get the sections data for sibling index lookups
+    const sectionsData = (window as any).__SECTIONS__ as any[];
+    
+    function findItemChildren(path: string[]): any[] | null {
+      // Navigate to the parent of the given path to get siblings
+      if (path.length === 0) return sectionsData;
+      if (path.length === 1) return sectionsData;
+      
+      let current = sectionsData;
+      for (let i = 0; i < path.length - 1; i++) {
+        const item = current.find((c: any) => c.id === path[i]);
+        if (!item || !item.children) return null;
+        current = item.children;
+      }
+      return current;
+    }
+    
+    function getSiblingIndex(path: string[]): number {
+      if (path.length === 0) return -1;
+      const siblings = findItemChildren(path);
+      if (!siblings) return -1;
+      const id = path[path.length - 1];
+      return siblings.findIndex((s: any) => s.id === id);
+    }
+
     function createChapter(path: string[]): HTMLElement | null {
       const pathKey = getPathKey(path);
       const template = document.querySelector(`template[data-template-id="${pathKey}"]`) as HTMLTemplateElement;
@@ -399,11 +424,46 @@ const allItems = flattenItems(sections);
       const previousPath = state.activePath;
       state.activePath = path;
       
+      // Check if going back up (navigating to ancestor)
+      const isGoingUp = path.length < previousPath.length && 
+        previousPath.slice(0, path.length).join('/') === path.join('/');
+      
       // Check if this is a sibling change (same depth, same parent)
       const isSiblingChange = previousPath.length === path.length && 
         previousPath.length > 0 &&
         previousPath.slice(0, -1).join('/') === path.slice(0, -1).join('/') &&
         previousPath[previousPath.length - 1] !== path[path.length - 1];
+      
+      // If going back up, remove all chapters deeper than target
+      if (isGoingUp) {
+        const toRemove: string[] = [];
+        state.chapters.forEach((chapter, key) => {
+          const keyDepth = key.split('/').length;
+          if (keyDepth > path.length) {
+            toRemove.push(key);
+          }
+        });
+        toRemove.forEach(key => {
+          const chapter = state.chapters.get(key);
+          if (chapter) {
+            chapter.classList.add('chapter-leaving');
+            chapter.classList.remove('chapter-visible');
+            setTimeout(() => {
+              chapter.remove();
+              state.chapters.delete(key);
+            }, 400);
+          }
+        });
+        
+        // Scroll to the target chapter
+        const targetChapter = getChapterElement(path);
+        if (targetChapter) {
+          scrollToElement(targetChapter);
+        }
+        updateURL(path);
+        updateBackToTopVisibility();
+        return;
+      }
       
       // Check if this chapter already exists
       const existingChapter = getChapterElement(path);
@@ -418,39 +478,60 @@ const allItems = flattenItems(sections);
         return;
       }
       
-      // For sibling changes, do an instant swap (replace in place)
+      // For sibling changes, do a horizontal slide
       if (isSiblingChange) {
         const oldChapter = getChapterElement(previousPath);
         const newChapter = createChapter(path);
         
         if (oldChapter && newChapter) {
+          // Determine slide direction based on sibling indices
+          const oldIndex = getSiblingIndex(previousPath);
+          const newIndex = getSiblingIndex(path);
+          const goingRight = newIndex > oldIndex;
+          
+          // Set up the new chapter with initial state
+          newChapter.classList.remove('chapter-entering');
+          newChapter.classList.add(goingRight ? 'slide-from-right' : 'slide-from-left');
+          
           // Insert new chapter right where old one was
           oldChapter.parentNode?.insertBefore(newChapter, oldChapter);
           
-          // Remove old chapter immediately (no animation)
-          oldChapter.remove();
-          state.chapters.delete(getPathKey(previousPath));
+          // Animate old chapter out
+          oldChapter.classList.remove('chapter-visible');
+          oldChapter.classList.add(goingRight ? 'slide-out-left' : 'slide-out-right');
           
-          // Also remove any children of the old sibling
-          const oldPathKey = getPathKey(previousPath);
-          const toRemove: string[] = [];
-          state.chapters.forEach((chapter, key) => {
-            if (key.startsWith(oldPathKey + '/')) {
-              toRemove.push(key);
-            }
-          });
-          toRemove.forEach(key => {
-            const chapter = state.chapters.get(key);
-            if (chapter) {
-              chapter.remove();
-              state.chapters.delete(key);
-            }
-          });
+          // Remove old chapter and its children after animation
+          setTimeout(() => {
+            oldChapter.remove();
+            state.chapters.delete(getPathKey(previousPath));
+            
+            // Also remove any children of the old sibling
+            const oldPathKey = getPathKey(previousPath);
+            const toRemove: string[] = [];
+            state.chapters.forEach((chapter, key) => {
+              if (key.startsWith(oldPathKey + '/')) {
+                toRemove.push(key);
+              }
+            });
+            toRemove.forEach(key => {
+              const chapter = state.chapters.get(key);
+              if (chapter) {
+                chapter.remove();
+                state.chapters.delete(key);
+              }
+            });
+          }, 300);
           
-          // Track and show new chapter (no animation)
+          // Track new chapter
           state.chapters.set(getPathKey(path), newChapter);
-          newChapter.classList.remove('chapter-entering');
-          newChapter.classList.add('chapter-visible');
+          
+          // Animate new chapter in after a tiny delay for smoothness
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              newChapter.classList.remove('slide-from-right', 'slide-from-left');
+              newChapter.classList.add('chapter-visible');
+            });
+          });
           
           updateURL(path);
           updateBackToTopVisibility();
