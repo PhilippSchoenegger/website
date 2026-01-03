@@ -51,11 +51,11 @@ function renderLinks(links: Link[] | undefined, label: string) {
     </div>
   )}
   
-  {item.media_coverage && item.media_coverage.length > 0 && (
+  {(item.media_coverage || item.selected_media_coverage) && (item.media_coverage?.length > 0 || item.selected_media_coverage?.length > 0) && (
     <div class="detail-section">
-      <h4 class="detail-label">Media Coverage</h4>
+      <h4 class="detail-label">{item.selected_media_coverage ? 'Selected Media Coverage' : 'Media Coverage'}</h4>
       <div class="link-list">
-        {item.media_coverage.map((link) => (
+        {(item.selected_media_coverage || item.media_coverage).map((link) => (
           <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
             {link.text}
           </a>
@@ -103,11 +103,11 @@ function renderLinks(links: Link[] | undefined, label: string) {
     </div>
   )}
   
-  {item.reviewing && item.reviewing.length > 0 && (
+  {(item.reviewing || item.selected_reviewing) && (item.reviewing?.length > 0 || item.selected_reviewing?.length > 0) && (
     <div class="detail-section">
-      <h4 class="detail-label">Peer Review</h4>
+      <h4 class="detail-label">{item.selected_reviewing ? 'Selected Peer Review' : 'Peer Review'}</h4>
       <div class="link-list">
-        {item.reviewing.map((r) => (
+        {(item.selected_reviewing || item.reviewing).map((r) => (
           <span class="link-tag">{r}</span>
         ))}
       </div>
@@ -169,11 +169,11 @@ function renderLinks(links: Link[] | undefined, label: string) {
     </div>
   )}
   
-  {item.articles && item.articles.length > 0 && (
+  {(item.articles || item.selected_articles) && (item.articles?.length > 0 || item.selected_articles?.length > 0) && (
     <div class="detail-section">
-      <h4 class="detail-label">Articles</h4>
+      <h4 class="detail-label">{item.selected_articles ? 'Selected Articles' : 'Articles'}</h4>
       <div class="link-list">
-        {item.articles.map((link) => (
+        {(item.selected_articles || item.articles).map((link) => (
           <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
             {link.text}
           </a>

@@ -127,9 +127,9 @@ const allItems = flattenItems(sections);
             </header>
             
             <!-- Position/Experience details -->
-            {(item.links || item.funding || item.media_coverage || 
-              item.fellowships || item.achievements || item.sponsors || item.articles ||
-              item.projects || item.conferences || item.teaching || item.reviewing || item.note) && (
+            {(item.links || item.funding || item.media_coverage || item.selected_media_coverage ||
+              item.fellowships || item.achievements || item.sponsors || item.articles || item.selected_articles ||
+              item.projects || item.conferences || item.teaching || item.reviewing || item.selected_reviewing || item.note) && (
               <PositionDetails item={item} />
             )}
             

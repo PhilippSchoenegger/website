@@ -38,8 +38,7 @@ sections:
           - id: ai-evaluations
             title: Evaluations
             intro: |
-              The research AI evaluations focused on prediction capabilities (with a focus on 
-              geopolitical and economic forecasting), as well as persuasion and personality predictions.
+              My AI evaluations research examines prediction capabilities (focusing on geopolitical and economic forecasting), persuasion, and personality predictions.
             publications:
               - year: 2024
                 title: "Diminished Diversity-of-Thought in a Standard Large Language Model"
@@ -64,7 +63,7 @@ sections:
               - year: 2025
                 title: "Large Language Models Are More Persuasive Than Incentivized Human Persuaders"
                 journal: "arXiv Preprint arXiv:2505.09662"
-                coauthors: "Francesco Salvi, Jiale Liu, Xiaoxue Nan, Ramit Debnath, Barbara Fasolo, Evelina Leivada, ..."
+                coauthors: "Francesco Salvi, Jiacheng Liu, Xiaoli Nan, Ramit Debnath, Barbara Fasolo, Evelina Leivada, Gabriel Recchia, Fritz Günther, Ali Zarifhonarvar, Joe Kwon, Zahoor Ul Islam, Marco Dehnert, Daryl Y. H. Lee, Madeline G. Reinecke, David G. Kamper, Mert Kobaş, Adam Sandford, Jonas Kgomo, Luke Hewitt, Shreya Kapoor, Kerem Oktar, Eyup Engin Kucuk, Bo Feng, Cameron R. Jones, Izzy Gainsburg, Sebastian Olschewski, Nora Heinzelmann, Francisco Cruz, Ben M. Tappin, Tao Ma, Peter S. Park, Rayan Onyonka, Arthur Hjorth, Peter Slattery, Qingcheng Zeng, Lennart Finke, Igor Grossmann, Alessandro Salatiello, Ezra Karger"
                 url: "https://arxiv.org/abs/2505.09662"
               - year: 2025
                 title: "AI Can Outperform Humans in Predicting Correlations Between Personality Items"
@@ -75,9 +74,7 @@ sections:
           - id: ai-posttraining
             title: Posttraining & Prompt Engineering
             intro: |
-              The posttraining work, largely with Lightning Rod Labs (https://www.lightningrod.ai/), 
-              used GRPO to improve forecasting capabilities of small models, while other prompt 
-              engineering research found less effects.
+              My posttraining work, largely with [Lightning Rod Labs](https://www.lightningrod.ai/), used GRPO to improve forecasting capabilities of small models, while separate prompt engineering research examined its effects on forecasting.
             publications:
               - year: 2025
                 title: "LLMs Can Teach Themselves to Better Predict the Future"
@@ -98,12 +95,12 @@ sections:
           - id: ai-other
             title: Other
             intro: |
-              Jointly with my team at Microsoft AI, we looked at the usage patterns of Copilot in 2025.
+              With my team at Microsoft AI, I examined the usage patterns of Copilot in 2025.
             publications:
               - year: 2025
                 title: "It's About Time: The Temporal and Modal Dynamics of Copilot Usage"
                 journal: "arXiv Preprint arXiv:2512.11879"
-                coauthors: "Beatriz Costa-Gomes, Sophia Chen, Connie Hsueh, Deborah Morgan, Yash Shah, ..."
+                coauthors: "Beatriz Costa-Gomes, Sophia Chen, Connie Hsueh, Deborah Morgan, Yash Shah, Sam Way, Yuki Zhu, Timothé Adeline, Michael Bhaskar, Mustafa Suleyman, Seth Spielman"
                 url: "https://arxiv.org/abs/2512.11879"
 
       # Economics Research
@@ -113,7 +110,7 @@ sections:
           - id: econ-behavioural
             title: Behavioural Economics
             intro: |
-              The research focus of my behavioural economics work was charitable giving.
+              My behavioural economics research focused on charitable giving and moral decision-making.
             publications:
               - year: 2022
                 title: "Sure-Thing vs. Probabilistic Charitable Giving: Experimental Evidence on the Role of Individual Differences in Risky and Ambiguous Charitable Decision-Making"
@@ -134,8 +131,7 @@ sections:
           - id: econ-decision
             title: Decision Science
             intro: |
-              Research in decision sciences focused on long-run causal effect forecasting 
-              and improving low-probability judgements.
+              My decision science research examines long-run causal effect forecasting and methods for improving low-probability judgements.
             publications:
               - year: 2024
                 title: "Forecasting Long-Run Causal Effects"
@@ -155,8 +151,7 @@ sections:
           - id: phil-experimental
             title: Experimental Philosophy
             intro: |
-              The experimental philosophy research focused both on methods (Bayesian Truth Serum) 
-              as well as experiments, such as in population ethics.
+              My experimental philosophy research spans methods (Bayesian Truth Serum) and empirical experiments in population ethics and moral psychology.
             publications:
               - year: 2023
                 title: "Concrete Over Abstract: Experimental Evidence of Reflective Equilibrium in Population Ethics"
@@ -182,7 +177,7 @@ sections:
           - id: phil-science
             title: Philosophy of Science
             intro: |
-              I also worked on philosophy of science.
+              My philosophy of science research examines research methodology and science communication practices.
             publications:
               - year: 2023
                 title: "Social Sciences in Crisis: On the Proposed Elimination of the Discussion Section"
@@ -198,7 +193,7 @@ sections:
           - id: phil-political
             title: Political Theory
             intro: |
-              My focus in my political theory work is liberalism, specifically John Locke.
+              My political theory research focuses on liberalism, particularly the work of John Locke.
             publications:
               - year: 2024
                 title: "On the Epistemological Similarities of Market Liberalism and Standpoint Theory"
@@ -223,7 +218,7 @@ sections:
           - id: psych-personality
             title: Personality Psychology
             intro: |
-              I also worked on constructing a personality scale for antinatalism.
+              My personality psychology research developed and validated scales for measuring antinatalist attitudes.
             publications:
               - year: 2023
                 title: "Introduction and Validation of the Short Antinatalism Scale (S-ANS)"
@@ -237,31 +232,30 @@ sections:
                 url: "https://doi.org/10.1080/09515089.2021.1946026"
 
           - id: psych-social
-            title: Social Psychology
+            title: Selected Social Psychology
             intro: |
-              Together with a large research team, we looked at the social psychology aspects of COVID.
+              With a large international research consortium, I contributed to studies examining the social psychology of the COVID-19 pandemic.
             publications:
               - year: 2022
                 title: "Predicting Attitudinal and Behavioral Responses to COVID-19 Pandemic Using Machine Learning"
                 journal: "PNAS Nexus"
-                coauthors: "Tomislav Pavlović, Flavio Azevedo, Koustav De, Juan Carlos Riaño-Moreno, Marina Maglić, Theofilos Gkinopoulos, ..."
+                coauthors: "Tomislav Pavlović, Flavio Azevedo, Koustav De, Julián C. Riaño-Moreno, Marina Maglić, Theofilos Gkinopoulos, ..., Jay Joseph Van Bavel"
                 url: "https://doi.org/10.1093/pnasnexus/pgac093"
               - year: 2023
                 title: "Social and Moral Psychology of COVID-19 Across 69 Countries"
                 journal: "Scientific Data"
-                coauthors: "Flavio Azevedo, Tomislav Pavlović, Gabriel G. Rêgo, Fatma Ceren Ay, Biljana Gjoneska, Twila W. Etienne, ..."
+                coauthors: "Flavio Azevedo, Tomislav Pavlović, Gabriel G. Rêgo, F. Ceren Ay, Biljana Gjoneska, Tom W. Etienne, ..., Paulo S. Boggio & Waldir M. Sampaio"
                 url: "https://doi.org/10.1038/s41597-023-02080-8"
               - year: 2022
                 title: "National Identity Predicts Public Health Support During a Global Pandemic"
                 journal: "Nature Communications"
-                coauthors: "Jay J. Van Bavel, Aleksandra Cichocka, Valerio Capraro, Hallgeir Sjåstad, John B. Nezlek, Tomislav Pavlović, ..."
+                coauthors: "Jay J. Van Bavel, Aleksandra Cichocka, Valerio Capraro, Hallgeir Sjåstad, John B. Nezlek, Tomislav Pavlović, ..., Paulo S. Boggio"
                 url: "https://doi.org/10.1038/s41467-021-27668-9"
 
           - id: psych-environmental
-            title: Environmental Psychology
+            title: Selected Environmental Psychology
             intro: |
-              In work with Kian Mintz-Woo, we looked at moral hazards and geoengineering, 
-              while with a larger team, our work was focused on behavioural interventions for climate change.
+              My environmental psychology research examined moral hazards in geoengineering with Kian Mintz-Woo, as well as global behavioural interventions for climate change as part of a large international consortium.
             publications:
               - year: 2024
                 title: "Moral Hazards and Solar Radiation Management: Evidence From a Large-Scale Online Experiment"
@@ -271,19 +265,19 @@ sections:
               - year: 2024
                 title: "The International Climate Psychology Collaboration: Climate Change-Related Data Collected From 63 Countries"
                 journal: "Scientific Data"
-                coauthors: "Kimberly C. Doell, Boryana Todorova, Madalina Vlasceanu, Joseph B. Bak-Coleman, Eva Pronizius, ..."
+                coauthors: "Kimberly C. Doell, Boryana Todorova, Madalina Vlasceanu, Joseph B. Bak Coleman, Ekaterina Pronizius, Philipp Schumann, ..., Jay J. Van Bavel"
                 url: "https://doi.org/10.1038/s41597-024-03865-1"
               - year: 2024
                 title: "Addressing Climate Change With Behavioral Science: A Global Intervention Tournament in 63 Countries"
                 journal: "Science Advances"
-                coauthors: "Madalina Vlasceanu, Kimberly C. Doell, Joseph B. Bak-Coleman, Boryana Todorova, ..."
+                coauthors: "Madalina Vlasceanu, Kimberly C. Doell, Joseph B. Bak-Coleman, Boryana Todorova, ..., Jay J. Van Bavel"
                 url: "https://doi.org/10.1126/sciadv.adj5778"
 
       # Other Research
       - id: research-other
         title: Other
         intro: |
-          With a broad interdisciplinary team, some of my work even extended into epidemiology.
+          Some of my interdisciplinary work extended into epidemiology and historical research.
         publications:
           - year: 2022
             title: "Causal and Associational Language in Observational Health Research: A Systematic Evaluation"
@@ -332,7 +326,7 @@ sections:
                 url: "https://www.lse.ac.uk/"
               - venue: "INSEAD"
                 url: "https://www.insead.edu/"
-            media_coverage:
+            selected_media_coverage:
               - text: "Forbes"
                 url: "https://www.forbes.com/sites/tomasgorny/2024/12/02/should-businesses-trust-ai-to-predict-customer-behaviors/"
               - text: "BigThink"
@@ -348,7 +342,7 @@ sections:
                 url: "https://www.kcl.ac.uk/"
               - text: "TBD Conference"
                 url: "https://www.thetbdconference.com/"
-            reviewing:
+            selected_reviewing:
               - "Decision"
               - "Cognition"
               - "Personality and Individual Differences"
@@ -359,8 +353,7 @@ sections:
             title: Forecasting Research Institute
             period: "2023"
             intro: |
-              In 2023, I worked with Philip Tetlock at the Forecasting Research Institute, 
-              working on X and Y.
+              In 2023, I worked with Philip Tetlock at the Forecasting Research Institute on AI forecasting and prediction methodology.
             links:
               - text: "Forecasting Research Institute"
                 url: "https://forecastingresearch.org/"
@@ -387,7 +380,7 @@ sections:
                     url: "https://www.givingwhatwecan.org/"
                   - text: "Long-Term Future Fund"
                     url: "https://funds.effectivealtruism.org/funds/far-future"
-                media_coverage:
+                selected_media_coverage:
                   - text: "Süddeutsche Zeitung"
                     url: "https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347"
                   - text: "The Times"
@@ -506,21 +499,10 @@ sections:
 
       - id: mtg
         title: "Magic: The Gathering"
+        period: "2012-2015"
         intro: |
-          I was a semi-professional Magic: The Gathering player in the format Legacy, 
-          where I had a win-rate of 74.6% in Grand Prix-level tournaments, 
-          the fifth highest win-rate in the world.
-        achievements:
-          - text: "4/1587 at GP Paris"
-            url: "https://en.wikipedia.org/wiki/Magic:_The_Gathering_Pro_Tour_season_2013%E2%80%9314"
-          - text: "4/4003 at GP New Jersey"
-            url: "https://en.wikipedia.org/wiki/Magic:_The_Gathering_Pro_Tour_season_2014%E2%80%9315"
-        sponsors:
-          - text: "Team MTG Mint Card"
-            url: "https://www.mtgmintcard.com/team-mtgmintcard?srsltid=AfmBOoqKMByQ5mjBnLJihSeaoEaUfJRzfxdhDSvMPIAVqyjFB9c5BQZg"
-          - text: "MTG Madness"
-            url: "https://web.archive.org/web/20140208062415/https://www.mtgmadness.com/"
-        articles:
+          From 2012-2015, I was a semi-professional Magic: The Gathering player in the Legacy format, achieving a 74.6% win-rate in Grand Prix-level tournaments—the fifth highest in the world at the time. I placed 4th at GP Paris (1,587 players) and 4th at GP New Jersey (4,003 players), and was sponsored by [Team MTG Mint Card](https://www.mtgmintcard.com/team-mtgmintcard) and [MTG Madness](https://web.archive.org/web/20140208062415/https://www.mtgmadness.com/).
+        selected_articles:
           - text: "Eternal Central - GP Paris Top 4 Report"
             url: "https://www.eternalcentral.com/there-and-back-again-grand-prix-paris-top-4-report-with-miracles/"
           - text: "StarCityGames - GP New Jersey Story"
