@@ -20,28 +20,68 @@ const {
     <meta name="description" content={description} />
     <meta name="author" content="Philipp Schoenegger" />
     
+    <!-- Security headers (meta fallbacks) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://philippschoenegger.com" />
+    <meta property="og:image" content="https://philippschoenegger.com/pic.jpg" />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://philippschoenegger.com/pic.jpg" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://philippschoenegger.com" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
-    <!-- Fonts -->
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/pic.jpg" as="image" />
+    
+    <!-- Fonts with optimal loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
+      rel="stylesheet" 
+      media="print" 
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    </noscript>
+    
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#0284c7" />
     
     <title>{title}</title>
   </head>
   <body>
     <slot />
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Philipp Schoenegger",
+      "url": "https://philippschoenegger.com",
+      "jobTitle": "Researcher, Microsoft AI Futures",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Microsoft"
+      },
+      "sameAs": []
+    }
+    </script>
   </body>
 </html>

@@ -1,5 +1,6 @@
 /* ============================================================================
    GLOBAL STYLES - Light Blue Academic Theme
+   Optimized for performance and accessibility
    ============================================================================ */
 
 :root {
@@ -24,15 +25,12 @@
   /* Node/nav colors */
   --color-node-bg: #f0f9ff;
   --color-node-border: #7dd3fc;
-  --color-node-active-bg: #0284c7;
-  --color-node-active-border: #0369a1;
-  --color-connection: #bae6fd;
-  --color-connection-active: #0284c7;
+  --color-node-selected-bg: #0284c7;
+  --color-node-selected-border: #0369a1;
   
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-serif: 'Charter', 'Georgia', 'Times New Roman', serif;
-  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
   
   /* Spacing */
   --space-xs: 0.25rem;
@@ -45,11 +43,10 @@
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-normal: 300ms ease;
-  --transition-slow: 500ms ease-out;
 }
 
 /* ============================================================================
-   RESET & BASE
+   RESET & BASE - Performance optimized
    ============================================================================ */
 
 *, *::before, *::after {
@@ -63,6 +60,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -72,6 +70,13 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 /* ============================================================================
@@ -110,7 +115,7 @@ a:hover {
    ============================================================================ */
 
 .main-container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: var(--space-lg);
 }
@@ -121,7 +126,7 @@ a:hover {
 
 .hero {
   text-align: center;
-  padding: var(--space-2xl) var(--space-lg);
+  padding: var(--space-xl) var(--space-lg);
   border-bottom: 1px solid var(--color-border-light);
 }
 
@@ -133,6 +138,8 @@ a:hover {
   margin-bottom: var(--space-lg);
   border: 3px solid var(--color-border);
   transition: border-color var(--transition-normal);
+  /* Performance: prevent layout shift */
+  aspect-ratio: 1;
 }
 
 .hero-photo:hover {
@@ -164,73 +171,126 @@ a:hover {
 }
 
 /* ============================================================================
-   NAVIGATION - Horizontal small buttons at bottom
+   TREE NAVIGATION - Horizontal levels side by side
    ============================================================================ */
 
-.nav-layer {
+.tree-container {
+  padding: var(--space-lg) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+/* Each tree level is a horizontal row */
+.tree-level {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-sm);
-  margin-top: var(--space-lg);
-  padding-top: var(--space-md);
+  padding: var(--space-sm) 0;
+  animation: fadeIn 0.3s ease-out;
+  /* Add subtle visual hierarchy for nested levels */
+  position: relative;
 }
 
-.nav-node {
+/* Connector line before child levels */
+.tree-level:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 10px;
+  background: linear-gradient(to bottom, var(--color-border), var(--color-accent));
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tree nodes - horizontal buttons */
+.tree-node {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-xs);
+  justify-content: center;
   padding: var(--space-sm) var(--space-md);
   background: var(--color-node-bg);
-  border: 1px solid var(--color-node-border);
-  border-radius: 6px;
+  border: 2px solid var(--color-node-border);
+  border-radius: 8px;
   cursor: pointer;
   transition: all var(--transition-fast);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--color-text);
+  white-space: nowrap;
+  /* Hardware acceleration for animations */
+  transform: translateZ(0);
+  will-change: transform, background-color;
 }
 
-.nav-node:hover {
+.tree-node:hover {
   background: var(--color-accent-light);
   border-color: var(--color-accent);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px -4px rgba(2, 132, 199, 0.25);
 }
 
-.nav-node.active {
-  background: var(--color-node-active-bg);
-  border-color: var(--color-node-active-border);
+.tree-node:active {
+  transform: translateY(0);
+}
+
+/* Selected state */
+.tree-node.selected {
+  background: var(--color-node-selected-bg);
+  border-color: var(--color-node-selected-border);
   color: white;
+  box-shadow: 0 2px 8px -2px rgba(2, 132, 199, 0.4);
 }
 
-.nav-node.visited {
-  background: var(--color-accent-light);
-  border-color: var(--color-accent);
+.tree-node.selected:hover {
+  background: var(--color-accent-hover);
 }
 
-.nav-node .node-indicator {
-  width: 6px;
-  height: 6px;
-  background: var(--color-accent);
-  border-radius: 50%;
+/* Indicate nodes with children */
+.tree-node[data-has-children="true"]::after {
+  content: '▾';
+  margin-left: var(--space-xs);
+  font-size: 0.7em;
+  opacity: 0.7;
 }
 
-.nav-node.active .node-indicator {
-  background: white;
+.tree-node.selected[data-has-children="true"]::after {
+  opacity: 1;
 }
 
 /* ============================================================================
-   SECTION BLOCKS
+   CONTENT DISPLAY AREA
    ============================================================================ */
 
-.section-block {
+.content-display {
   padding: var(--space-xl) 0;
-  border-bottom: 1px solid var(--color-border-light);
-  animation: fadeInUp 0.4s ease-out;
+  min-height: 200px;
 }
 
-@keyframes fadeInUp {
+.content-display:empty {
+  min-height: 0;
+  padding: 0;
+}
+
+.content-section {
+  animation: contentFadeIn 0.4s ease-out;
+}
+
+@keyframes contentFadeIn {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -241,76 +301,30 @@ a:hover {
   }
 }
 
-.section-block:last-child {
-  border-bottom: none;
+.content-header {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border-light);
 }
 
-.section-header {
-  margin-bottom: var(--space-md);
-}
-
-.section-title {
-  font-size: 1.4rem;
+.content-title {
+  font-size: 1.6rem;
   color: var(--color-text);
   margin-bottom: var(--space-sm);
 }
 
-.section-period {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
+.content-period {
+  font-size: 0.9rem;
+  color: var(--color-accent);
   font-weight: 500;
   margin-bottom: var(--space-sm);
 }
 
-.section-intro {
+.content-intro {
   font-size: 0.95rem;
   color: var(--color-text-secondary);
   line-height: 1.7;
-}
-
-/* ============================================================================
-   PATH INDICATOR (Breadcrumb trail)
-   ============================================================================ */
-
-.path-indicator {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-xs);
-  margin-bottom: var(--space-lg);
-  padding: var(--space-sm) 0;
-}
-
-.path-item {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-sm);
-  background: var(--color-accent-light);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  font-size: 0.8rem;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.path-item:hover {
-  background: var(--color-node-bg);
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
-.path-item.current {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: white;
-  cursor: default;
-}
-
-.path-separator {
-  color: var(--color-text-faint);
-  font-size: 0.75rem;
+  max-width: 700px;
 }
 
 /* ============================================================================
@@ -330,6 +344,9 @@ a:hover {
   border: 1px solid var(--color-border-light);
   border-radius: 8px;
   transition: all var(--transition-fast);
+  /* Content-visibility for performance with many publications */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
 }
 
 .publication-card:hover {
@@ -416,45 +433,7 @@ a:hover {
 }
 
 /* ============================================================================
-   SCROLL INDICATOR
-   ============================================================================ */
-
-.scroll-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-xs);
-  color: var(--color-text-faint);
-  font-size: 0.75rem;
-  margin-top: var(--space-lg);
-  animation: bounce 2s infinite;
-}
-
-.scroll-indicator svg {
-  width: 20px;
-  height: 20px;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-6px); }
-  60% { transform: translateY(-3px); }
-}
-
-/* ============================================================================
-   CONNECTION LINES (between navigation levels)
-   ============================================================================ */
-
-.connection-line {
-  width: 2px;
-  height: 24px;
-  background: linear-gradient(to bottom, var(--color-border), var(--color-accent));
-  margin: var(--space-sm) auto;
-  border-radius: 1px;
-}
-
-/* ============================================================================
-   RESPONSIVE
+   RESPONSIVE DESIGN
    ============================================================================ */
 
 @media (max-width: 768px) {
@@ -467,7 +446,7 @@ a:hover {
   }
   
   .hero {
-    padding: var(--space-xl) var(--space-md);
+    padding: var(--space-lg) var(--space-md);
   }
   
   .hero-photo {
@@ -479,23 +458,61 @@ a:hover {
     font-size: 1.8rem;
   }
   
-  .nav-layer {
+  .tree-level {
     gap: var(--space-xs);
   }
   
-  .nav-node {
+  .tree-node {
     padding: var(--space-xs) var(--space-sm);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 480px) {
-  .path-indicator {
-    flex-direction: column;
-    align-items: flex-start;
+  .tree-level {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--space-sm);
+    -webkit-overflow-scrolling: touch;
   }
   
-  .path-separator {
+  .tree-node {
+    flex-shrink: 0;
+  }
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+
+@media print {
+  .tree-container {
     display: none;
+  }
+  
+  .hero-photo {
+    border: 1px solid #ccc;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

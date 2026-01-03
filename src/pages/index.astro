@@ -16,14 +16,14 @@ const { site, sections } = content;
 // Serialize for client-side navigation
 const sectionsJson = JSON.stringify(sections);
 
-// Helper to get all items flattened with their paths
-function flattenItems(items: any[], parentPath: string[] = [], level: number = 0): any[] {
+// Flatten all items for template generation
+function flattenItems(items: any[], parentPath: string[] = []): any[] {
   const result: any[] = [];
   for (const item of items) {
     const currentPath = [...parentPath, item.id];
-    result.push({ ...item, path: currentPath, level });
+    result.push({ ...item, path: currentPath });
     if (item.children) {
-      result.push(...flattenItems(item.children, currentPath, level + 1));
+      result.push(...flattenItems(item.children, currentPath));
     }
   }
   return result;
@@ -35,50 +35,57 @@ const allItems = flattenItems(sections);
 <BaseLayout title="Philipp Schoenegger" description={site.intro}>
   <main class="main-container" id="main">
     
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <img src="/pic.jpg" alt="Philipp Schoenegger" class="hero-photo" />
+    <!-- Hero Section - Always visible at top -->
+    <header class="hero" id="hero">
+      <img 
+        src="/pic.jpg" 
+        alt="Philipp Schoenegger" 
+        class="hero-photo" 
+        width="140" 
+        height="140"
+        loading="eager"
+        decoding="async"
+      />
       <h1 class="hero-name">{site.title}</h1>
       <p class="hero-tagline">{site.tagline}</p>
       <p class="hero-intro">{site.intro}</p>
-      
-      <!-- Initial navigation buttons -->
-      <nav class="nav-layer" id="nav-root" data-level="0">
+    </header>
+    
+    <!-- Navigation Tree Container - Horizontal levels -->
+    <nav class="tree-container" id="tree-nav" aria-label="Content navigation">
+      <!-- Level 0: Root categories (displayed horizontally) -->
+      <div class="tree-level" data-level="0">
         {sections.map((section: any) => (
           <button 
-            class="nav-node" 
+            class="tree-node" 
             data-id={section.id}
             data-path={JSON.stringify([section.id])}
+            data-has-children={section.children ? 'true' : 'false'}
+            type="button"
+            aria-pressed="false"
           >
-            <span class="node-indicator"></span>
             {section.title}
           </button>
         ))}
-      </nav>
-      
-      <div class="scroll-indicator" id="scroll-hint">
-        <span>Select to explore</span>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 5v14M5 12l7 7 7-7"/>
-        </svg>
       </div>
-    </section>
+      <!-- Additional levels will be inserted dynamically as horizontal rows -->
+    </nav>
     
-    <!-- Dynamic content area - sections render here as user navigates -->
-    <div id="content-area">
-      <!-- Content will be inserted dynamically -->
-    </div>
+    <!-- Content Display Area -->
+    <article id="content-display" class="content-display" aria-live="polite">
+      <!-- Selected content renders here -->
+    </article>
     
-    <!-- Hidden templates for all sections -->
-    <div id="section-templates" style="display: none;">
+    <!-- Hidden templates for all content sections -->
+    <div id="content-templates" hidden aria-hidden="true">
       {allItems.map((item: any) => (
         <template data-template-id={item.path.join('-')}>
-          <section class="section-block" data-section-path={JSON.stringify(item.path)}>
-            <div class="section-header">
-              <h2 class="section-title">{item.title}</h2>
-              {item.period && <div class="section-period">{item.period}</div>}
-              {item.intro && !item.period && <p class="section-intro">{item.intro}</p>}
-            </div>
+          <div class="content-section" data-path={JSON.stringify(item.path)}>
+            <header class="content-header">
+              <h2 class="content-title">{item.title}</h2>
+              {item.period && <p class="content-period">{item.period}</p>}
+              {item.intro && <p class="content-intro">{item.intro}</p>}
+            </header>
             
             {/* Position/Experience details */}
             {(item.links || item.funding || item.media_coverage || 
@@ -91,26 +98,7 @@ const allItems = flattenItems(sections);
             {item.publications && item.publications.length > 0 && (
               <PublicationList publications={item.publications} />
             )}
-            
-            {/* Child navigation */}
-            {item.children && item.children.length > 0 && (
-              <Fragment>
-                <div class="connection-line"></div>
-                <nav class="nav-layer" data-parent-path={JSON.stringify(item.path)}>
-                  {item.children.map((child: any) => (
-                    <button 
-                      class="nav-node" 
-                      data-id={child.id}
-                      data-path={JSON.stringify([...item.path, child.id])}
-                    >
-                      <span class="node-indicator"></span>
-                      {child.title}
-                    </button>
-                  ))}
-                </nav>
-              </Fragment>
-            )}
-          </section>
+          </div>
         </template>
       ))}
     </div>
@@ -121,194 +109,146 @@ const allItems = flattenItems(sections);
   </script>
   
   <script>
-    // State
-    const visitedPaths: Set<string> = new Set();
-    const currentPathStack: string[][] = [];
+    // State management
+    const state = {
+      currentPath: [] as string[],
+      expandedLevels: new Map<number, string>(), // level -> selected id
+    };
     
-    // DOM
-    const contentArea = document.getElementById('content-area')!;
-    const scrollHint = document.getElementById('scroll-hint')!;
-    const heroNav = document.getElementById('nav-root')!;
+    // DOM references
+    const treeNav = document.getElementById('tree-nav')!;
+    const contentDisplay = document.getElementById('content-display')!;
     
     // Initialize
-    document.addEventListener('DOMContentLoaded', () => {
-      setupNavigation();
-    });
+    document.addEventListener('DOMContentLoaded', init);
     
-    function setupNavigation() {
-      // Attach click handlers to all nav nodes (including dynamically added ones)
-      document.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        const navNode = target.closest('.nav-node') as HTMLElement;
-        
-        if (navNode) {
-          const pathStr = navNode.dataset.path;
-          if (pathStr) {
-            const path = JSON.parse(pathStr);
-            navigateToPath(path);
-          }
-        }
-        
-        // Handle path item clicks (breadcrumb navigation)
-        const pathItem = target.closest('.path-item:not(.current)') as HTMLElement;
-        if (pathItem) {
-          const pathStr = pathItem.dataset.path;
-          if (pathStr) {
-            const path = JSON.parse(pathStr);
-            navigateToPath(path, true);
-          }
-        }
-      });
+    function init() {
+      // Attach click handlers via event delegation
+      treeNav.addEventListener('click', handleNodeClick);
     }
     
-    function navigateToPath(path: string[], isBackNav = false) {
-      const pathKey = path.join('-');
+    function handleNodeClick(e: Event) {
+      const target = e.target as HTMLElement;
+      const node = target.closest('.tree-node') as HTMLElement;
+      if (!node) return;
       
-      // Mark as visited
-      visitedPaths.add(pathKey);
+      const pathStr = node.dataset.path;
+      if (!pathStr) return;
       
-      // Hide scroll hint
-      scrollHint.style.display = 'none';
+      const path = JSON.parse(pathStr) as string[];
+      selectPath(path);
+    }
+    
+    function selectPath(path: string[]) {
+      const level = path.length - 1;
+      const nodeId = path[path.length - 1];
       
-      // Update hero nav buttons
-      updateNavButtonStates(heroNav, path);
+      // Update state
+      state.currentPath = path;
+      state.expandedLevels.set(level, nodeId);
       
-      // If going back, remove sections after the target
-      if (isBackNav) {
-        // Find which sections to remove
-        const existingSections = contentArea.querySelectorAll('.section-block');
-        let foundTarget = false;
-        existingSections.forEach((section) => {
-          const sectionPath = JSON.parse((section as HTMLElement).dataset.sectionPath || '[]');
-          if (foundTarget) {
-            section.remove();
-          }
-          if (JSON.stringify(sectionPath) === JSON.stringify(path)) {
-            foundTarget = true;
-          }
+      // Clear levels after this one
+      for (let i = level + 1; i < 10; i++) {
+        state.expandedLevels.delete(i);
+      }
+      
+      // Update UI
+      updateTreeUI(path);
+      updateContent(path);
+    }
+    
+    function updateTreeUI(selectedPath: string[]) {
+      const sections = (window as any).__SECTIONS__;
+      const level = selectedPath.length - 1;
+      
+      // Remove tree levels after the selected level
+      const allLevels = treeNav.querySelectorAll('.tree-level');
+      allLevels.forEach((levelEl) => {
+        const levelNum = parseInt((levelEl as HTMLElement).dataset.level || '0');
+        if (levelNum > level) {
+          levelEl.remove();
+        }
+      });
+      
+      // Update active states for existing nodes
+      treeNav.querySelectorAll('.tree-node').forEach((node) => {
+        const nodeEl = node as HTMLElement;
+        const nodePath = JSON.parse(nodeEl.dataset.path || '[]') as string[];
+        const nodeLevel = nodePath.length - 1;
+        const nodeId = nodePath[nodePath.length - 1];
+        
+        // Check if this node is in the selected path
+        const isSelected = state.expandedLevels.get(nodeLevel) === nodeId;
+        nodeEl.classList.toggle('selected', isSelected);
+        nodeEl.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+      });
+      
+      // Get the selected item to check for children
+      const selectedItem = getItemByPath(sections, selectedPath);
+      
+      // If it has children, add a new tree level (horizontal row)
+      if (selectedItem?.children?.length > 0) {
+        const newLevel = document.createElement('div');
+        newLevel.className = 'tree-level';
+        newLevel.dataset.level = String(level + 1);
+        newLevel.setAttribute('role', 'group');
+        newLevel.setAttribute('aria-label', `${selectedItem.title} subcategories`);
+        
+        selectedItem.children.forEach((child: any) => {
+          const button = document.createElement('button');
+          button.className = 'tree-node';
+          button.type = 'button';
+          button.dataset.id = child.id;
+          button.dataset.path = JSON.stringify([...selectedPath, child.id]);
+          button.dataset.hasChildren = child.children ? 'true' : 'false';
+          button.textContent = child.title;
+          button.setAttribute('aria-pressed', 'false');
+          newLevel.appendChild(button);
         });
         
-        // Update path stack
-        while (currentPathStack.length > 0) {
-          const last = currentPathStack[currentPathStack.length - 1];
-          if (JSON.stringify(last) === JSON.stringify(path)) {
-            break;
-          }
-          currentPathStack.pop();
-        }
+        treeNav.appendChild(newLevel);
         
-        // Scroll to the target section
-        const targetSection = contentArea.querySelector(`[data-section-path='${JSON.stringify(path)}']`);
-        if (targetSection) {
-          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        
+        // Smooth scroll to show new level
+        requestAnimationFrame(() => {
+          newLevel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      }
+    }
+    
+    function updateContent(path: string[]) {
+      const pathKey = path.join('-');
+      const template = document.querySelector(`template[data-template-id="${pathKey}"]`) as HTMLTemplateElement;
+      
+      if (!template) {
+        contentDisplay.innerHTML = '';
         return;
       }
       
-      // Add to path stack
-      currentPathStack.push(path);
+      // Clone template content
+      const content = template.content.cloneNode(true);
       
-      // Get the template
-      const template = document.querySelector(`template[data-template-id="${pathKey}"]`) as HTMLTemplateElement;
-      if (!template) return;
+      // Add fade-in animation class
+      contentDisplay.classList.add('updating');
       
-      // Clone and insert
-      const content = template.content.cloneNode(true) as DocumentFragment;
+      // Clear and update display
+      contentDisplay.innerHTML = '';
+      contentDisplay.appendChild(content);
       
-      // Add path indicator (breadcrumb)
-      const section = content.querySelector('.section-block')!;
-      const pathIndicator = createPathIndicator(path);
-      section.insertBefore(pathIndicator, section.firstChild);
-      
-      // Append to content area
-      contentArea.appendChild(content);
-      
-      // Update nav button states in the new section
-      const newSection = contentArea.lastElementChild as HTMLElement;
-      const navLayer = newSection.querySelector('.nav-layer');
-      if (navLayer) {
-        updateNavButtonStates(navLayer as HTMLElement, []);
-      }
-      
-      // Scroll to the new section
-      newSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      
-      // Mark visited in all nav layers
-      updateAllVisitedStates();
-    }
-    
-    function createPathIndicator(path: string[]): HTMLElement {
-      const container = document.createElement('div');
-      container.className = 'path-indicator';
-      
-      const sections = (window as any).__SECTIONS__;
-      let currentItems = sections;
-      const pathSoFar: string[] = [];
-      
-      // Add "Home" first
-      const homeItem = document.createElement('span');
-      homeItem.className = 'path-item';
-      homeItem.dataset.path = '[]';
-      homeItem.textContent = 'Home';
-      homeItem.addEventListener('click', () => {
-        // Clear all content and reset
-        contentArea.innerHTML = '';
-        currentPathStack.length = 0;
-        scrollHint.style.display = 'flex';
-        updateNavButtonStates(heroNav, []);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-      container.appendChild(homeItem);
-      
-      // Build path items
-      for (let i = 0; i < path.length; i++) {
-        const id = path[i];
-        const item = currentItems.find((it: any) => it.id === id);
-        if (!item) break;
-        
-        pathSoFar.push(id);
-        
-        // Separator
-        const sep = document.createElement('span');
-        sep.className = 'path-separator';
-        sep.textContent = '→';
-        container.appendChild(sep);
-        
-        // Path item
-        const pathItem = document.createElement('span');
-        pathItem.className = 'path-item' + (i === path.length - 1 ? ' current' : '');
-        pathItem.dataset.path = JSON.stringify([...pathSoFar]);
-        pathItem.textContent = item.title;
-        container.appendChild(pathItem);
-        
-        currentItems = item.children || [];
-      }
-      
-      return container;
-    }
-    
-    function updateNavButtonStates(navLayer: HTMLElement, activePath: string[]) {
-      const buttons = navLayer.querySelectorAll('.nav-node');
-      buttons.forEach((btn) => {
-        const el = btn as HTMLElement;
-        const btnPath = JSON.parse(el.dataset.path || '[]');
-        const btnId = btnPath[btnPath.length - 1];
-        const activeId = activePath[activePath.length - 1];
-        
-        el.classList.toggle('active', btnId === activeId);
-        el.classList.toggle('visited', visitedPaths.has(btnPath.join('-')) && btnId !== activeId);
+      // Remove animation class after animation completes
+      requestAnimationFrame(() => {
+        contentDisplay.classList.remove('updating');
+        // Scroll content into view smoothly
+        contentDisplay.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
     
-    function updateAllVisitedStates() {
-      document.querySelectorAll('.nav-node').forEach((btn) => {
-        const el = btn as HTMLElement;
-        const btnPath = JSON.parse(el.dataset.path || '[]');
-        const isVisited = visitedPaths.has(btnPath.join('-'));
-        const isActive = el.classList.contains('active');
-        el.classList.toggle('visited', isVisited && !isActive);
-      });
+    function getItemByPath(items: any[], path: string[]): any {
+      if (path.length === 0) return null;
+      const [first, ...rest] = path;
+      const item = items.find((it: any) => it.id === first);
+      if (!item) return null;
+      if (rest.length === 0) return item;
+      return getItemByPath(item.children || [], rest);
     }
   </script>
 </BaseLayout>
