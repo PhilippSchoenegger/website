@@ -1,0 +1,39 @@
+---
+interface Props {
+  name: string;
+  tagline: string;
+  intro: string;
+  photoSrc: string;
+}
+
+const { name, tagline, intro, photoSrc } = Astro.props;
+---
+
+<section class="section section--hero" id="hero">
+  <div class="hero">
+    <img 
+      src={photoSrc} 
+      alt={`Photo of ${name}`} 
+      class="hero-photo"
+      loading="eager"
+    />
+    <h1 class="hero-name">{name}</h1>
+    <p class="hero-tagline">{tagline}</p>
+    <p class="hero-intro">{intro}</p>
+  </div>
+  
+  <div class="scroll-indicator">
+    <span>Explore</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .section--hero {
+    background: white;
+    position: relative;
+    z-index: 10;
+  }
+</style>

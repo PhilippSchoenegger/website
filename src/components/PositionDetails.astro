@@ -1,0 +1,247 @@
+---
+import type { NavItem, Link, Fellowship } from './NavigationLayer.astro';
+
+interface Props {
+  item: NavItem;
+}
+
+const { item } = Astro.props;
+
+function renderLinks(links: Link[] | undefined, label: string) {
+  if (!links || links.length === 0) return null;
+  return { links, label };
+}
+---
+
+<div class="position-details">
+  {item.period && (
+    <div class="position-period">{item.period}</div>
+  )}
+  
+  {item.intro && (
+    <p class="position-intro">{item.intro}</p>
+  )}
+  
+  {item.note && (
+    <p class="position-note">{item.note}</p>
+  )}
+  
+  {item.links && item.links.length > 0 && (
+    <div class="detail-section">
+      <div class="link-list">
+        {item.links.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.funding && item.funding.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Funding</h4>
+      <div class="link-list">
+        {item.funding.map((link) => (
+          link.url ? (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+              {link.text}
+            </a>
+          ) : (
+            <span class="link-tag">{link.text}</span>
+          )
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.media_coverage && item.media_coverage.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Media Coverage</h4>
+      <div class="link-list">
+        {item.media_coverage.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.presentations && item.presentations.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Presentations</h4>
+      <div class="link-list">
+        {item.presentations.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.conferences && item.conferences.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Conference Presentations</h4>
+      <div class="link-list">
+        {item.conferences.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.teaching && item.teaching.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Teaching</h4>
+      <div class="link-list">
+        {item.teaching.map((t) => (
+          <a href={t.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+            {t.venue}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.reviewing && item.reviewing.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Peer Review</h4>
+      <div class="link-list">
+        {item.reviewing.map((r) => (
+          <span class="link-tag">{r}</span>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.fellowships && item.fellowships.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Fellowships</h4>
+      <div class="fellowship-list">
+        {item.fellowships.map((f) => (
+          <div class="fellowship-item">
+            <span class="fellowship-title">{f.title}</span>
+            <a href={f.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+              {f.organization}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.projects && item.projects.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Projects</h4>
+      <div class="link-list">
+        {item.projects.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.achievements && item.achievements.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Achievements</h4>
+      <div class="link-list">
+        {item.achievements.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.sponsors && item.sponsors.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Sponsors</h4>
+      <div class="link-list">
+        {item.sponsors.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {item.articles && item.articles.length > 0 && (
+    <div class="detail-section">
+      <h4 class="detail-label">Articles</h4>
+      <div class="link-list">
+        {item.articles.map((link) => (
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
+            {link.text}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .position-details {
+    width: 100%;
+  }
+  
+  .position-period {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+  }
+  
+  .position-intro,
+  .position-note {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+  }
+  
+  .detail-section {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-light);
+  }
+  
+  .detail-section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+  
+  .detail-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .fellowship-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .fellowship-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+  
+  .fellowship-title {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+export interface NavItem {
+  id: string;
+  title: string;
+  intro?: string;
+  children?: NavItem[];
+  publications?: Publication[];
+  period?: string;
+  links?: Link[];
+  funding?: Link[];
+  media_coverage?: Link[];
+  presentations?: Link[];
+  teaching?: { venue: string; url: string }[];
+  reviewing?: string[];
+  fellowships?: Fellowship[];
+  achievements?: Link[];
+  sponsors?: Link[];
+  articles?: Link[];
+  projects?: Link[];
+  conferences?: Link[];
+  note?: string;
+}
+
+export interface Publication {
+  year: number;
+  title: string;
+  journal: string;
+  coauthors: string;
+  url: string;
+}
+
+export interface Link {
+  text: string;
+  url: string;
+}
+
+export interface Fellowship {
+  title: string;
+  organization: string;
+  url: string;
+}
+
+interface Props {
+  items: NavItem[];
+  level: number;
+  parentPath?: string[];
+}
+
+const { items, level, parentPath = [] } = Astro.props;
+---
+
+<div class="nav-layer" data-level={level}>
+  {items.map((item) => (
+    <button 
+      class="nav-node" 
+      data-id={item.id}
+      data-has-children={item.children ? 'true' : 'false'}
+      data-has-publications={item.publications ? 'true' : 'false'}
+      data-path={JSON.stringify([...parentPath, item.id])}
+    >
+      <div class="node-dot"></div>
+      <h3>{item.title}</h3>
+    </button>
+  ))}
+</div>
+
+<style>
+  .nav-layer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+    width: 100%;
+  }
+</style>

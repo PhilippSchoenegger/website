@@ -1,0 +1,527 @@
+# ============================================================================
+# WEBSITE CONTENT STRUCTURE
+# ============================================================================
+# This file defines the hierarchical navigation and content for the website.
+# Edit this file to add/modify content. The website build will read from here.
+#
+# STRUCTURE:
+#   - Each section has: id, title, content (optional), children (optional)
+#   - Children create nested navigation levels
+#   - Links use: { text, url } format
+#   - Publications use: { year, title, journal, coauthors, url } format
+# ============================================================================
+
+site:
+  title: "Philipp Schoenegger"
+  tagline: "I work on Microsoft AI's Futures team in the Office of the CEO."
+  intro: |
+    My current research focuses on the economic impacts of advanced artificial intelligence, 
+    AI consciousness and its societal impacts, and forecasting AI progress among other related topics.
+
+# ============================================================================
+# MAIN NAVIGATION SECTIONS
+# ============================================================================
+sections:
+  # --------------------------------------------------------------------------
+  # RESEARCH
+  # --------------------------------------------------------------------------
+  - id: research
+    title: Research
+    intro: |
+      My research spans AI, economics, philosophy, psychology and more. 
+      It has been cited over 1,500 times with an h-index of 15.
+    children:
+      # AI Research
+      - id: ai
+        title: Artificial Intelligence
+        children:
+          - id: ai-evaluations
+            title: Evaluations
+            intro: |
+              The research AI evaluations focused on prediction capabilities (with a focus on 
+              geopolitical and economic forecasting), as well as persuasion and personality predictions.
+            publications:
+              - year: 2024
+                title: "Diminished Diversity-of-Thought in a Standard Large Language Model"
+                journal: "Behavior Research Methods"
+                coauthors: "Peter S. Park, Chongyang Zhu"
+                url: "https://link.springer.com/article/10.3758/s13428-023-02307-x"
+              - year: 2024
+                title: "Wisdom of the Silicon Crowd: LLM Ensemble Prediction Capabilities Rival Human Crowd Accuracy"
+                journal: "Science Advances"
+                coauthors: "Indre Tuminauskaite, Peter S. Park, Ryan V.S. Bastos, Philip E. Tetlock"
+                url: "https://doi.org/10.1126/sciadv.adp1528"
+              - year: 2025
+                title: "AI-Augmented Predictions: LLM Assistants Improve Human Forecasting Accuracy"
+                journal: "ACM Transactions on Interactive Intelligent Systems"
+                coauthors: "Peter S. Park, Ezra Karger, Sean Trott, Philip E. Tetlock"
+                url: "https://doi.org/10.1145/3707649"
+              - year: 2023
+                title: "Large Language Model Prediction Capabilities: Evidence From a Real-World Forecasting Tournament"
+                journal: "arXiv Preprint arXiv:2310.13014"
+                coauthors: "Peter S. Park"
+                url: "https://arxiv.org/abs/2310.13014"
+              - year: 2025
+                title: "Large Language Models Are More Persuasive Than Incentivized Human Persuaders"
+                journal: "arXiv Preprint arXiv:2505.09662"
+                coauthors: "Francesco Salvi, Jiale Liu, Xiaoxue Nan, Ramit Debnath, Barbara Fasolo, Evelina Leivada, ..."
+                url: "https://arxiv.org/abs/2505.09662"
+              - year: 2025
+                title: "AI Can Outperform Humans in Predicting Correlations Between Personality Items"
+                journal: "Communications Psychology"
+                coauthors: "Spencer Greenberg, Alexander Grishin, Lucius Caviola"
+                url: "https://doi.org/10.1038/s44271-025-00205-w"
+
+          - id: ai-posttraining
+            title: Posttraining & Prompt Engineering
+            intro: |
+              The posttraining work, largely with Lightning Rod Labs (https://www.lightningrod.ai/), 
+              used GRPO to improve forecasting capabilities of small models, while other prompt 
+              engineering research found less effects.
+            publications:
+              - year: 2025
+                title: "LLMs Can Teach Themselves to Better Predict the Future"
+                journal: "arXiv Preprint arXiv:2502.05253"
+                coauthors: "Benjamin Turtel, Danny Franklin"
+                url: "https://arxiv.org/abs/2502.05253"
+              - year: 2025
+                title: "Outcome-Based Reinforcement Learning to Predict the Future"
+                journal: "Transactions on Machine Learning Research"
+                coauthors: "Benjamin Turtel, Danny Franklin, Kris Skotheim, Luke Hewitt"
+                url: "https://openreview.net/pdf?id=bbhdeL8EUX"
+              - year: 2025
+                title: "Prompt Engineering Large Language Models' Forecasting Capabilities"
+                journal: "arXiv Preprint arXiv:2506.01578"
+                coauthors: "Caleb R. Jones, Philip E. Tetlock, Barbara Mellers"
+                url: "https://arxiv.org/abs/2506.01578"
+
+          - id: ai-other
+            title: Other
+            intro: |
+              Jointly with my team at Microsoft AI, we looked at the usage patterns of Copilot in 2025.
+            publications:
+              - year: 2025
+                title: "It's About Time: The Temporal and Modal Dynamics of Copilot Usage"
+                journal: "arXiv Preprint arXiv:2512.11879"
+                coauthors: "Beatriz Costa-Gomes, Sophia Chen, Connie Hsueh, Deborah Morgan, Yash Shah, ..."
+                url: "https://arxiv.org/abs/2512.11879"
+
+      # Economics Research
+      - id: economics
+        title: Economics
+        children:
+          - id: econ-behavioural
+            title: Behavioural Economics
+            intro: |
+              The research focus of my behavioural economics work was charitable giving.
+            publications:
+              - year: 2022
+                title: "Sure-Thing vs. Probabilistic Charitable Giving: Experimental Evidence on the Role of Individual Differences in Risky and Ambiguous Charitable Decision-Making"
+                journal: "PLOS ONE"
+                coauthors: "Miguel Costa-Gomes"
+                url: "https://doi.org/10.1371/journal.pone.0273971"
+              - year: 2023
+                title: "Demanding the Morally Demanding: Experimental Evidence on the Effects of Moral Arguments and Moral Demandingness on Charitable Giving"
+                journal: "Journal of Behavioral and Experimental Economics"
+                coauthors: "Ben Grodeck"
+                url: "https://www.sciencedirect.com/science/article/abs/pii/S2214804323000149"
+              - year: 2022
+                title: "Charitable Giving Under Normative Uncertainty: Experimental Evidence on the Behavioral Impact of Normative Expert Advice"
+                journal: "Available at SSRN"
+                coauthors: "Miguel Costa-Gomes"
+                url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4389737"
+
+          - id: econ-decision
+            title: Decision Science
+            intro: |
+              Research in decision sciences focused on long-run causal effect forecasting 
+              and improving low-probability judgements.
+            publications:
+              - year: 2024
+                title: "Forecasting Long-Run Causal Effects"
+                journal: "SSRN"
+                coauthors: "David R. Bernard"
+                url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4702393"
+              - year: 2024
+                title: "Improving Low-Probability Judgments"
+                journal: "SSRN"
+                coauthors: "Pavel D. Atanasov, Coralie Consigny, Ezra Karger, David V. Budescu, ..."
+                url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5025990"
+
+      # Philosophy Research
+      - id: philosophy
+        title: Philosophy
+        children:
+          - id: phil-experimental
+            title: Experimental Philosophy
+            intro: |
+              The experimental philosophy research focused both on methods (Bayesian Truth Serum) 
+              as well as experiments, such as in population ethics.
+            publications:
+              - year: 2023
+                title: "Concrete Over Abstract: Experimental Evidence of Reflective Equilibrium in Population Ethics"
+                journal: "Experiments in Moral and Political Philosophy"
+                coauthors: "Ben Grodeck"
+                url: "https://www.taylorfrancis.com/chapters/edit/10.4324/9781003301424-4/concrete-abstract-philipp-schoenegger-ben-grodeck"
+              - year: 2019
+                title: "The Moral Behavior of Ethics Professors: A Replication-Extension in German-Speaking Countries"
+                journal: "Philosophical Psychology"
+                coauthors: "Johannes Wagner"
+                url: "https://doi.org/10.1080/09515089.2019.1587912"
+              - year: 2023
+                title: "Experimental Philosophy and the Incentivisation Challenge: A Proposed Application of the Bayesian Truth Serum"
+                journal: "Review of Philosophy and Psychology"
+                coauthors: ""
+                url: "https://link.springer.com/article/10.1007/s13164-021-00571-4"
+              - year: 2022
+                title: "Taking a Closer Look at the Bayesian Truth Serum"
+                journal: "Experimental Psychology"
+                coauthors: "Steven Verheyen"
+                url: "https://econtent.hogrefe.com/doi/10.1027/1618-3169/a000558"
+
+          - id: phil-science
+            title: Philosophy of Science
+            intro: |
+              I also worked on philosophy of science.
+            publications:
+              - year: 2023
+                title: "Social Sciences in Crisis: On the Proposed Elimination of the Discussion Section"
+                journal: "Synthese"
+                coauthors: "Raimund Pils"
+                url: "https://doi.org/10.1007/s11229-023-04267-3"
+              - year: 2024
+                title: "Scientific Realism, Scientific Practice, and Science Communication: An Empirical Investigation of Academics and Science Communicators"
+                journal: "Studies in History and Philosophy of Science"
+                coauthors: "Raimund Pils"
+                url: "https://www.sciencedirect.com/science/article/pii/S0039368124000475"
+
+          - id: phil-political
+            title: Political Theory
+            intro: |
+              My focus in my political theory work is liberalism, specifically John Locke.
+            publications:
+              - year: 2024
+                title: "On the Epistemological Similarities of Market Liberalism and Standpoint Theory"
+                journal: "Episteme"
+                coauthors: "Raimund Pils"
+                url: "https://www.cambridge.org/core/journals/episteme/article/on-the-epistemological-similarities-of-market-liberalism-and-standpoint-theory/B28FB4DAB495006A07DA4DF23C00DCA3"
+              - year: 2020
+                title: "The Lockean Prerogative, Natural Law, and Political Power"
+                journal: "Locke Studies"
+                coauthors: ""
+                url: "https://ojs.lib.uwo.ca/index.php/locke/article/view/8056"
+              - year: 2023
+                title: "Locke on Prerogative: Democracy, Libertarianism, and Proto-Utilitarianism"
+                journal: "Locke Studies"
+                coauthors: "Henrik Skaug Sætra"
+                url: "https://ojs.lib.uwo.ca/index.php/locke/article/view/16399"
+
+      # Psychology Research
+      - id: psychology
+        title: Psychology
+        children:
+          - id: psych-personality
+            title: Personality Psychology
+            intro: |
+              I also worked on constructing a personality scale for antinatalism.
+            publications:
+              - year: 2023
+                title: "Introduction and Validation of the Short Antinatalism Scale (S-ANS)"
+                journal: "Psychological Test Adaptation and Development"
+                coauthors: "Maximilian Maier, Ryan V.S. Bastos"
+                url: "https://doi.org/10.1027/2698-1866/a000036"
+              - year: 2022
+                title: "What's Up With Anti-Natalists? An Observational Study on the Relationship Between Dark Triad Personality Traits and Anti-Natalist Views"
+                journal: "Philosophical Psychology"
+                coauthors: ""
+                url: "https://doi.org/10.1080/09515089.2021.1946026"
+
+          - id: psych-social
+            title: Social Psychology
+            intro: |
+              Together with a large research team, we looked at the social psychology aspects of COVID.
+            publications:
+              - year: 2022
+                title: "Predicting Attitudinal and Behavioral Responses to COVID-19 Pandemic Using Machine Learning"
+                journal: "PNAS Nexus"
+                coauthors: "Tomislav Pavlović, Flavio Azevedo, Koustav De, Juan Carlos Riaño-Moreno, Marina Maglić, Theofilos Gkinopoulos, ..."
+                url: "https://doi.org/10.1093/pnasnexus/pgac093"
+              - year: 2023
+                title: "Social and Moral Psychology of COVID-19 Across 69 Countries"
+                journal: "Scientific Data"
+                coauthors: "Flavio Azevedo, Tomislav Pavlović, Gabriel G. Rêgo, Fatma Ceren Ay, Biljana Gjoneska, Twila W. Etienne, ..."
+                url: "https://doi.org/10.1038/s41597-023-02080-8"
+              - year: 2022
+                title: "National Identity Predicts Public Health Support During a Global Pandemic"
+                journal: "Nature Communications"
+                coauthors: "Jay J. Van Bavel, Aleksandra Cichocka, Valerio Capraro, Hallgeir Sjåstad, John B. Nezlek, Tomislav Pavlović, ..."
+                url: "https://doi.org/10.1038/s41467-021-27668-9"
+
+          - id: psych-environmental
+            title: Environmental Psychology
+            intro: |
+              In work with Kian Mintz-Woo, we looked at moral hazards and geoengineering, 
+              while with a larger team, our work was focused on behavioural interventions for climate change.
+            publications:
+              - year: 2024
+                title: "Moral Hazards and Solar Radiation Management: Evidence From a Large-Scale Online Experiment"
+                journal: "Journal of Environmental Psychology"
+                coauthors: "Kian Mintz-Woo"
+                url: "https://www.sciencedirect.com/science/article/pii/S0272494424000616"
+              - year: 2024
+                title: "The International Climate Psychology Collaboration: Climate Change-Related Data Collected From 63 Countries"
+                journal: "Scientific Data"
+                coauthors: "Kimberly C. Doell, Boryana Todorova, Madalina Vlasceanu, Joseph B. Bak-Coleman, Eva Pronizius, ..."
+                url: "https://doi.org/10.1038/s41597-024-03865-1"
+              - year: 2024
+                title: "Addressing Climate Change With Behavioral Science: A Global Intervention Tournament in 63 Countries"
+                journal: "Science Advances"
+                coauthors: "Madalina Vlasceanu, Kimberly C. Doell, Joseph B. Bak-Coleman, Boryana Todorova, ..."
+                url: "https://doi.org/10.1126/sciadv.adj5778"
+
+      # Other Research
+      - id: research-other
+        title: Other
+        intro: |
+          With a broad interdisciplinary team, some of my work even extended into epidemiology.
+        publications:
+          - year: 2022
+            title: "Causal and Associational Language in Observational Health Research: A Systematic Evaluation"
+            journal: "American Journal of Epidemiology"
+            coauthors: "Noah A. Haber, Sarah E. Wieten, Julia M. Rohrer, Onyebuchi A. Arah, Peter W.G. Tennant, Elizabeth A. Stuart, ..."
+            url: "https://doi.org/10.1093/aje/kwac137"
+          - year: 2017
+            title: "Nationalsozialismus und Mediävistik: Ein Vergleich der 1938-1945 und 1946-1964 an der Karl-Franzens-Universität Graz Verfassten Dissertationen mit Mittelalterlichem Schwerpunkt"
+            journal: "Die Karl-Franzens-Universität und der Lange Schatten des Hakenkreuzes"
+            coauthors: "Christina Deutschl, Claudia Mayr, Florian Zeilinger"
+            url: "https://www.unipress-graz.com/buecher/die-karl-franzens-universitat-graz-und-der-lange-schatten-des-hakenkreuzes"
+
+  # --------------------------------------------------------------------------
+  # PREVIOUS POSITIONS
+  # --------------------------------------------------------------------------
+  - id: positions
+    title: Previous Positions
+    children:
+      # Academic Positions
+      - id: academic
+        title: Academic
+        children:
+          - id: lse
+            title: London School of Economics
+            period: "2022-2024"
+            intro: |
+              From 2022-2024, I was a post-doctoral researcher at the London School of Economics, 
+              working at the Behavioural Lab with Barbara Fasolo and Matteo Galizzi. 
+              I worked at the intersection of applied AI and behavioural science.
+            links:
+              - text: "London School of Economics"
+                url: "https://www.lse.ac.uk/"
+              - text: "Behavioural Lab"
+                url: "https://www.lse.ac.uk/behavioural-lab/?entryId=2319c173-7bdc-45d3-9a69-d12fd54340d7&nodeId=e2e64854-5d30-44fa-a289-a5ef76104f3e"
+            funding:
+              - text: "Longview Philanthropy"
+                url: "https://www.longview.org/"
+              - text: "LSE Department of Management"
+                url: "https://www.lse.ac.uk/management"
+              - text: "Wharton-INSEAD Alliance"
+                url: "https://insead.wharton.upenn.edu/"
+              - text: "Wharton AI & Analytics Initiative"
+                url: "https://ai-analytics.wharton.upenn.edu/"
+            teaching:
+              - venue: "LSE"
+                url: "https://www.lse.ac.uk/"
+              - venue: "INSEAD"
+                url: "https://www.insead.edu/"
+            media_coverage:
+              - text: "Forbes"
+                url: "https://www.forbes.com/sites/tomasgorny/2024/12/02/should-businesses-trust-ai-to-predict-customer-behaviors/"
+              - text: "BigThink"
+                url: "https://bigthink.com/thinking/anti-natalism-psychopaths-having-children-immoral/"
+              - text: "Astral Codex Ten"
+                url: "https://www.astralcodexten.com/p/mantic-monday-31124"
+              - text: "Marginal Revolution"
+                url: "https://marginalrevolution.com/marginalrevolution/2023/09/do-llms-diminish-diversity-of-thought.html"
+            presentations:
+              - text: "UK Ministry of Defence"
+                url: "https://www.gov.uk/government/organisations/ministry-of-defence"
+              - text: "King's College London"
+                url: "https://www.kcl.ac.uk/"
+              - text: "TBD Conference"
+                url: "https://www.thetbdconference.com/"
+            reviewing:
+              - "Decision"
+              - "Cognition"
+              - "Personality and Individual Differences"
+              - "Royal Society Open"
+              - "PCI RR"
+
+          - id: fri
+            title: Forecasting Research Institute
+            period: "2022"
+            intro: |
+              In 2022, I worked with Philip Tetlock at the Forecasting Research Institute, 
+              working on X and Y.
+            links:
+              - text: "Forecasting Research Institute"
+                url: "https://forecastingresearch.org/"
+
+          - id: standrews
+            title: University of St Andrews
+            children:
+              - id: standrews-phd
+                title: Ph.D.
+                period: "Completed 2022"
+                intro: |
+                  In 2022, I completed a Ph.D. in Philosophy and Economics with the title 
+                  'Moral Decision-Making: Essays from Philosophy and Economics' under the 
+                  supervision of Theron Pummer and Miguel Costa-Gomes at St Andrews.
+                links:
+                  - text: "St Andrews"
+                    url: "https://www.st-andrews.ac.uk/"
+                funding:
+                  - text: "Forethought Foundation"
+                    url: ""
+                  - text: "Centre for Effective Altruism"
+                    url: "https://www.centreforeffectivealtruism.org/"
+                  - text: "Giving What We Can"
+                    url: "https://www.givingwhatwecan.org/"
+                  - text: "Long-Term Future Fund"
+                    url: "https://funds.effectivealtruism.org/funds/far-future"
+                media_coverage:
+                  - text: "Süddeutsche Zeitung"
+                    url: "https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347"
+                  - text: "The Times"
+                    url: "https://www.thetimes.co.uk/article/ethics-professors-don-t-walk-the-walk-d7n6097m8"
+                  - text: "Psychology Today"
+                    url: "https://www.psychologytoday.com/us/blog/unique-everybody-else/202109/are-dark-triad-traits-adaptive"
+                  - text: "Die Zeit"
+                    url: "https://www.zeit.de/2021/49/liberalismus-corona-klima-fdp-friedrich-august-von-hayek/komplettansicht"
+                  - text: "PsyPost"
+                    url: "https://www.psypost.org/2022/03/dark-triad-personality-traits-are-more-common-among-those-who-believe-procreation-is-morally-wrong-62746"
+                  - text: "Wikipedia"
+                    url: "https://es.wikipedia.org/?curid=1309987"
+                conferences:
+                  - text: "Scottish Economic Society Annual Conference"
+                    url: "https://scotecon.org/"
+                  - text: "UK Experimental Philosophy Workshop"
+                    url: "https://x-phi.uea.ac.uk/online-workshop/"
+                  - text: "Behavioural Economics, Society, and Technology Conference"
+                    url: "https://research.qut.edu.au/best/"
+                  - text: "London Graduate Conference in History of Political Thought"
+                    url: "https://projects.history.qmul.ac.uk/hpt/category/london-graduate-conference-in-history-of-political-thought/"
+
+              - id: standrews-mlitt
+                title: M.Litt.
+                period: "Completed 2018"
+                intro: |
+                  In 2018 I completed the M.Litt. in Moral, Political, and Legal Philosophy 
+                  at St Andrews, where I was on the 2018-2019 Dean's List.
+                links:
+                  - text: "St Andrews"
+                    url: "https://www.st-andrews.ac.uk/"
+
+              - id: standrews-fellowships
+                title: Fellowships
+                intro: |
+                  During my time at St Andrews, I held a number of fellowships.
+                fellowships:
+                  - title: "Associate Fellow"
+                    organization: "AdvanceHE"
+                    url: "https://www.advance-he.ac.uk/fellowship/associate-fellowship"
+                  - title: "Bernard Marcus Fellow"
+                    organization: "Institute for Human Studies"
+                    url: "https://www.theihs.org/"
+                  - title: "ECCP Programme Visitor and Global Priorities Fellow"
+                    organization: "Global Priorities Institute, University of Oxford"
+                    url: "https://www.globalprioritiesinstitute.org/"
+                  - title: "Oscar Morgenstern Fellow"
+                    organization: "Mercatus Center at George Mason University"
+                    url: "https://www.mercatus.org/"
+
+      # Forecasting Positions
+      - id: forecasting
+        title: Forecasting
+        children:
+          - id: seldon
+            title: Seldon Capital
+            period: "2024-2025"
+            intro: |
+              Between 2024 and 2025 I was the Forecasting Team Lead at Seldon Capital, 
+              working on various issues in macroeconomics and technology.
+            links:
+              - text: "Seldon Capital"
+                url: "https://www.seldon.capital/"
+
+          - id: swift
+            title: Swift Centre
+            period: "2023-2025"
+            intro: |
+              Between 2023 and 2025 I was a forecaster for the Swift Centre, working on a 
+              wide range of questions, including forecasting for the future capabilities 
+              of frontier AI models for Google DeepMind.
+            links:
+              - text: "Swift Centre"
+                url: "https://www.swiftcentre.org/"
+              - text: "DeepMind forecasting paper"
+                url: "https://arxiv.org/pdf/2403.13793"
+
+          - id: metaculus
+            title: Metaculus
+            period: "2022-present"
+            intro: |
+              In 2022 I qualified as a Pro Forecaster at Metaculus.
+            links:
+              - text: "Pro Forecasters"
+                url: "https://www.metaculus.com/pro-forecasters/"
+              - text: "Metaculus"
+                url: "https://www.metaculus.com/"
+            projects:
+              - text: "Federation of American Scientists"
+                url: "https://fas.org/publication/mathematically-predicting-the-future-with-professional-forecaster-philip-schoenegger/"
+              - text: "Carnegie Endowment for International Peace"
+                url: "https://carnegieendowment.org/research/2025/04/forecasting-nuclear-escalation-risks-cloudy-with-a-chance-of-fallout?lang=en"
+
+  # --------------------------------------------------------------------------
+  # OTHER
+  # --------------------------------------------------------------------------
+  - id: other
+    title: Other
+    children:
+      - id: graz
+        title: University of Graz
+        period: "2014-2018"
+        intro: |
+          From 2014-2018, I was an undergraduate student at the University of Graz, 
+          earning a Mag.phil. teaching degree in Psychology, Philosophy and German, 
+          a B.A. in Philosophy, and a B.A. in German Philology. 
+          I earned two academic performance scholarships.
+        links:
+          - text: "University Center for Human Values at Princeton"
+            url: "https://uchv.princeton.edu/"
+          - text: "Princeton University"
+            url: "https://www.princeton.edu/"
+        note: |
+          During this time I was an unofficial visiting student at the University Center 
+          for Human Values with Peter Singer at Princeton University.
+
+      - id: mtg
+        title: "Magic: The Gathering"
+        intro: |
+          I was a semi-professional Magic: The Gathering player in the format Legacy, 
+          where I had a win-rate of 74.6% in Grand Prix-level tournaments, 
+          the fifth highest win-rate in the world.
+        achievements:
+          - text: "4/1587 at GP Paris"
+            url: "https://en.wikipedia.org/wiki/Magic:_The_Gathering_Pro_Tour_season_2013%E2%80%9314"
+          - text: "4/4003 at GP New Jersey"
+            url: "https://en.wikipedia.org/wiki/Magic:_The_Gathering_Pro_Tour_season_2014%E2%80%9315"
+        sponsors:
+          - text: "Team MTG Mint Card"
+            url: "https://www.mtgmintcard.com/team-mtgmintcard?srsltid=AfmBOoqKMByQ5mjBnLJihSeaoEaUfJRzfxdhDSvMPIAVqyjFB9c5BQZg"
+          - text: "MTG Madness"
+            url: "https://web.archive.org/web/20140208062415/https://www.mtgmadness.com/"
+        articles:
+          - text: "Eternal Central - GP Paris Top 4 Report"
+            url: "https://www.eternalcentral.com/there-and-back-again-grand-prix-paris-top-4-report-with-miracles/"
+          - text: "StarCityGames - GP New Jersey Story"
+            url: "https://articles.starcitygames.com/articles/one-journey-one-miracle-a-grand-prix-new-jersey-story/"

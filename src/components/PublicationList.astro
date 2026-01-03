@@ -1,0 +1,33 @@
+---
+import type { Publication } from './NavigationLayer.astro';
+
+interface Props {
+  publications: Publication[];
+}
+
+const { publications } = Astro.props;
+
+// Sort by year descending
+const sortedPubs = [...publications].sort((a, b) => b.year - a.year);
+---
+
+<div class="publication-list">
+  {sortedPubs.map((pub) => (
+    <article class="publication-card">
+      <div class="publication-year">{pub.year}</div>
+      <h4 class="publication-title">
+        {pub.url ? (
+          <a href={pub.url} target="_blank" rel="noopener noreferrer">
+            {pub.title}
+          </a>
+        ) : (
+          pub.title
+        )}
+      </h4>
+      <div class="publication-journal">{pub.journal}</div>
+      {pub.coauthors && (
+        <div class="publication-coauthors">with {pub.coauthors}</div>
+      )}
+    </article>
+  ))}
+</div>
