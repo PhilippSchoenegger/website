@@ -5,6 +5,7 @@ import PositionDetails from '../components/PositionDetails.astro';
 import yaml from 'js-yaml';
 import fs from 'node:fs';
 import path from 'node:path';
+import { marked } from 'marked';
 
 // Load content from YAML
 const contentPath = path.join(process.cwd(), 'content.yaml');
@@ -30,6 +31,9 @@ function flattenItems(items: any[], parentPath: string[] = []): any[] {
 }
 
 const allItems = flattenItems(sections);
+
+// Parse intro markdown to HTML
+const introHtml = marked.parseInline(site.intro.trim());
 ---
 
 <BaseLayout title="Philipp Schoenegger" description={site.intro}>
@@ -48,7 +52,7 @@ const allItems = flattenItems(sections);
         />
         <h1 class="hero-name">{site.title}</h1>
         <p class="hero-tagline">{site.tagline}</p>
-        <p class="hero-intro">{site.intro}</p>
+        <p class="hero-intro" set:html={introHtml}></p>
       </div>
       
       <!-- Root navigation - always visible -->

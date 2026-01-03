@@ -27,7 +27,7 @@ sections:
   - id: research
     title: Research
     intro: |
-      My research is inter- and multi-disciplinary, primarily at the intersection of AI, economics, philosophy, and psychology. I have studied AI evaluations, forecasting, charitable giving, experimental philosophy, and more. My work has been cited >1,500 times with an h-index of 15. See my [Google Scholar](https://scholar.google.com/citations?user=kDAq8DcAAAAJ&hl=en&oi=ao) for a full list of publications.
+      My research is inter- and multi-disciplinary, primarily at the intersection of AI, economics, philosophy, and psychology. I have studied AI evaluations, forecasting, charitable giving, experimental philosophy, and more. My work has been cited >1,500 times with an h-index of 15. See my [Google Scholar](https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate) for a full list of publications.
     children:
       # AI Research
       - id: ai
@@ -38,7 +38,7 @@ sections:
           - id: ai-evaluations
             title: Evaluations
             intro: |
-              My AI evaluations research began with forecasting, which is an excellent metric for tracking AI capabilities because predictions are by definition out of the training distribution and ground truth cannot be revealed at test time. Persuasion capabilities are equally important to research as they represent a central pathway through which AI systems can influence human decision-making. My research suggested that models are at best indistinguishable from human crowds for forecasting, but likely still below, while persuasion and personality prediction capabilities are definitively at human and even expert level.
+              I study AI capabilities in forecasting and persuasion. Forecasting serves as an excellent evaluation metric because predictions are by definition out of the training distribution and ground truth cannot be revealed at test time. Persuasion capabilities matter equally as they represent a central pathway through which AI systems influence human decision-making. My research shows that models are at best indistinguishable from human crowds for forecasting, but likely still below, while persuasion and personality prediction capabilities are definitively at human and even expert level.
             publications:
               - year: 2024
                 title: "Diminished Diversity-of-Thought in a Standard Large Language Model"
@@ -74,7 +74,7 @@ sections:
           - id: ai-posttraining
             title: Posttraining & Prompt Engineering
             intro: |
-              My posttraining work with [Lightning Rod Labs](https://www.lightningrod.ai/) used reinforcement learning from verifiable rewards (RLVR), specifically GRPO, to improve forecasting capabilities of small models. While prompt engineering promises to be very effective given its low cost, we did not find strong effects in our research.
+              My posttraining work with [Lightning Rod Labs](https://www.lightningrod.ai/) uses reinforcement learning from verifiable rewards (RLVR), specifically GRPO, to improve forecasting capabilities of small models. While prompt engineering promises to be effective given its low cost, we do not find strong effects in our research.
             publications:
               - year: 2025
                 title: "LLMs Can Teach Themselves to Better Predict the Future"
@@ -112,7 +112,7 @@ sections:
           - id: econ-behavioural
             title: Behavioural Economics
             intro: |
-              My behavioural economics research focused on charitable giving and moral decision-making. Key findings include that moral arguments can boost charitable giving, even when they increase the perceived demandingness of donations.
+              My behavioural economics research focuses on charitable giving and moral decision-making. Key findings include that moral arguments can boost charitable giving, even when they increase the perceived demandingness of donations.
             publications:
               - year: 2022
                 title: "Sure-Thing vs. Probabilistic Charitable Giving: Experimental Evidence on the Role of Individual Differences in Risky and Ambiguous Charitable Decision-Making"
@@ -155,7 +155,7 @@ sections:
           - id: phil-experimental
             title: Experimental Philosophy
             intro: |
-              My experimental philosophy research spans methods (Bayesian Truth Serum) and empirical experiments in population ethics and moral psychology. I developed applications of BTS for incentive-compatible elicitation in philosophical surveys and tested its practical implementation.
+              My experimental philosophy research spans methods (Bayesian Truth Serum) and empirical experiments in population ethics and moral psychology. I develop applications of BTS for incentive-compatible elicitation in philosophical surveys and test its practical implementation.
             publications:
               - year: 2023
                 title: "Concrete Over Abstract: Experimental Evidence of Reflective Equilibrium in Population Ethics"
@@ -197,7 +197,7 @@ sections:
           - id: phil-political
             title: Political Theory
             intro: |
-              My political theory research focuses on liberalism, particularly the work of John Locke. I examined Locke's theory of prerogative, its relationship to natural law and democratic theory, and the epistemological foundations of liberal thought.
+              My political theory research focuses on liberalism, particularly the work of John Locke. I examine Locke's theory of prerogative, its relationship to natural law and democratic theory, and the epistemological foundations of liberal thought.
             publications:
               - year: 2024
                 title: "On the Epistemological Similarities of Market Liberalism and Standpoint Theory"
@@ -339,37 +339,19 @@ sections:
             title: University of St Andrews
             period: "2018-2022"
             intro: |
-              During my time at St Andrews, my research evolved from philosophy to economics, bridging both disciplines in my doctoral work.
+              During my time at St Andrews, my research bridged philosophy and economics. I held fellowships at [AdvanceHE](https://www.advance-he.ac.uk/fellowship/associate-fellowship) (Associate Fellow), the [Institute for Human Studies](https://www.theihs.org/) (Bernard Marcus Fellow), the [Global Priorities Institute](https://www.globalprioritiesinstitute.org/) at the University of Oxford (ECCP Programme Visitor and Global Priorities Fellow), and the [Mercatus Center](https://www.mercatus.org/) at George Mason University (Oscar Morgenstern Fellow).
             children:
               - id: standrews-phd
                 title: PhD
                 period: "Completed 2022"
                 intro: |
-                  In 2022, I completed a PhD in Philosophy and Economics with the title 'Moral Decision-Making: Essays from Philosophy and Economics' under the supervision of Theron Pummer and Miguel Costa-Gomes at [St Andrews](https://www.st-andrews.ac.uk/). The dissertation comprised three philosophy papers and three economics papers, reflecting my interdisciplinary training. My research was funded by the Forethought Foundation, the [Centre for Effective Altruism](https://www.centreforeffectivealtruism.org/), [Giving What We Can](https://www.givingwhatwecan.org/), and the [Long-Term Future Fund](https://funds.effectivealtruism.org/funds/far-future). I presented at the [Scottish Economic Society Annual Conference](https://scotecon.org/), the [UK Experimental Philosophy Workshop](https://x-phi.uea.ac.uk/online-workshop/), the [Behavioural Economics, Society, and Technology Conference](https://research.qut.edu.au/best/), and the [London Graduate Conference in History of Political Thought](https://projects.history.qmul.ac.uk/hpt/category/london-graduate-conference-in-history-of-political-thought/).
-                selected_media_coverage:
-                  - text: "Süddeutsche Zeitung"
-                    url: "https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347"
-                  - text: "The Times"
-                    url: "https://www.thetimes.co.uk/article/ethics-professors-don-t-walk-the-walk-d7n6097m8"
-                  - text: "Psychology Today"
-                    url: "https://www.psychologytoday.com/us/blog/unique-everybody-else/202109/are-dark-triad-traits-adaptive"
-                  - text: "Die Zeit"
-                    url: "https://www.zeit.de/2021/49/liberalismus-corona-klima-fdp-friedrich-august-von-hayek/komplettansicht"
-                  - text: "PsyPost"
-                    url: "https://www.psypost.org/2022/03/dark-triad-personality-traits-are-more-common-among-those-who-believe-procreation-is-morally-wrong-62746"
-                  - text: "Wikipedia"
-                    url: "https://es.wikipedia.org/?curid=1309987"
-
-              - id: standrews-mlitt
-                title: MLitt
-                period: "Completed 2018"
-                intro: |
-                  In 2018, I completed the MLitt in Moral, Political, and Legal Philosophy at [St Andrews](https://www.st-andrews.ac.uk/), where I was on the 2018-2019 Dean's List.
-
-              - id: standrews-fellowships
-                title: Fellowships
-                intro: |
-                  During my time at St Andrews, I held fellowships at [AdvanceHE](https://www.advance-he.ac.uk/fellowship/associate-fellowship) (Associate Fellow), the [Institute for Human Studies](https://www.theihs.org/) (Bernard Marcus Fellow), the [Global Priorities Institute](https://www.globalprioritiesinstitute.org/) at the University of Oxford (ECCP Programme Visitor and Global Priorities Fellow), and the [Mercatus Center](https://www.mercatus.org/) at George Mason University (Oscar Morgenstern Fellow).
+                  In 2022, I completed a PhD in Philosophy and Economics with the title 'Moral Decision-Making: Essays from Philosophy and Economics' under the supervision of Theron Pummer and Miguel Costa-Gomes at [St Andrews](https://www.st-andrews.ac.uk/). The dissertation comprises three philosophy papers and three economics papers, reflecting my interdisciplinary training. My research was funded by the Forethought Foundation, the [Centre for Effective Altruism](https://www.centreforeffectivealtruism.org/), [Giving What We Can](https://www.givingwhatwecan.org/), and the [Long-Term Future Fund](https://funds.effectivealtruism.org/funds/far-future). I presented at the [Scottish Economic Society Annual Conference](https://scotecon.org/), the [UK Experimental Philosophy Workshop](https://x-phi.uea.ac.uk/online-workshop/), the [Behavioural Economics, Society, and Technology Conference](https://research.qut.edu.au/best/), and the [London Graduate Conference in History of Political Thought](https://projects.history.qmul.ac.uk/hpt/category/london-graduate-conference-in-history-of-political-thought/). My work received coverage in [Süddeutsche Zeitung](https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347), [The Times](https://www.thetimes.co.uk/article/ethics-professors-don-t-walk-the-walk-d7n6097m8), [Psychology Today](https://www.psychologytoday.com/us/blog/unique-everybody-else/202109/are-dark-triad-traits-adaptive), [Die Zeit](https://www.zeit.de/2021/49/liberalismus-corona-klima-fdp-friedrich-august-von-hayek/komplettansicht), and [PsyPost](https://www.psypost.org/2022/03/dark-triad-personality-traits-are-more-common-among-those-who-believe-procreation-is-morally-wrong-62746), and is cited on [Wikipedia](https://es.wikipedia.org/?curid=1309987).
+                children:
+                  - id: standrews-mlitt
+                    title: MLitt
+                    period: "Completed 2018"
+                    intro: |
+                      In 2018, I completed the MLitt in Moral, Political, and Legal Philosophy at [St Andrews](https://www.st-andrews.ac.uk/), where I was on the 2018-2019 Dean's List.
 
       # Forecasting Positions
       - id: forecasting
