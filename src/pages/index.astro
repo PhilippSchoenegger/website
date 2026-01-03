@@ -33,270 +33,469 @@ const allItems = flattenItems(sections);
 ---
 
 <BaseLayout title="Philipp Schoenegger" description={site.intro}>
-  <main class="main-container" id="main">
-    
-    <!-- Hero Section - Always visible at top -->
-    <header class="hero" id="hero">
-      <img 
-        src="/pic.jpg" 
-        alt="Philipp Schoenegger" 
-        class="hero-photo" 
-        width="140" 
-        height="140"
-        loading="eager"
-        decoding="async"
-      />
-      <h1 class="hero-name">{site.title}</h1>
-      <p class="hero-tagline">{site.tagline}</p>
-      <p class="hero-intro">{site.intro}</p>
-    </header>
-    
-    <!-- Navigation Tree Container - Horizontal levels -->
-    <nav class="tree-container" id="tree-nav" aria-label="Content navigation">
-      <!-- Level 0: Root categories (displayed horizontally) -->
-      <div class="tree-level" data-level="0">
-        {sections.map((section: any) => (
-          <button 
-            class="tree-node" 
-            data-id={section.id}
-            data-path={JSON.stringify([section.id])}
-            data-has-children={section.children ? 'true' : 'false'}
-            type="button"
-            aria-pressed="false"
-          >
-            {section.title}
-          </button>
-        ))}
+  <!-- SVG definitions for tree connections -->
+  <svg class="tree-svg-defs" aria-hidden="true">
+    <defs>
+      <linearGradient id="connection-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#bae6fd;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <main class="tree-main" id="main">
+    <!-- The Tree: A persistent, visual, navigable structure -->
+    <div class="tree-canvas" id="tree-canvas">
+      
+      <!-- Root Node: The Person -->
+      <div class="tree-root" id="tree-root">
+        <div class="root-node" data-node-id="root">
+          <img 
+            src="/pic.jpg" 
+            alt="Philipp Schoenegger" 
+            class="root-photo"
+            width="120" 
+            height="120"
+            loading="eager"
+          />
+          <h1 class="root-name">{site.title}</h1>
+          <p class="root-tagline">{site.tagline}</p>
+          <p class="root-intro">{site.intro}</p>
+        </div>
+        
+        <!-- Connection lines will be drawn by SVG -->
+        <svg class="tree-connections" id="tree-connections" aria-hidden="true"></svg>
+        
+        <!-- Level 0: Main branches -->
+        <div class="tree-branches" id="tree-branches" data-level="0">
+          {sections.map((section: any, index: number) => (
+            <div class="branch-container" data-branch-id={section.id}>
+              <button 
+                class="tree-node level-0"
+                data-node-id={section.id}
+                data-path={JSON.stringify([section.id])}
+                data-has-children={section.children ? 'true' : 'false'}
+                data-index={index}
+                type="button"
+              >
+                <span class="node-label">{section.title}</span>
+                {section.children && <span class="node-expand-indicator">+</span>}
+              </button>
+              
+              <!-- Child expansion area - will be populated dynamically -->
+              <div class="branch-children" data-parent={section.id}></div>
+            </div>
+          ))}
+        </div>
       </div>
-      <!-- Additional levels will be inserted dynamically as horizontal rows -->
-    </nav>
-    
-    <!-- Content Display Area -->
-    <article id="content-display" class="content-display" aria-live="polite">
-      <!-- Selected content renders here -->
-    </article>
-    
-    <!-- Hidden templates for all content sections -->
-    <div id="content-templates" hidden aria-hidden="true">
-      {allItems.map((item: any) => (
-        <template data-template-id={item.path.join('-')}>
-          <div class="content-section" data-path={JSON.stringify(item.path)}>
-            <header class="content-header">
-              <h2 class="content-title">{item.title}</h2>
-              {item.period && <p class="content-period">{item.period}</p>}
-              {item.intro && <p class="content-intro">{item.intro}</p>}
-            </header>
-            
-            {/* Position/Experience details */}
-            {(item.links || item.funding || item.media_coverage || 
-              item.fellowships || item.achievements || item.sponsors || item.articles ||
-              item.projects || item.conferences || item.teaching || item.reviewing || item.note) && (
-              <PositionDetails item={item} />
-            )}
-            
-            {/* Publications */}
-            {item.publications && item.publications.length > 0 && (
-              <PublicationList publications={item.publications} />
-            )}
-          </div>
-        </template>
-      ))}
+      
+      <!-- Content Panel: Slides in from the side or expands inline -->
+      <aside class="content-panel" id="content-panel" aria-live="polite">
+        <div class="panel-inner" id="panel-inner">
+          <!-- Content will be inserted here -->
+        </div>
+      </aside>
     </div>
   </main>
+  
+  <!-- Hidden templates for all content sections -->
+  <div id="content-templates" hidden aria-hidden="true">
+    {allItems.map((item: any) => (
+      <template data-template-id={item.path.join('-')}>
+        <article class="content-article" data-path={JSON.stringify(item.path)}>
+          <header class="article-header">
+            <h2 class="article-title">{item.title}</h2>
+            {item.period && <p class="article-period">{item.period}</p>}
+            {item.intro && <p class="article-intro">{item.intro}</p>}
+          </header>
+          
+          {(item.links || item.funding || item.media_coverage || 
+            item.fellowships || item.achievements || item.sponsors || item.articles ||
+            item.projects || item.conferences || item.teaching || item.reviewing || item.note) && (
+            <PositionDetails item={item} />
+          )}
+          
+          {item.publications && item.publications.length > 0 && (
+            <PublicationList publications={item.publications} />
+          )}
+        </article>
+      </template>
+    ))}
+  </div>
   
   <script define:vars={{ sectionsJson }}>
     window.__SECTIONS__ = JSON.parse(sectionsJson);
   </script>
   
   <script>
-    // State management
-    const state = {
-      currentPath: [] as string[],
-      expandedLevels: new Map<number, string>(), // level -> selected id
+    // ============================================================================
+    // GROUNDBREAKING TREE NAVIGATION
+    // A true visual tree with persistent paths and smooth traversal
+    // ============================================================================
+    
+    interface TreeState {
+      expandedPaths: Map<string, string[]>; // nodeId -> full path
+      activePath: string[];
+      activeNodeId: string | null;
+    }
+    
+    const state: TreeState = {
+      expandedPaths: new Map(),
+      activePath: [],
+      activeNodeId: null,
     };
     
-    // DOM references
-    const treeNav = document.getElementById('tree-nav')!;
-    const contentDisplay = document.getElementById('content-display')!;
+    // DOM Elements
+    const treeCanvas = document.getElementById('tree-canvas')!;
+    const treeBranches = document.getElementById('tree-branches')!;
+    const treeConnections = document.getElementById('tree-connections')!;
+    const contentPanel = document.getElementById('content-panel')!;
+    const panelInner = document.getElementById('panel-inner')!;
     
-    // Smooth scroll utility - no jumping, gentle easing
-    function smoothScrollTo(element: HTMLElement, offset = 0) {
-      const targetPosition = element.getBoundingClientRect().top + window.scrollY - offset;
-      const startPosition = window.scrollY;
-      const distance = targetPosition - startPosition;
-      const duration = Math.min(800, Math.max(400, Math.abs(distance) * 0.5)); // Adaptive duration
+    // ============================================================================
+    // SMOOTH SCROLL ENGINE - Cinematic easing
+    // ============================================================================
+    
+    function smoothScrollToElement(element: HTMLElement, options: {
+      offset?: number;
+      duration?: number;
+      onComplete?: () => void;
+    } = {}) {
+      const { offset = 100, duration: customDuration, onComplete } = options;
+      
+      const rect = element.getBoundingClientRect();
+      const absoluteY = rect.top + window.scrollY;
+      const targetY = absoluteY - offset;
+      const startY = window.scrollY;
+      const distance = targetY - startY;
+      
+      // Adaptive duration based on distance
+      const duration = customDuration ?? Math.min(1200, Math.max(500, Math.abs(distance) * 0.8));
+      
       let startTime: number | null = null;
       
-      // Easing function - ease-out-quart for smooth deceleration
-      function easeOutQuart(t: number): number {
-        return 1 - Math.pow(1 - t, 4);
+      // Cinematic ease-in-out-quint
+      function easeInOutQuint(t: number): number {
+        return t < 0.5 
+          ? 16 * t * t * t * t * t 
+          : 1 - Math.pow(-2 * t + 2, 5) / 2;
       }
       
       function animate(currentTime: number) {
         if (startTime === null) startTime = currentTime;
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = easeOutQuart(progress);
+        const easedProgress = easeInOutQuint(progress);
         
-        window.scrollTo(0, startPosition + distance * easedProgress);
+        window.scrollTo(0, startY + distance * easedProgress);
         
         if (progress < 1) {
           requestAnimationFrame(animate);
+        } else {
+          onComplete?.();
         }
       }
       
       requestAnimationFrame(animate);
     }
     
-    // Initialize
-    document.addEventListener('DOMContentLoaded', init);
+    // ============================================================================
+    // TREE STRUCTURE MANAGEMENT
+    // ============================================================================
     
-    function init() {
-      // Attach click handlers via event delegation
-      treeNav.addEventListener('click', handleNodeClick);
-    }
-    
-    function handleNodeClick(e: Event) {
-      const target = e.target as HTMLElement;
-      const node = target.closest('.tree-node') as HTMLElement;
-      if (!node) return;
+    function getItemByPath(path: string[]): any {
+      let items = (window as any).__SECTIONS__;
+      let current = null;
       
-      const pathStr = node.dataset.path;
-      if (!pathStr) return;
-      
-      const path = JSON.parse(pathStr) as string[];
-      selectPath(path);
-    }
-    
-    function selectPath(path: string[]) {
-      const level = path.length - 1;
-      const nodeId = path[path.length - 1];
-      
-      // Update state
-      state.currentPath = path;
-      state.expandedLevels.set(level, nodeId);
-      
-      // Clear levels after this one
-      for (let i = level + 1; i < 10; i++) {
-        state.expandedLevels.delete(i);
+      for (const id of path) {
+        current = items.find((item: any) => item.id === id);
+        if (!current) return null;
+        items = current.children || [];
       }
       
-      // Update UI
-      updateTreeUI(path);
-      updateContent(path);
+      return current;
     }
     
-    function updateTreeUI(selectedPath: string[]) {
-      const sections = (window as any).__SECTIONS__;
-      const level = selectedPath.length - 1;
+    function createNodeElement(item: any, path: string[], level: number): HTMLElement {
+      const container = document.createElement('div');
+      container.className = 'branch-container';
+      container.dataset.branchId = item.id;
+      container.dataset.level = String(level);
       
-      // Remove tree levels after the selected level with fade out
-      const allLevels = treeNav.querySelectorAll('.tree-level');
-      allLevels.forEach((levelEl) => {
-        const levelNum = parseInt((levelEl as HTMLElement).dataset.level || '0');
-        if (levelNum > level) {
-          const el = levelEl as HTMLElement;
-          el.style.opacity = '0';
-          el.style.transform = 'translateY(-10px)';
-          setTimeout(() => el.remove(), 200);
+      const button = document.createElement('button');
+      button.className = `tree-node level-${level}`;
+      button.dataset.nodeId = item.id;
+      button.dataset.path = JSON.stringify(path);
+      button.dataset.hasChildren = item.children ? 'true' : 'false';
+      button.type = 'button';
+      
+      const label = document.createElement('span');
+      label.className = 'node-label';
+      label.textContent = item.title;
+      button.appendChild(label);
+      
+      if (item.children && item.children.length > 0) {
+        const indicator = document.createElement('span');
+        indicator.className = 'node-expand-indicator';
+        indicator.textContent = '+';
+        button.appendChild(indicator);
+      }
+      
+      container.appendChild(button);
+      
+      // Child container
+      const childrenContainer = document.createElement('div');
+      childrenContainer.className = 'branch-children';
+      childrenContainer.dataset.parent = item.id;
+      container.appendChild(childrenContainer);
+      
+      return container;
+    }
+    
+    function expandNode(nodeId: string, path: string[]) {
+      const item = getItemByPath(path);
+      if (!item) return;
+      
+      const nodeButton = document.querySelector(`[data-node-id="${nodeId}"]`) as HTMLElement;
+      if (!nodeButton) return;
+      
+      // Mark as expanded
+      nodeButton.classList.add('expanded');
+      state.expandedPaths.set(nodeId, path);
+      
+      // Update indicator
+      const indicator = nodeButton.querySelector('.node-expand-indicator');
+      if (indicator) indicator.textContent = '−';
+      
+      // If has children, render them
+      if (item.children && item.children.length > 0) {
+        const container = nodeButton.closest('.branch-container');
+        const childrenArea = container?.querySelector('.branch-children') as HTMLElement;
+        
+        if (childrenArea && childrenArea.children.length === 0) {
+          // Create child nodes
+          const childWrapper = document.createElement('div');
+          childWrapper.className = 'children-wrapper';
+          childWrapper.style.opacity = '0';
+          childWrapper.style.transform = 'translateY(-20px)';
+          
+          item.children.forEach((child: any) => {
+            const childPath = [...path, child.id];
+            const childLevel = path.length;
+            const childNode = createNodeElement(child, childPath, childLevel);
+            childWrapper.appendChild(childNode);
+          });
+          
+          childrenArea.appendChild(childWrapper);
+          
+          // Animate in
+          requestAnimationFrame(() => {
+            childWrapper.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+            childWrapper.style.opacity = '1';
+            childWrapper.style.transform = 'translateY(0)';
+          });
+          
+          // Update SVG connections
+          requestAnimationFrame(() => {
+            setTimeout(() => updateConnections(), 50);
+          });
         }
-      });
+      }
+    }
+    
+    function collapseNode(nodeId: string) {
+      const nodeButton = document.querySelector(`[data-node-id="${nodeId}"]`) as HTMLElement;
+      if (!nodeButton) return;
       
-      // Update active states for existing nodes
-      treeNav.querySelectorAll('.tree-node').forEach((node) => {
-        const nodeEl = node as HTMLElement;
-        const nodePath = JSON.parse(nodeEl.dataset.path || '[]') as string[];
-        const nodeLevel = nodePath.length - 1;
-        const nodeId = nodePath[nodePath.length - 1];
-        
-        // Check if this node is in the selected path
-        const isSelected = state.expandedLevels.get(nodeLevel) === nodeId;
-        nodeEl.classList.toggle('selected', isSelected);
-        nodeEl.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
-      });
+      nodeButton.classList.remove('expanded');
+      state.expandedPaths.delete(nodeId);
       
-      // Get the selected item to check for children
-      const selectedItem = getItemByPath(sections, selectedPath);
+      // Update indicator
+      const indicator = nodeButton.querySelector('.node-expand-indicator');
+      if (indicator) indicator.textContent = '+';
       
-      // If it has children, add a new tree level (horizontal row)
-      if (selectedItem?.children?.length > 0) {
-        const newLevel = document.createElement('div');
-        newLevel.className = 'tree-level';
-        newLevel.dataset.level = String(level + 1);
-        newLevel.setAttribute('role', 'group');
-        newLevel.setAttribute('aria-label', `${selectedItem.title} subcategories`);
+      // Remove children with animation
+      const container = nodeButton.closest('.branch-container');
+      const childrenArea = container?.querySelector('.branch-children') as HTMLElement;
+      
+      if (childrenArea) {
+        const wrapper = childrenArea.querySelector('.children-wrapper') as HTMLElement;
+        if (wrapper) {
+          wrapper.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+          wrapper.style.opacity = '0';
+          wrapper.style.transform = 'translateY(-20px)';
+          
+          setTimeout(() => {
+            wrapper.remove();
+            updateConnections();
+          }, 300);
+        }
         
-        // Start with opacity 0 for fade-in
-        newLevel.style.opacity = '0';
-        newLevel.style.transform = 'translateY(-10px)';
-        
-        selectedItem.children.forEach((child: any) => {
-          const button = document.createElement('button');
-          button.className = 'tree-node';
-          button.type = 'button';
-          button.dataset.id = child.id;
-          button.dataset.path = JSON.stringify([...selectedPath, child.id]);
-          button.dataset.hasChildren = child.children ? 'true' : 'false';
-          button.textContent = child.title;
-          button.setAttribute('aria-pressed', 'false');
-          newLevel.appendChild(button);
-        });
-        
-        treeNav.appendChild(newLevel);
-        
-        // Animate in after append
-        requestAnimationFrame(() => {
-          newLevel.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
-          newLevel.style.opacity = '1';
-          newLevel.style.transform = 'translateY(0)';
+        // Also collapse any expanded children
+        const expandedChildren = childrenArea.querySelectorAll('.tree-node.expanded');
+        expandedChildren.forEach((child) => {
+          const childId = (child as HTMLElement).dataset.nodeId;
+          if (childId) collapseNode(childId);
         });
       }
     }
     
-    function updateContent(path: string[]) {
+    function selectNode(nodeId: string, path: string[]) {
+      // Remove previous selection
+      document.querySelectorAll('.tree-node.selected').forEach((el) => {
+        el.classList.remove('selected');
+      });
+      
+      // Add selection
+      const nodeButton = document.querySelector(`[data-node-id="${nodeId}"]`) as HTMLElement;
+      if (nodeButton) {
+        nodeButton.classList.add('selected');
+      }
+      
+      state.activePath = path;
+      state.activeNodeId = nodeId;
+      
+      // Load content
+      loadContent(path);
+    }
+    
+    function loadContent(path: string[]) {
       const pathKey = path.join('-');
       const template = document.querySelector(`template[data-template-id="${pathKey}"]`) as HTMLTemplateElement;
       
-      if (!template) {
-        // Fade out existing content
-        contentDisplay.style.opacity = '0';
-        setTimeout(() => {
-          contentDisplay.innerHTML = '';
-          contentDisplay.style.opacity = '1';
-        }, 200);
-        return;
-      }
-      
-      // Clone template content
-      const content = template.content.cloneNode(true);
-      
       // Fade out current content
-      contentDisplay.style.transition = 'opacity 0.2s ease-out';
-      contentDisplay.style.opacity = '0';
+      panelInner.style.transition = 'opacity 0.3s ease-out';
+      panelInner.style.opacity = '0';
       
-      // After fade out, update content and fade in
       setTimeout(() => {
-        contentDisplay.innerHTML = '';
-        contentDisplay.appendChild(content);
+        if (template) {
+          const content = template.content.cloneNode(true);
+          panelInner.innerHTML = '';
+          panelInner.appendChild(content);
+          contentPanel.classList.add('active');
+        } else {
+          panelInner.innerHTML = '';
+          contentPanel.classList.remove('active');
+        }
         
-        // Fade in new content
+        // Fade in
         requestAnimationFrame(() => {
-          contentDisplay.style.opacity = '1';
-          
-          // Smooth scroll to content with offset to keep nav visible
-          const navHeight = treeNav.offsetHeight + 40;
-          smoothScrollTo(contentDisplay, navHeight);
+          panelInner.style.opacity = '1';
         });
-      }, 200);
+      }, 300);
     }
     
-    function getItemByPath(items: any[], path: string[]): any {
-      if (path.length === 0) return null;
-      const [first, ...rest] = path;
-      const item = items.find((it: any) => it.id === first);
-      if (!item) return null;
-      if (rest.length === 0) return item;
-      return getItemByPath(item.children || [], rest);
+    // ============================================================================
+    // SVG CONNECTION LINES - Visual tree structure
+    // ============================================================================
+    
+    function updateConnections() {
+      const svg = treeConnections;
+      svg.innerHTML = '';
+      
+      // Get root node position
+      const rootNode = document.querySelector('.root-node') as HTMLElement;
+      if (!rootNode) return;
+      
+      const canvasRect = treeCanvas.getBoundingClientRect();
+      
+      // Draw connections for all expanded nodes
+      document.querySelectorAll('.branch-container').forEach((container) => {
+        const button = container.querySelector('.tree-node') as HTMLElement;
+        const childrenWrapper = container.querySelector('.children-wrapper');
+        
+        if (!button || !childrenWrapper) return;
+        
+        const buttonRect = button.getBoundingClientRect();
+        const parentX = buttonRect.left + buttonRect.width / 2 - canvasRect.left;
+        const parentY = buttonRect.bottom - canvasRect.top;
+        
+        // Draw lines to each child
+        childrenWrapper.querySelectorAll(':scope > .branch-container > .tree-node').forEach((child) => {
+          const childRect = child.getBoundingClientRect();
+          const childX = childRect.left + childRect.width / 2 - canvasRect.left;
+          const childY = childRect.top - canvasRect.top;
+          
+          // Create curved path
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          const midY = (parentY + childY) / 2;
+          
+          const d = `M ${parentX} ${parentY} C ${parentX} ${midY}, ${childX} ${midY}, ${childX} ${childY}`;
+          path.setAttribute('d', d);
+          path.setAttribute('class', 'connection-line');
+          path.setAttribute('fill', 'none');
+          path.setAttribute('stroke', 'url(#connection-gradient)');
+          path.setAttribute('stroke-width', '2');
+          
+          svg.appendChild(path);
+        });
+      });
     }
+    
+    // ============================================================================
+    // EVENT HANDLING
+    // ============================================================================
+    
+    function handleNodeClick(e: Event) {
+      const target = e.target as HTMLElement;
+      const nodeButton = target.closest('.tree-node') as HTMLElement;
+      
+      if (!nodeButton) return;
+      
+      const nodeId = nodeButton.dataset.nodeId;
+      const pathStr = nodeButton.dataset.path;
+      const hasChildren = nodeButton.dataset.hasChildren === 'true';
+      
+      if (!nodeId || !pathStr) return;
+      
+      const path = JSON.parse(pathStr) as string[];
+      const isExpanded = nodeButton.classList.contains('expanded');
+      const isSelected = nodeButton.classList.contains('selected');
+      
+      // First, scroll to the node smoothly
+      smoothScrollToElement(nodeButton, {
+        offset: 150,
+        onComplete: () => {
+          // Then handle the interaction
+          if (hasChildren) {
+            if (isExpanded && isSelected) {
+              // Already expanded and selected - collapse
+              collapseNode(nodeId);
+            } else if (isExpanded) {
+              // Expanded but not selected - just select
+              selectNode(nodeId, path);
+            } else {
+              // Not expanded - expand and select
+              expandNode(nodeId, path);
+              selectNode(nodeId, path);
+            }
+          } else {
+            // No children - just select
+            selectNode(nodeId, path);
+          }
+        }
+      });
+    }
+    
+    // ============================================================================
+    // INITIALIZATION
+    // ============================================================================
+    
+    function init() {
+      // Event delegation for node clicks
+      treeCanvas.addEventListener('click', handleNodeClick);
+      
+      // Update connections on resize
+      let resizeTimeout: number;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = window.setTimeout(updateConnections, 100);
+      });
+      
+      // Initial connection draw
+      updateConnections();
+    }
+    
+    document.addEventListener('DOMContentLoaded', init);
   </script>
 </BaseLayout>
