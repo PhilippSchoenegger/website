@@ -123,13 +123,12 @@ const allItems = flattenItems(sections);
             <header class="chapter-header">
               <h2 class="chapter-title">{item.title.toUpperCase()}</h2>
               {item.period && <p class="chapter-period">{item.period}</p>}
-              {item.intro && <p class="chapter-intro">{item.intro}</p>}
+              {item.intro && <p class="chapter-intro" set:html={item.intro.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')} />}
             </header>
             
             <!-- Position/Experience details -->
-            {(item.links || item.funding || item.media_coverage || item.selected_media_coverage ||
-              item.fellowships || item.achievements || item.sponsors || item.articles || item.selected_articles ||
-              item.projects || item.conferences || item.teaching || item.reviewing || item.selected_reviewing || item.note) && (
+            {(item.selected_media_coverage || item.selected_reviewing || 
+              item.fellowships || item.selected_articles || item.note) && (
               <PositionDetails item={item} />
             )}
             

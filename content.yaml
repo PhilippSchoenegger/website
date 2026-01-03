@@ -304,28 +304,7 @@ sections:
             title: London School of Economics
             period: "2022-2024"
             intro: |
-              From 2022-2024, I was a post-doctoral researcher at the London School of Economics, 
-              working at the Behavioural Lab with Barbara Fasolo and Matteo Galizzi. 
-              I worked at the intersection of applied AI and behavioural science.
-            links:
-              - text: "London School of Economics"
-                url: "https://www.lse.ac.uk/"
-              - text: "Behavioural Lab"
-                url: "https://www.lse.ac.uk/behavioural-lab/?entryId=2319c173-7bdc-45d3-9a69-d12fd54340d7&nodeId=e2e64854-5d30-44fa-a289-a5ef76104f3e"
-            funding:
-              - text: "Longview Philanthropy"
-                url: "https://www.longview.org/"
-              - text: "LSE Department of Management"
-                url: "https://www.lse.ac.uk/management"
-              - text: "Wharton-INSEAD Alliance"
-                url: "https://insead.wharton.upenn.edu/"
-              - text: "Wharton AI & Analytics Initiative"
-                url: "https://ai-analytics.wharton.upenn.edu/"
-            teaching:
-              - venue: "LSE"
-                url: "https://www.lse.ac.uk/"
-              - venue: "INSEAD"
-                url: "https://www.insead.edu/"
+              From 2022-2024, I was a post-doctoral researcher at the [London School of Economics](https://www.lse.ac.uk/), working at the [Behavioural Lab](https://www.lse.ac.uk/behavioural-lab/?entryId=2319c173-7bdc-45d3-9a69-d12fd54340d7&nodeId=e2e64854-5d30-44fa-a289-a5ef76104f3e) with Barbara Fasolo and Matteo Galizzi. I worked at the intersection of applied AI and behavioural science, with funding from [Longview Philanthropy](https://www.longview.org/), the [LSE Department of Management](https://www.lse.ac.uk/management), the [Wharton-INSEAD Alliance](https://insead.wharton.upenn.edu/), and the [Wharton AI & Analytics Initiative](https://ai-analytics.wharton.upenn.edu/). I taught at [LSE](https://www.lse.ac.uk/) and [INSEAD](https://www.insead.edu/), and presented at the [UK Ministry of Defence](https://www.gov.uk/government/organisations/ministry-of-defence), [King's College London](https://www.kcl.ac.uk/), and the [TBD Conference](https://www.thetbdconference.com/).
             selected_media_coverage:
               - text: "Forbes"
                 url: "https://www.forbes.com/sites/tomasgorny/2024/12/02/should-businesses-trust-ai-to-predict-customer-behaviors/"
@@ -335,13 +314,6 @@ sections:
                 url: "https://www.astralcodexten.com/p/mantic-monday-31124"
               - text: "Marginal Revolution"
                 url: "https://marginalrevolution.com/marginalrevolution/2023/09/do-llms-diminish-diversity-of-thought.html"
-            presentations:
-              - text: "UK Ministry of Defence"
-                url: "https://www.gov.uk/government/organisations/ministry-of-defence"
-              - text: "King's College London"
-                url: "https://www.kcl.ac.uk/"
-              - text: "TBD Conference"
-                url: "https://www.thetbdconference.com/"
             selected_reviewing:
               - "Decision"
               - "Cognition"
@@ -353,10 +325,7 @@ sections:
             title: Forecasting Research Institute
             period: "2023"
             intro: |
-              In 2023, I worked with Philip Tetlock at the Forecasting Research Institute on AI forecasting and prediction methodology.
-            links:
-              - text: "Forecasting Research Institute"
-                url: "https://forecastingresearch.org/"
+              In 2023, I worked with Philip Tetlock at the [Forecasting Research Institute](https://forecastingresearch.org/) on AI forecasting and prediction methodology.
 
           - id: standrews
             title: University of St Andrews
@@ -365,21 +334,7 @@ sections:
                 title: Ph.D.
                 period: "Completed 2022"
                 intro: |
-                  In 2022, I completed a Ph.D. in Philosophy and Economics with the title 
-                  'Moral Decision-Making: Essays from Philosophy and Economics' under the 
-                  supervision of Theron Pummer and Miguel Costa-Gomes at St Andrews.
-                links:
-                  - text: "St Andrews"
-                    url: "https://www.st-andrews.ac.uk/"
-                funding:
-                  - text: "Forethought Foundation"
-                    url: ""
-                  - text: "Centre for Effective Altruism"
-                    url: "https://www.centreforeffectivealtruism.org/"
-                  - text: "Giving What We Can"
-                    url: "https://www.givingwhatwecan.org/"
-                  - text: "Long-Term Future Fund"
-                    url: "https://funds.effectivealtruism.org/funds/far-future"
+                  In 2022, I completed a Ph.D. in Philosophy and Economics with the title 'Moral Decision-Making: Essays from Philosophy and Economics' under the supervision of Theron Pummer and Miguel Costa-Gomes at [St Andrews](https://www.st-andrews.ac.uk/). My research was funded by the Forethought Foundation, the [Centre for Effective Altruism](https://www.centreforeffectivealtruism.org/), [Giving What We Can](https://www.givingwhatwecan.org/), and the [Long-Term Future Fund](https://funds.effectivealtruism.org/funds/far-future). I presented at the [Scottish Economic Society Annual Conference](https://scotecon.org/), the [UK Experimental Philosophy Workshop](https://x-phi.uea.ac.uk/online-workshop/), the [Behavioural Economics, Society, and Technology Conference](https://research.qut.edu.au/best/), and the [London Graduate Conference in History of Political Thought](https://projects.history.qmul.ac.uk/hpt/category/london-graduate-conference-in-history-of-political-thought/).
                 selected_media_coverage:
                   - text: "Süddeutsche Zeitung"
                     url: "https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347"
@@ -393,25 +348,12 @@ sections:
                     url: "https://www.psypost.org/2022/03/dark-triad-personality-traits-are-more-common-among-those-who-believe-procreation-is-morally-wrong-62746"
                   - text: "Wikipedia"
                     url: "https://es.wikipedia.org/?curid=1309987"
-                conferences:
-                  - text: "Scottish Economic Society Annual Conference"
-                    url: "https://scotecon.org/"
-                  - text: "UK Experimental Philosophy Workshop"
-                    url: "https://x-phi.uea.ac.uk/online-workshop/"
-                  - text: "Behavioural Economics, Society, and Technology Conference"
-                    url: "https://research.qut.edu.au/best/"
-                  - text: "London Graduate Conference in History of Political Thought"
-                    url: "https://projects.history.qmul.ac.uk/hpt/category/london-graduate-conference-in-history-of-political-thought/"
 
               - id: standrews-mlitt
                 title: M.Litt.
                 period: "Completed 2018"
                 intro: |
-                  In 2018 I completed the M.Litt. in Moral, Political, and Legal Philosophy 
-                  at St Andrews, where I was on the 2018-2019 Dean's List.
-                links:
-                  - text: "St Andrews"
-                    url: "https://www.st-andrews.ac.uk/"
+                  In 2018, I completed the M.Litt. in Moral, Political, and Legal Philosophy at [St Andrews](https://www.st-andrews.ac.uk/), where I was on the 2018-2019 Dean's List.
 
               - id: standrews-fellowships
                 title: Fellowships
@@ -439,40 +381,19 @@ sections:
             title: Seldon Capital
             period: "2024-2025"
             intro: |
-              Between 2024 and 2025 I was the Forecasting Team Lead at Seldon Capital, 
-              working on various issues in macroeconomics and technology.
-            links:
-              - text: "Seldon Capital"
-                url: "https://www.seldon.capital/"
+              Between 2024 and 2025, I was the Forecasting Team Lead at [Seldon Capital](https://www.seldon.capital/), working on various issues in macroeconomics and technology.
 
           - id: swift
             title: Swift Centre
             period: "2023-2025"
             intro: |
-              Between 2023 and 2025 I was a forecaster for the Swift Centre, working on a 
-              wide range of questions, including forecasting for the future capabilities 
-              of frontier AI models for Google DeepMind.
-            links:
-              - text: "Swift Centre"
-                url: "https://www.swiftcentre.org/"
-              - text: "DeepMind forecasting paper"
-                url: "https://arxiv.org/pdf/2403.13793"
+              Between 2023 and 2025, I was a forecaster for the [Swift Centre](https://www.swiftcentre.org/), working on a wide range of questions, including forecasting for the future capabilities of frontier AI models for Google DeepMind (see our [forecasting paper](https://arxiv.org/pdf/2403.13793)).
 
           - id: metaculus
             title: Metaculus
             period: "2022-2025"
             intro: |
-              Between 2022 and 2025 I was a Pro Forecaster at Metaculus.
-            links:
-              - text: "Pro Forecasters"
-                url: "https://www.metaculus.com/pro-forecasters/"
-              - text: "Metaculus"
-                url: "https://www.metaculus.com/"
-            projects:
-              - text: "Federation of American Scientists"
-                url: "https://fas.org/publication/mathematically-predicting-the-future-with-professional-forecaster-philip-schoenegger/"
-              - text: "Carnegie Endowment for International Peace"
-                url: "https://carnegieendowment.org/research/2025/04/forecasting-nuclear-escalation-risks-cloudy-with-a-chance-of-fallout?lang=en"
+              Between 2022 and 2025, I was a [Pro Forecaster](https://www.metaculus.com/pro-forecasters/) at [Metaculus](https://www.metaculus.com/). I worked on projects with the [Federation of American Scientists](https://fas.org/publication/mathematically-predicting-the-future-with-professional-forecaster-philip-schoenegger/) and the [Carnegie Endowment for International Peace](https://carnegieendowment.org/research/2025/04/forecasting-nuclear-escalation-risks-cloudy-with-a-chance-of-fallout?lang=en).
 
   # --------------------------------------------------------------------------
   # OTHER
@@ -484,18 +405,7 @@ sections:
         title: University of Graz
         period: "2014-2018"
         intro: |
-          From 2014-2018, I was an undergraduate student at the University of Graz, 
-          earning a Mag.phil. teaching degree in Psychology, Philosophy and German, 
-          a B.A. in Philosophy, and a B.A. in German Philology. 
-          I earned two academic performance scholarships.
-        links:
-          - text: "University Center for Human Values at Princeton"
-            url: "https://uchv.princeton.edu/"
-          - text: "Princeton University"
-            url: "https://www.princeton.edu/"
-        note: |
-          During this time I was an unofficial visiting student at the University Center 
-          for Human Values with Peter Singer at Princeton University.
+          From 2014-2018, I was an undergraduate student at the University of Graz, earning a Mag.phil. teaching degree in Psychology, Philosophy and German, a B.A. in Philosophy, and a B.A. in German Philology. I earned two academic performance scholarships. During this time, I was an unofficial visiting student at the [University Center for Human Values](https://uchv.princeton.edu/) with Peter Singer at [Princeton University](https://www.princeton.edu/).
 
       - id: mtg
         title: "Magic: The Gathering"

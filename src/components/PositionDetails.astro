@@ -6,26 +6,18 @@ interface Props {
 }
 
 const { item } = Astro.props;
-
-function renderLinks(links: Link[] | undefined, label: string) {
-  if (!links || links.length === 0) return null;
-  return { links, label };
-}
 ---
 
 <div class="position-details">
-  {item.intro && (
-    <p class="position-intro">{item.intro}</p>
-  )}
-  
   {item.note && (
     <p class="position-note">{item.note}</p>
   )}
   
-  {item.links && item.links.length > 0 && (
+  {item.selected_media_coverage && item.selected_media_coverage.length > 0 && (
     <div class="detail-section">
+      <h4 class="detail-label">Selected Media Coverage</h4>
       <div class="link-list">
-        {item.links.map((link) => (
+        {item.selected_media_coverage.map((link) => (
           <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
             {link.text}
           </a>
@@ -34,80 +26,11 @@ function renderLinks(links: Link[] | undefined, label: string) {
     </div>
   )}
   
-  {item.funding && item.funding.length > 0 && (
+  {item.selected_reviewing && item.selected_reviewing.length > 0 && (
     <div class="detail-section">
-      <h4 class="detail-label">Funding</h4>
+      <h4 class="detail-label">Selected Peer Review</h4>
       <div class="link-list">
-        {item.funding.map((link) => (
-          link.url ? (
-            <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
-              {link.text}
-            </a>
-          ) : (
-            <span class="link-tag">{link.text}</span>
-          )
-        ))}
-      </div>
-    </div>
-  )}
-  
-  {(item.media_coverage || item.selected_media_coverage) && (item.media_coverage?.length > 0 || item.selected_media_coverage?.length > 0) && (
-    <div class="detail-section">
-      <h4 class="detail-label">{item.selected_media_coverage ? 'Selected Media Coverage' : 'Media Coverage'}</h4>
-      <div class="link-list">
-        {(item.selected_media_coverage || item.media_coverage).map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
-            {link.text}
-          </a>
-        ))}
-      </div>
-    </div>
-  )}
-  
-  {item.presentations && item.presentations.length > 0 && (
-    <div class="detail-section">
-      <h4 class="detail-label">Presentations</h4>
-      <div class="link-list">
-        {item.presentations.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
-            {link.text}
-          </a>
-        ))}
-      </div>
-    </div>
-  )}
-  
-  {item.conferences && item.conferences.length > 0 && (
-    <div class="detail-section">
-      <h4 class="detail-label">Conference Presentations</h4>
-      <div class="link-list">
-        {item.conferences.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
-            {link.text}
-          </a>
-        ))}
-      </div>
-    </div>
-  )}
-  
-  {item.teaching && item.teaching.length > 0 && (
-    <div class="detail-section">
-      <h4 class="detail-label">Teaching</h4>
-      <div class="link-list">
-        {item.teaching.map((t) => (
-          <a href={t.url} target="_blank" rel="noopener noreferrer" class="link-tag">
-            {t.venue}
-          </a>
-        ))}
-      </div>
-    </div>
-  )}
-  
-  {(item.reviewing || item.selected_reviewing) && (item.reviewing?.length > 0 || item.selected_reviewing?.length > 0) && (
-    <div class="detail-section">
-      <h4 class="detail-label">{item.selected_reviewing ? 'Selected Peer Review' : 'Peer Review'}</h4>
-      <div class="link-list">
-        {(item.selected_reviewing || item.reviewing).map((r) => (
+        {item.selected_reviewing.map((r) => (
           <span class="link-tag">{r}</span>
         ))}
       </div>
@@ -130,50 +53,11 @@ function renderLinks(links: Link[] | undefined, label: string) {
     </div>
   )}
   
-  {item.projects && item.projects.length > 0 && (
+  {item.selected_articles && item.selected_articles.length > 0 && (
     <div class="detail-section">
-      <h4 class="detail-label">Projects</h4>
+      <h4 class="detail-label">Selected Articles</h4>
       <div class="link-list">
-        {item.projects.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
-            {link.text}
-          </a>
-        ))}
-      </div>
-    </div>
-  )}
-  
-  {item.achievements && item.achievements.length > 0 && (
-    <div class="detail-section">
-      <h4 class="detail-label">Achievements</h4>
-      <div class="link-list">
-        {item.achievements.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
-            {link.text}
-          </a>
-        ))}
-      </div>
-    </div>
-  )}
-  
-  {item.sponsors && item.sponsors.length > 0 && (
-    <div class="detail-section">
-      <h4 class="detail-label">Sponsors</h4>
-      <div class="link-list">
-        {item.sponsors.map((link) => (
-          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
-            {link.text}
-          </a>
-        ))}
-      </div>
-    </div>
-  )}
-  
-  {(item.articles || item.selected_articles) && (item.articles?.length > 0 || item.selected_articles?.length > 0) && (
-    <div class="detail-section">
-      <h4 class="detail-label">{item.selected_articles ? 'Selected Articles' : 'Articles'}</h4>
-      <div class="link-list">
-        {(item.selected_articles || item.articles).map((link) => (
+        {item.selected_articles.map((link) => (
           <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-tag">
             {link.text}
           </a>
@@ -188,14 +72,6 @@ function renderLinks(links: Link[] | undefined, label: string) {
     width: 100%;
   }
   
-  .position-period {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-sm);
-    font-weight: 500;
-  }
-  
-  .position-intro,
   .position-note {
     font-size: 0.95rem;
     color: var(--color-text-secondary);
