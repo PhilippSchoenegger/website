@@ -38,6 +38,32 @@ for (const item of allItems) {
   pathToTitle.set(item.path.join('/'), item.title);
 }
 
+// Create a map of path -> siblings info for navigation
+// Returns { siblings: [{id, title}], currentIndex: number }
+function getSiblingsInfo(path: string[]): { siblings: {id: string, title: string}[], currentIndex: number } {
+  if (path.length === 0) return { siblings: [], currentIndex: -1 };
+  
+  // Find parent's children
+  let parentChildren = sections;
+  for (let i = 0; i < path.length - 1; i++) {
+    const parent = parentChildren.find((item: any) => item.id === path[i]);
+    if (!parent || !parent.children) return { siblings: [], currentIndex: -1 };
+    parentChildren = parent.children;
+  }
+  
+  const currentId = path[path.length - 1];
+  const siblings = parentChildren.map((item: any) => ({ id: item.id, title: item.title }));
+  const currentIndex = siblings.findIndex(s => s.id === currentId);
+  
+  return { siblings, currentIndex };
+}
+
+// Store siblings info for each item
+const itemSiblingsMap = new Map<string, { siblings: {id: string, title: string}[], currentIndex: number }>();
+for (const item of allItems) {
+  itemSiblingsMap.set(item.path.join('/'), getSiblingsInfo(item.path));
+}
+
 // Parse intro/tagline markdown to HTML (with paragraph support)
 const addLinkTargets = (html: string) =>
   html.replace(/<a\s+/g, '<a target="_blank" rel="noopener noreferrer" ');
@@ -121,29 +147,74 @@ const cleanDescription = stripMarkdown(site.intro);
           data-chapter-id={item.id}
           data-chapter-depth={item.path.length}
         >
-          <!-- Breadcrumb trail -->
+          <!-- Breadcrumb trail with sibling stacks -->
           <nav class="chapter-breadcrumb" aria-label="Breadcrumb">
             <button class="breadcrumb-home" data-scroll-to="hero" type="button">
               Home
             </button>
-            {item.path.slice(0, -1).map((id: string, idx: number) => {
-              const ancestorPath = item.path.slice(0, idx + 1);
-              const ancestorTitle = pathToTitle.get(ancestorPath.join('/')) || id;
+            {item.path.map((id: string, idx: number) => {
+              const currentPath = item.path.slice(0, idx + 1);
+              const pathKey = currentPath.join('/');
+              const siblingsInfo = itemSiblingsMap.get(pathKey) || { siblings: [], currentIndex: -1 };
+              const isLast = idx === item.path.length - 1;
+              const parentPath = currentPath.slice(0, -1);
+              const siblingsAbove = siblingsInfo.siblings.slice(0, siblingsInfo.currentIndex);
+              const siblingsBelow = siblingsInfo.siblings.slice(siblingsInfo.currentIndex + 1);
+              
               return (
-                <Fragment>
-                  <span class="breadcrumb-sep">→</span>
-                  <button 
-                    class="breadcrumb-item" 
-                    data-scroll-to={ancestorPath.join('/')}
-                    type="button"
-                  >
-                    {ancestorTitle}
-                  </button>
-                </Fragment>
+                <div class="sibling-stack">
+                  {/* Siblings above current */}
+                  {siblingsAbove.length > 0 && (
+                    <div class="siblings-above">
+                      {siblingsAbove.map((sib) => {
+                        const sibPath = [...parentPath, sib.id];
+                        return (
+                          <button 
+                            class="sibling-option"
+                            data-nav-to={JSON.stringify(sibPath)}
+                            type="button"
+                          >
+                            {sib.title}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                  {/* Selected row with arrow */}
+                  <div class="selected-row">
+                    <span class="breadcrumb-sep">→</span>
+                    {isLast ? (
+                      <span class="breadcrumb-current sibling-selected">{item.title}</span>
+                    ) : (
+                      <button 
+                        class="breadcrumb-item sibling-selected" 
+                        data-scroll-to={pathKey}
+                        type="button"
+                      >
+                        {pathToTitle.get(pathKey) || id}
+                      </button>
+                    )}
+                  </div>
+                  {/* Siblings below current */}
+                  {siblingsBelow.length > 0 && (
+                    <div class="siblings-below">
+                      {siblingsBelow.map((sib) => {
+                        const sibPath = [...parentPath, sib.id];
+                        return (
+                          <button 
+                            class="sibling-option"
+                            data-nav-to={JSON.stringify(sibPath)}
+                            type="button"
+                          >
+                            {sib.title}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               );
             })}
-            <span class="breadcrumb-sep">→</span>
-            <span class="breadcrumb-current">{item.title}</span>
           </nav>
           
           <!-- Chapter content -->
@@ -468,32 +539,202 @@ const cleanDescription = stripMarkdown(site.intro);
         previousPath.slice(0, -1).join('/') === path.slice(0, -1).join('/') &&
         previousPath[previousPath.length - 1] !== path[path.length - 1];
       
-      // If going back up, remove all chapters deeper than target
+      // Check if navigating to sibling at a shallower level (needs to scroll up first)
+      // e.g., from Previous Positions/Forecasting/Seldon to Previous Positions/Undergraduate
+      const isShallowerSibling = path.length < previousPath.length && 
+        previousPath.slice(0, path.length).join('/') !== path.join('/');
+      
+      // Handle shallower sibling: scroll up to that level, then sibling-switch
+      if (isShallowerSibling) {
+        // Find the divergence point (where paths start to differ)
+        let divergeDepth = 0;
+        for (let i = 0; i < Math.min(path.length, previousPath.length); i++) {
+          if (path[i] === previousPath[i]) {
+            divergeDepth = i + 1;
+          } else {
+            break;
+          }
+        }
+        
+        // The sibling switch happens at divergeDepth + 1 (e.g., Forecasting vs Undergraduate)
+        // Scroll to the current chapter at the target's depth
+        const currentAtTargetDepth = previousPath.slice(0, path.length);
+        const switchChapter = getChapterElement(currentAtTargetDepth);
+        
+        if (switchChapter) {
+          // Collect chapters deeper than target depth to remove
+          const chaptersToRemove: {key: string, chapter: HTMLElement}[] = [];
+          state.chapters.forEach((chapter, key) => {
+            const keyPath = key.split('/');
+            // Remove if deeper than target, or if at target depth but different branch
+            if (keyPath.length > path.length || 
+                (keyPath.length === path.length && key !== getPathKey(path))) {
+              chaptersToRemove.push({ key, chapter });
+            }
+          });
+          
+          // Scroll up to the switch point
+          const targetRect = switchChapter.getBoundingClientRect();
+          const targetY = targetRect.top + window.scrollY - 20;
+          const startY = window.scrollY;
+          const distance = targetY - startY;
+          const duration = Math.min(1200, Math.max(500, Math.abs(distance) * 0.5));
+          
+          let startTime: number | null = null;
+          isNavigating = true;
+          
+          function easeInOutCubic(t: number): number {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+          }
+          
+          function animateAndSwitch(currentTime: number) {
+            if (startTime === null) startTime = currentTime;
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easedProgress = easeInOutCubic(progress);
+            
+            window.scrollTo(0, startY + distance * easedProgress);
+            
+            if (progress < 1) {
+              requestAnimationFrame(animateAndSwitch);
+            } else {
+              // Now do a sibling-style horizontal slide at this level
+              const oldChapter = switchChapter;
+              const newChapter = createChapter(path);
+              
+              if (newChapter) {
+                // Determine slide direction based on sibling indices
+                const oldIndex = getSiblingIndex(currentAtTargetDepth);
+                const newIndex = getSiblingIndex(path);
+                const goingRight = newIndex > oldIndex;
+                
+                // Create wrapper for transition
+                const wrapper = document.createElement('div');
+                wrapper.style.position = 'relative';
+                wrapper.style.overflow = 'hidden';
+                
+                oldChapter.parentNode?.insertBefore(wrapper, oldChapter);
+                wrapper.appendChild(oldChapter);
+                oldChapter.classList.remove('chapter-visible');
+                oldChapter.classList.add(goingRight ? 'slide-out-left' : 'slide-out-right');
+                
+                newChapter.classList.remove('chapter-entering');
+                newChapter.classList.add(goingRight ? 'slide-from-right' : 'slide-from-left');
+                wrapper.appendChild(newChapter);
+                
+                state.chapters.set(getPathKey(path), newChapter);
+                
+                // Animate in
+                requestAnimationFrame(() => {
+                  requestAnimationFrame(() => {
+                    newChapter.classList.remove('slide-from-right', 'slide-from-left');
+                    newChapter.classList.add('chapter-visible');
+                  });
+                });
+                
+                // Cleanup
+                setTimeout(() => {
+                  wrapper.parentNode?.insertBefore(newChapter, wrapper);
+                  wrapper.remove();
+                  
+                  // Remove old chapters (including switch chapter and its children)
+                  for (const {key, chapter} of chaptersToRemove) {
+                    chapter.remove();
+                    state.chapters.delete(key);
+                  }
+                  
+                  isNavigating = false;
+                }, 350);
+              } else {
+                isNavigating = false;
+              }
+            }
+          }
+          
+          requestAnimationFrame(animateAndSwitch);
+          updateURL(path);
+          updateBackToTopVisibility();
+          return;
+        }
+      }
+      
+      // If going back up, fade out chapters as we scroll past them
       if (isGoingUp) {
-        const toRemove: string[] = [];
+        const targetChapter = getChapterElement(path);
+        if (!targetChapter) {
+          updateURL(path);
+          updateBackToTopVisibility();
+          return;
+        }
+        
+        // Collect chapters to remove (deeper than target)
+        const chaptersToRemove: {key: string, chapter: HTMLElement, top: number}[] = [];
         state.chapters.forEach((chapter, key) => {
           const keyDepth = key.split('/').length;
           if (keyDepth > path.length) {
-            toRemove.push(key);
-          }
-        });
-        toRemove.forEach(key => {
-          const chapter = state.chapters.get(key);
-          if (chapter) {
-            chapter.classList.add('chapter-leaving');
-            chapter.classList.remove('chapter-visible');
-            setTimeout(() => {
-              chapter.remove();
-              state.chapters.delete(key);
-            }, 400);
+            const rect = chapter.getBoundingClientRect();
+            chaptersToRemove.push({
+              key,
+              chapter,
+              top: rect.top + window.scrollY
+            });
           }
         });
         
-        // Scroll to the target chapter
-        const targetChapter = getChapterElement(path);
-        if (targetChapter) {
-          scrollToElement(targetChapter);
+        // Sort by position (shallowest/highest first - we scroll up past these)
+        chaptersToRemove.sort((a, b) => a.top - b.top);
+        
+        // Calculate scroll target - scroll UP to the target
+        const targetRect = targetChapter.getBoundingClientRect();
+        const targetY = targetRect.top + window.scrollY - 20;
+        const startY = window.scrollY;
+        const distance = targetY - startY; // Will be negative when scrolling up
+        const duration = Math.min(1400, Math.max(600, Math.abs(distance) * 0.6));
+        
+        let startTime: number | null = null;
+        const fadedChapters = new Set<string>();
+        
+        isNavigating = true;
+        
+        function easeInOutCubic(t: number): number {
+          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
         }
+        
+        function animateScrollUp(currentTime: number) {
+          if (startTime === null) startTime = currentTime;
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easedProgress = easeInOutCubic(progress);
+          
+          const currentY = startY + distance * easedProgress;
+          window.scrollTo(0, currentY);
+          
+          // Fade out chapters that are now below the viewport (we scrolled up past them)
+          const viewportBottom = currentY + window.innerHeight;
+          for (const {key, chapter, top} of chaptersToRemove) {
+            // Fade out when the chapter's top is below viewport bottom (scrolled past it going up)
+            if (top > viewportBottom - 100 && !fadedChapters.has(key)) {
+              fadedChapters.add(key);
+              chapter.classList.add('chapter-fading-up');
+              chapter.classList.remove('chapter-visible');
+            }
+          }
+          
+          if (progress < 1) {
+            requestAnimationFrame(animateScrollUp);
+          } else {
+            isNavigating = false;
+            // Clean up faded chapters
+            for (const {key, chapter} of chaptersToRemove) {
+              setTimeout(() => {
+                chapter.remove();
+                state.chapters.delete(key);
+              }, 300);
+            }
+          }
+        }
+        
+        requestAnimationFrame(animateScrollUp);
         updateURL(path);
         updateBackToTopVisibility();
         return;
@@ -764,6 +1005,17 @@ const cleanDescription = stripMarkdown(site.intro);
         return;
       }
       
+      // Sibling option click (from vertical sibling stacks)
+      const siblingBtn = target.closest('[data-nav-to]') as HTMLElement;
+      if (siblingBtn) {
+        const pathStr = siblingBtn.dataset.navTo;
+        if (pathStr) {
+          const path = JSON.parse(pathStr);
+          navigateTo(path);
+        }
+        return;
+      }
+      
       // Breadcrumb or back-to-top click
       const scrollBtn = target.closest('[data-scroll-to]') as HTMLElement;
       if (scrollBtn) {
@@ -782,7 +1034,9 @@ const cleanDescription = stripMarkdown(site.intro);
             smoothScrollTo(0, { duration: gentleDuration, onComplete: clearChapters });
             return;
           }
-          scrollToPath(scrollTarget);
+          // For breadcrumb clicks, navigate to that path (which handles scroll-up properly)
+          const targetPath = scrollTarget.split('/');
+          navigateTo(targetPath);
         }
         return;
       }
