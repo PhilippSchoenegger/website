@@ -447,24 +447,19 @@ sections:
                 intro: |
                   During my time at St Andrews, I held several fellowships: I was an Associate Fellow at [AdvanceHE](https://www.advance-he.ac.uk/fellowship/associate-fellowship) for continued education in teaching, a Bernard Marcus Fellow at the [Institute for Human Studies](https://www.theihs.org/) focusing on Locke and liberalism, an ECCP programme visitor and Global Priorities Fellow at the [Global Priorities Institute](https://www.globalprioritiesinstitute.org/) at the University of Oxford working on effective charitable giving, and an Oscar Morgenstern Fellow at the [Mercatus Center](https://www.mercatus.org/) at George Mason University working on mainline economics.
 
-          - id: undergraduate
-            title: Undergraduate
+          - id: graz
+            title: University of Graz
+            period: "2014-2018"
             intro: |
-              My undergraduate studies were at the University of Graz, where I completed three concurrent degrees in Psychology, Philosophy, and German Philology. During this time, I was also a semi-professional Magic: The Gathering player, achieving a top-5 world ranking in the Legacy format and multiple Grand Prix Top 8 finishes.
+              From 2014-2018, I was an undergraduate student at the University of Graz, completing three concurrent degrees: a Mag.phil. teaching degree in Psychology, Philosophy and German, a BA in Philosophy, and a BA in German Philology. I earned two academic performance scholarships. At the end of my studies, I was an unofficial visiting student at the [University Center for Human Values](https://uchv.princeton.edu/) at [Princeton University](https://www.princeton.edu/), where I finished my Mag.phil. thesis under the supervision of Peter Singer. During this time, I was also a semi-professional Magic: The Gathering player, achieving a top-5 world ranking in the Legacy format and multiple Grand Prix Top 8 finishes.
             children:
-              - id: graz
-                title: University of Graz
-                period: "2014-2018"
+              - id: mtg
+                title: "Magic: The Gathering"
+                period: "2012-2015"
                 intro: |
-                  From 2014-2018, I was an undergraduate student at the University of Graz, completing three concurrent degrees: a Mag.phil. teaching degree in Psychology, Philosophy and German, a BA in Philosophy, and a BA in German Philology. I earned two academic performance scholarships. At the end of my studies, I was an unofficial visiting student at the [University Center for Human Values](https://uchv.princeton.edu/) at [Princeton University](https://www.princeton.edu/), where I finished my Mag.phil. thesis under the supervision of Peter Singer.
-                children:
-                  - id: mtg
-                    title: "Magic: The Gathering"
-                    period: "2012-2015"
-                    intro: |
-                      Before and early on during my undergraduate studies, I was a semi-professional Magic: The Gathering player in the Legacy format, achieving a [74.6% win-rate](/Legacy%20win-rate.png) in Grand Prix-level tournaments, the fifth highest in the world at the time. 
-                      
-                      My main accomplishments were a 4th place at GP Paris (1,587 players) and another 4th place  at GP New Jersey (4,003 players). During this period, I was sponsored by [Team MTG Mint Card](https://www.mtgmintcard.com/team-mtgmintcard) and [MTG Madness](https://web.archive.org/web/20140208062415/https://www.mtgmadness.com/), and have written for outlets such as Eternal Central for the [GP Paris Top 4 report](https://www.eternalcentral.com/there-and-back-again-grand-prix-paris-top-4-report-with-miracles/) and StarCityGames for the [GP New Jersey Story](https://articles.starcitygames.com/articles/one-journey-one-miracle-a-grand-prix-new-jersey-story/), among others. 
+                  Before and early on during my undergraduate studies, I was a semi-professional Magic: The Gathering player in the Legacy format, achieving a [74.6% win-rate](/Legacy%20win-rate.png) in Grand Prix-level tournaments, the fifth highest in the world at the time. 
+                  
+                  My main accomplishments were a 4th place at GP Paris (1,587 players) and another 4th place  at GP New Jersey (4,003 players). During this period, I was sponsored by [Team MTG Mint Card](https://www.mtgmintcard.com/team-mtgmintcard) and [MTG Madness](https://web.archive.org/web/20140208062415/https://www.mtgmadness.com/), and have written for outlets such as Eternal Central for the [GP Paris Top 4 report](https://www.eternalcentral.com/there-and-back-again-grand-prix-paris-top-4-report-with-miracles/) and StarCityGames for the [GP New Jersey Story](https://articles.starcitygames.com/articles/one-journey-one-miracle-a-grand-prix-new-jersey-story/), among others. 
 
       # Forecasting Positions
       - id: forecasting
