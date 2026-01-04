@@ -142,25 +142,29 @@ a:hover {
 }
 
 .hero-name {
-  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
   font-weight: 700;
   color: var(--color-text);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
   letter-spacing: -0.02em;
 }
 
 .hero-tagline {
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
-  color: var(--color-text-secondary);
-  margin-bottom: var(--space-lg);
-  line-height: 1.8;
+  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
+  color: var(--color-text);
+  margin-bottom: var(--space-xl);
+  line-height: 1.6;
   font-weight: 600;
 }
 
+.hero-tagline p {
+  margin: 0;
+}
+
 .hero-intro {
-  font-size: 1.18rem;
-  color: var(--color-text-muted);
-  line-height: 1.95;
+  font-size: 1.25rem;
+  color: var(--color-text-secondary);
+  line-height: 1.85;
   text-align: left;
 }
 
