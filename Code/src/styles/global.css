@@ -160,6 +160,15 @@ a:hover {
   font-size: 1rem;
   color: var(--color-text-muted);
   line-height: 1.8;
+  text-align: left;
+}
+
+.hero-intro p {
+  margin-bottom: var(--space-md);
+}
+
+.hero-intro p:last-child {
+  margin-bottom: 0;
 }
 
 /* ============================================================================
@@ -389,6 +398,7 @@ a:hover {
   font-size: 1.1rem;
   color: var(--color-text-secondary);
   line-height: 1.8;
+  text-align: left;
 }
 
 .chapter-intro a {
@@ -466,6 +476,43 @@ a:hover {
   font-size: 0.85rem;
   color: var(--color-text-muted);
   margin-top: var(--space-xs);
+}
+
+.publication-abstract {
+  margin-top: var(--space-md);
+  border-top: 1px dashed var(--color-border-light);
+  padding-top: var(--space-sm);
+}
+
+.publication-abstract summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.publication-abstract summary::-webkit-details-marker {
+  display: none;
+}
+
+.abstract-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0;
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color var(--transition-fast);
+}
+
+.abstract-toggle:hover {
+  color: var(--color-accent-hover);
+}
+
+.abstract-body {
+  margin-top: var(--space-xs);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
 }
 
 /* ============================================================================

@@ -1,0 +1,490 @@
+# ============================================================================
+# WEBSITE CONTENT STRUCTURE
+# ============================================================================
+# This file defines the hierarchical navigation and content for the website.
+# Edit this file to add/modify content. The website build will read from here.
+#
+# STRUCTURE:
+#   - Each section has: id, title, content (optional), children (optional)
+#   - Children create nested navigation levels
+#   - Links use: { text, url } format
+#   - Publications use: { year, title, journal, coauthors, url } format
+# ============================================================================
+
+site:
+  title: "Philipp Schoenegger"
+  tagline: "I work on [Microsoft AI](https://microsoft.ai/)'s Futures team in the Office of the CEO."
+  intro: |
+    My current research focuses on the future impacts of advanced artificial intelligence and relies on judgemental forecasting, survey studies, open model experiments, strategy / policy gaming, simulation studies, and frontier safety analysis.
+
+    Connect on [Twitter](https://x.com/SchoeneggerPhil), [LinkedIn](https://www.linkedin.com/in/philipp-schoenegger-755117211/), or reach out via email at contact.schoenegger@gmail.com.
+
+# ============================================================================
+# MAIN NAVIGATION SECTIONS
+# ============================================================================
+sections:
+  # --------------------------------------------------------------------------
+  # RESEARCH
+  # --------------------------------------------------------------------------
+  - id: research
+    title: Research
+    intro: |
+      Over my research career in academia and outside, I have worked in fields including AI, economics, philosophy, and psychology. This inter- and multi-disciplinary has led me to become familiar with a large number of methodologies and approaches, ranging from experimental design and survey methods to LLMs and statistical modeling. Across these projects, I have worked on solo-author projects, collaborated in small teams, led a 40+ reearch team, and contributed to large international consortia. 
+      
+      My work has been published specialist journals such as [Journal of Behavioral and Experimental Economics](https://www.sciencedirect.com/science/article/abs/pii/S2214804323000149), [Transactions on Machine Learning Research](https://openreview.net/pdf?id=bbhdeL8EUX), and [Environmental Psychology](https://www.sciencedirect.com/science/article/pii/S0272494424000616), as well as generalist journals like [Science Advances](https://doi.org/10.1126/sciadv.adp1528) and [Nature Communications](https://doi.org/10.1038/s41467-021-27668-9). 
+      
+      So far, my work has been cited more than 1,500 times with an h-index of 15. See my [Google Scholar](https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate) for a full list of publications.
+
+      There has also been some media coverage of my work in outlets such as [Forbes](https://www.forbes.com/sites/tomasgorny/2024/12/02/should-businesses-trust-ai-to-predict-customer-behaviors/), [BigThink](https://bigthink.com/thinking/anti-natalism-psychopaths-having-children-immoral/), [Süddeutsche Zeitung](https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347), [The Times](https://www.thetimes.co.uk/article/ethics-professors-don-t-walk-the-walk-d7n6097m8), [Psychology Today](https://www.psychologytoday.com/us/blog/unique-everybody-else/202109/are-dark-triad-traits-adaptive), and [Die Zeit](https://www.zeit.de/2021/49/liberalismus-corona-klima-fdp-friedrich-august-von-hayek/komplettansicht).
+
+    children:
+      # AI Research
+      - id: ai
+        title: Artificial Intelligence
+        intro: |
+          My work in artificial intelligence is largely situated at the intersection of AI and social science and has been published in journals such as [Transactions on Machine Learning Research](https://openreview.net/pdf?id=bbhdeL8EUX) and [ACM Transactions on Interactive Intelligent Systems](https://doi.org/10.1145/3707649). 
+
+          In my papers on AI, I focus on two sets of questions: First, how well AI systems can perform in a set of relevant tasks such as real-world geopolitical and economic forecasting, personality estimation, and persuasion. Second, how AI systems can be improved through posttraining methods such as reinforcement learning from verifiable outcomes and prompt engineering to increase their forecasting capabilities. 
+    
+        children:
+          - id: ai-evaluations
+            title: Evaluations
+            intro: |
+              I have previously worked on evaluations of AI capabilities to replace human survey study participants, forecast geopolitical and economic outcomes, estimate relationships between personality items, and persuade human decision-makers. 
+
+              Evaluating frontier LLMs on forecasting tasks is particularly interesting for two reasons. First, forecasting is an inherently difficult task that requires integrating diverse sources of information and reasoning about complex, uncertain futures. Second, forecasting is a core capability for many high-impact applications of AI, such as decision support, risk assessment, and strategic planning. Our work suggests that while LLMs have made significant progress in forecasting, they still lag behind human experts and at best match crowds in real-world prediction tasks when drawing on ensemble methods, highlighting the need for further research to enhance their reasoning and predictive capabilities. However, our work on personality prediction shows that LLMs can already outperform most individual humans in this specific domain, suggesting that they can serve as valuable tools for understanding human traits and behaviors.
+
+              A further important capability is persuasion, as AI systems that can effectively persuade humans will have significant influence over human decision-making and thus pose significant risks as capabilities advance. Our work shows that frontier LLMs can already outperform incentivized human persuaders in interactive settings, demonstrating superior persuasive capabilities in both truthful and deceptive contexts. These findings underscore the urgency of developing alignment and governance frameworks to manage the risks associated with increasingly capable AI persuaders.
+
+            publications:
+              - year: 2024
+                title: "Diminished Diversity-of-Thought in a Standard Large Language Model"
+                journal: "Behavior Research Methods"
+                coauthors: "Peter S. Park, Chongyang Zhu"
+                url: "https://link.springer.com/article/10.3758/s13428-023-02307-x"
+                abstract: "We test whether large language models (LLMs) can be used to simulate human participants in social-science studies. To do this, we ran replications of 14 studies from the Many Labs 2 replication project with OpenAI’s text-davinci-003 model, colloquially known as GPT-3.5. Based on our pre-registered analyses, we find that among the eight studies we could analyse, our GPT sample replicated 37.5% of the original results and 37.5% of the Many Labs 2 results. However, we were unable to analyse the remaining six studies due to an unexpected phenomenon we call the “correct answer” effect. Different runs of GPT-3.5 answered nuanced questions probing political orientation, economic preference, judgement, and moral philosophy with zero or near-zero variation in responses: with the supposedly “correct answer.” In one exploratory follow-up study, we found that a “correct answer” was robust to changing the demographic details that precede the prompt. In another, we found that most but not all “correct answers” were robust to changing the order of answer choices. One of our most striking findings occurred in our replication of the Moral Foundations Theory survey results, where we found GPT-3.5 identifying as a political conservative in 99.6% of the cases, and as a liberal in 99.3% of the cases in the reverse-order condition. However, both self-reported ‘GPT conservatives’ and ‘GPT liberals’ showed right-leaning moral foundations. Our results cast doubts on the validity of using LLMs as a general replacement for human participants in the social sciences. Our results also raise concerns that a hypothetical AI-led future may be subject to a diminished diversity of thought."
+              - year: 2024
+                title: "Wisdom of the Silicon Crowd: LLM Ensemble Prediction Capabilities Rival Human Crowd Accuracy"
+                journal: "Science Advances"
+                coauthors: "Indre Tuminauskaite, Peter S. Park, Rafael V.S. Bastos, Philip E. Tetlock"
+                url: "https://doi.org/10.1126/sciadv.adp1528"
+                abstract: "Human forecasting accuracy improves through the “wisdom of the crowd” effect, in which aggregated predictions tend to outperform individual ones. Past research suggests that individual large language models (LLMs) tend to underperform compared to human crowd aggregates. We simulate a wisdom of the crowd effect with LLMs. Specifically, we use an ensemble of 12 LLMs to make probabilistic predictions about 31 binary questions, comparing them with those made by 925 human forecasters in a 3-month tournament. We show that the LLM crowd outperforms a no-information benchmark and is statistically indistinguishable from the human crowd. We also observe human-like biases, such as the acquiescence bias. In another study, we find that LLM predictions (of GPT-4 and Claude 2) improve when exposed to the median human prediction, increasing accuracy by 17 to 28%. However, simply averaging human and machine forecasts yields more accurate results. Our findings suggest that LLM predictions can rival the human crowd’s forecasting accuracy through simple aggregation."
+              - year: 2025
+                title: "AI-Augmented Predictions: LLM Assistants Improve Human Forecasting Accuracy"
+                journal: "ACM Transactions on Interactive Intelligent Systems"
+                coauthors: "Peter S. Park, Ezra Karger, Sean Trott, Philip E. Tetlock"
+                url: "https://doi.org/10.1145/3707649"
+                abstract: "Large language models (LLMs) match and sometimes exceed human performance in many domains. This study explores the potential of LLMs to augment human judgment in a forecasting task. We evaluate the effect on human forecasters of two LLM assistants: one designed to provide high-quality (“superforecasting”) advice, and the other designed to be overconfident and base-rate neglecting, thus providing noisy forecasting advice. We compare participants using these assistants to a control group that received a less advanced model that did not provide numerical predictions or engage in explicit discussion of predictions. Participants (N 991) answered a set of six forecasting questions and had the option to consult their assigned LLM assistant throughout. Our preregistered analyses show that interacting with each of our frontier LLM assistants significantly enhances prediction accuracy by between 24% and 28% compared to the control group. Exploratory analyses showed a pronounced outlier effect in one forecasting item, without which we find that the superforecasting assistant increased accuracy by 41%, compared with 29% for the noisy assistant. We further examine whether LLM forecasting augmentation disproportionately benefits less skilled forecasters, degrades the wisdom-of-the-crowd by reducing prediction diversity, or varies in effectiveness with question difficulty. Our data do not consistently support these hypotheses. Our results suggest that access to a frontier LLM assistant, even a noisy one, can be a helpful decision aid in cognitively demanding tasks compared to a less powerful model that does not provide specific forecasting advice. However, the effects of outliers suggest that further research into the robustness of this pattern is needed."
+              - year: 2023
+                title: "Large Language Model Prediction Capabilities: Evidence From a Real-World Forecasting Tournament"
+                journal: "arXiv Preprint arXiv:2310.13014"
+                coauthors: "Peter S. Park"
+                url: "https://arxiv.org/abs/2310.13014"
+                abstract: "Accurately predicting the future would be an important milestone in the capabilities of artificial intelligence. However, research on the ability of large language models to provide probabilistic predictions about future events remains nascent. To empirically test this ability, we enrolled OpenAI's state-of-the-art large language model, GPT-4, in a three-month forecasting tournament hosted on the Metaculus platform. The tournament, running from July to October 2023, attracted 843 participants and covered diverse topics including Big Tech, U.S. politics, viral outbreaks, and the Ukraine conflict. Focusing on binary forecasts, we show that GPT-4's probabilistic forecasts are significantly less accurate than the median human-crowd forecasts. We find that GPT-4's forecasts did not significantly differ from the no-information forecasting strategy of assigning a 50% probability to every question. We explore a potential explanation, that GPT-4 might be predisposed to predict probabilities close to the midpoint of the scale, but our data do not support this hypothesis. Overall, we find that GPT-4 significantly underperforms in real-world predictive tasks compared to median human-crowd forecasts. A potential explanation for this underperformance is that in real-world forecasting tournaments, the true answers are genuinely unknown at the time of prediction; unlike in other benchmark tasks like professional exams or time series forecasting, where strong performance may at least partly be due to the answers being memorized from the training data. This makes real-world forecasting tournaments an ideal environment for testing the generalized reasoning and prediction capabilities of artificial intelligence going forward."
+              - year: 2025
+                title: "Large Language Models Are More Persuasive Than Incentivized Human Persuaders"
+                journal: "arXiv Preprint arXiv:2505.09662"
+                coauthors: "Francesco Salvi, Jiacheng Liu, Xiaoli Nan, Ramit Debnath, Barbara Fasolo, Evelina Leivada, Gabriel Recchia, Fritz Günther, Ali Zarifhonarvar, Joe Kwon, Zahoor Ul Islam, Marco Dehnert, Daryl Y. H. Lee, Madeline G. Reinecke, David G. Kamper, Mert Kobaş, Adam Sandford, Jonas Kgomo, Luke Hewitt, Shreya Kapoor, Kerem Oktar, Eyup Engin Kucuk, Bo Feng, Cameron R. Jones, Izzy Gainsburg, Sebastian Olschewski, Nora Heinzelmann, Francisco Cruz, Ben M. Tappin, Tao Ma, Peter S. Park, Rayan Onyonka, Arthur Hjorth, Peter Slattery, Qingcheng Zeng, Lennart Finke, Igor Grossmann, Alessandro Salatiello, Ezra Karger"
+                url: "https://arxiv.org/abs/2505.09662"
+                abstract: "We directly compare the persuasion capabilities of a frontier large language model (LLM; Claude Sonnet 3.5) against incentivized human persuaders in an interactive, real-time conversational quiz setting. In this preregistered, large-scale incentivized experiment, participants (quiz takers) completed an online quiz where persuaders (either humans or LLMs) attempted to persuade quiz takers toward correct or incorrect answers. We find that LLM persuaders achieved significantly higher compliance with their directional persuasion attempts than incentivized human persuaders, demonstrating superior persuasive capabilities in both truthful (toward correct answers) and deceptive (toward incorrect answers) contexts. We also find that LLM persuaders significantly increased quiz takers' accuracy, leading to higher earnings, when steering quiz takers toward correct answers, and significantly decreased their accuracy, leading to lower earnings, when steering them toward incorrect answers. Overall, our findings suggest that AI's persuasion capabilities already exceed those of humans that have real-money bonuses tied to performance. Our findings of increasingly capable AI persuaders thus underscore the urgency of emerging alignment and governance frameworks."
+              - year: 2025
+                title: "AI Can Outperform Humans in Predicting Correlations Between Personality Items"
+                journal: "Communications Psychology"
+                coauthors: "Spencer Greenberg, Alexander Grishin, Lucius Caviola"
+                url: "https://doi.org/10.1038/s44271-025-00205-w"
+                abstract: "We assess the abilities of both specialized deep neural networks, such as PersonalityMap, and general LLMs, including GPT-4o and Claude 3 Opus, in understanding human personality by predicting correlations between personality questionnaire items. All AI models outperform the vast majority of laypeople and academic experts. However, we can improve the accuracy of individual correlation predictions by taking the median prediction per group to produce a “wisdom of the crowds” estimate. Thus, we also compare the median predictions from laypeople, academic experts, GPT-4o/Claude 3 Opus, and PersonalityMap. Based on medians, PersonalityMap and academic experts surpass both LLMs and laypeople on most measures. These results suggest that while advanced LLMs make superior predictions compared to most individual humans, specialized models like PersonalityMap can match even expert group-level performance in domain-specific tasks. This underscores the capabilities of large language models while emphasizing the continued relevance of specialized systems as well as human experts for personality research."
+
+          - id: ai-posttraining
+            title: Posttraining & Prompt Engineering
+            intro: |
+              My posttraining work, mostly in collaboration with [Lightning Rod Labs](https://www.lightningrod.ai/) uses reinforcement learning from verifiable rewards (RLVR), specifically GRPO, to improve forecasting capabilities of small models. Our work shows that this approach can significantly improve forecasting accuracy of smaller models, closing much of the gap to larger models while using far less computational resources (a 14B model matching o1). This suggests that RLVR is a promising approach for improving AI forecasting capabilities in a cost-effective manner.
+              
+              I have also investigated the prompt engineering side of improving LLM forecasting capabilities. Here, our work shows that simple prompt engineering strategies often fail to yield significant improvements in forecasting accuracy, suggesting that more robust techniques may be needed to enhance LLM performance in complex tasks such as forecasting.
+            publications:
+              - year: 2025
+                title: "Outcome-Based Reinforcement Learning to Predict the Future"
+                journal: "Transactions on Machine Learning Research"
+                coauthors: "Benjamin Turtel, Danny Franklin, Kris Skotheim, Luke Hewitt"
+                url: "https://openreview.net/pdf?id=bbhdeL8EUX"
+                abstract: "Reinforcement Learning with Verifiable Rewards (RLVR) has been an effective approach for improving Large Language Models’ reasoning in domains such as coding and mathematics. Here, we apply RLVR methods towards forecasting future real-world events – a challenging task for RL due to the very noisy (and delayed) outcomes involved. Using a novel dataset of recent questions from a prediction market, and accompanying relevant news headlines, we show that a compact (14B) reasoning model can be trained to match or surpass the predictive accuracy of frontier models like o1, while greatly improving probabilistic calibration. The model’s performance is also practically meaningful: in a Polymarket trading simulation, we estimate that its bets would have yielded a return on investment of over 10% across all questions in the test set. We detail and compare approaches used in training our model, including augmenting our training-data with synthetic prediction questions, guardrails for learning stability, and median prediction sampling at inference-time."
+              - year: 2025
+                title: "LLMs Can Teach Themselves to Better Predict the Future"
+                journal: "arXiv Preprint arXiv:2502.05253"
+                coauthors: "Benjamin Turtel, Danny Franklin"
+                url: "https://arxiv.org/abs/2502.05253"
+                abstract: "We present an outcome-driven fine-tuning framework that enhances the forecasting capabilities of large language models (LLMs) without relying on human-curated reasoning samples. Our method leverages model self-play to generate pairs of diverse reasoning trajectories and probabilistic forecasts for a set of diverse questions that resolve after the models' knowledge cutoff date. We then rank pairs of these reasoning traces by their distance to the actual outcomes before fine-tuning the model via Direct Preference Optimization (DPO). On a separate test set, our approach increases prediction accuracy of Phi-4 14B and DeepSeek-R1 14B by between 7--10% over a base model and a DPO fine-tuned control model with randomized labels, bringing them on par with forecasting capabilities of much larger frontier models like GPT-4o."
+              - year: 2025
+                title: "Prompt Engineering Large Language Models' Forecasting Capabilities"
+                journal: "arXiv Preprint arXiv:2506.01578"
+                coauthors: "Caleb R. Jones, Philip E. Tetlock, Barbara Mellers"
+                url: "https://arxiv.org/abs/2506.01578"
+                abstract: "Large language model performance can be improved in a large number of ways. Many such techniques, like fine-tuning or advanced tool usage, are time-intensive and expensive. Although prompt engineering is significantly cheaper and often works for simpler tasks, it remains unclear whether prompt engineering suffices for more complex domains like forecasting. Here we show that small prompt modifications rarely boost forecasting accuracy beyond a minimal baseline. In our first study, we tested 38 prompts across Claude 3.5 Sonnet, Claude 3.5 Haiku, GPT-4o, and Llama 3.1 405B. In our second, we introduced compound prompts and prompts from external sources, also including the reasoning models o1 and o1-mini. Our results show that most prompts lead to negligible gains, although references to base rates yield slight benefits. Surprisingly, some strategies showed strong negative effects on accuracy: especially encouraging the model to engage in Bayesian reasoning. These results suggest that, in the context of complex tasks like forecasting, basic prompt refinements alone offer limited gains, implying that more robust or specialized techniques may be required for substantial performance improvements in AI forecasting."
+
+          - id: ai-other
+            title: Other
+            intro: |
+              With teams at Microsoft AI, we conducted a descriptive analysis of Copilot usage patterns throughout 2025, examining temporal and modal dynamics of how users interact with AI assistants. We find that usage patterns vary significantly by device type and context, with mobile users focusing on health-related topics consistently across time, while desktop users exhibit work and technology-related queries that align with business hours. These findings highlight the integration of AI into various facets of daily life, serving as both a professional tool and a personal companion.
+            publications:
+              - year: 2025
+                title: "It's About Time: The Temporal and Modal Dynamics of Copilot Usage"
+                journal: "arXiv Preprint arXiv:2512.11879"
+                coauthors: "Beatriz Costa-Gomes, Sophia Chen, Connie Hsueh, Deborah Morgan, Yash Shah, Sam Way, Yuki Zhu, Timothé Adeline, Michael Bhaskar, Mustafa Suleyman, Seth Spielman"
+                url: "https://arxiv.org/abs/2512.11879"
+                abstract: "We analyze 37.5 million deidentified conversations with Microsoft's Copilot between January and September 2025. Unlike prior analyses of AI usage, we focus not just on what people do with AI, but on how and when they do it. We find that how people use AI depends fundamentally on context and device type. On mobile, health is the dominant topic, which is consistent across every hour and every month we observed - with users seeking not just information but also advice. On desktop, the pattern is strikingly different: work and technology dominate during business hours, with 'Work and Career' overtaking 'Technology' as the top topic precisely between 8 a.m. and 5 p.m. These differences extend to temporal rhythms: programming queries spike on weekdays while gaming rises on weekends, philosophical questions climb during late-night hours, and relationship conversations surge on Valentine's Day. These patterns suggest that users have rapidly integrated AI into the full texture of their lives, as a work aid at their desks and a companion on their phones."
+
+      # Economics Research
+      - id: economics
+        title: Economics
+        intro: |
+          My work in economics is heavily in the experimental tradition, focusing on behavioural economics and decision science. My research has been published in journals such as [Journal of Behavioral and Experimental Economics](https://www.sciencedirect.com/science/article/abs/pii/S2214804323000149) and [PLOS ONE](https://doi.org/10.1371/journal.pone.0273971). 
+
+          My economics research focuses on two main areas: First, behavioural economics, particularly charitable giving and moral decision-making. Second, decision science, including forecasting of long-run causal effects and methods for improving low-probability judgements.
+
+        children:
+          - id: econ-behavioural
+            title: Behavioural Economics
+            intro: |
+              Overall, my research theme in behavioural economics is to understand how people make decisions that have moral significance, particularly in the context of charitable giving. I use experimental methods to investigate how different factors, such as risk attitudes, moral arguments, and normative uncertainty, influence people's willingness to donate to charity.
+
+              In our work, we find that individual differences in risk and ambiguity attitudes, empathy, numeracy, optimism, and donor type have little to no effect on charitable giving decisions between sure-thing and probabilistic charities. We also find that moral arguments can significantly increase donations, but increasing moral demandingness does not have an additional effect. Finally, we show that people value descriptive information about charities more than normative expert advice, but both can influence charity choice and reduce uncertainty.
+
+            publications:
+              - year: 2022
+                title: "Sure-Thing vs. Probabilistic Charitable Giving: Experimental Evidence on the Role of Individual Differences in Risky and Ambiguous Charitable Decision-Making"
+                journal: "PLOS ONE"
+                coauthors: "Miguel Costa-Gomes"
+                url: "https://doi.org/10.1371/journal.pone.0273971"
+                abstract: "Charities differ, among other things, alongside the likelihood that their interventions succeed and produce the desired outcomes and alongside the extent that such likelihood can even be articulated numerically. In this paper, we investigate what best explains charitable giving behaviour regarding charities that have interventions that will succeed with a quantifiable and high probability (sure-thing charities) and charities that have interventions that only have a small and hard to quantify probability of bringing about the desired end (probabilistic charities). We study individual differences in risk/ambiguity attitudes, empathy, numeracy, optimism, and donor type (warm glow vs. pure altruistic donor type) as potential predictors of this choice. We conduct a money incentivised, pre-registered experiment on Prolific on a representative UK sample (n = 1,506) to investigate participant choices (i) between these two types of charities and (ii) about one randomly selected charity. Overall, we find little to no evidence that individual differences predict choices regarding decisions about sure-thing and probabilistic charities, with the exception that a purely altruistic donor type predicts donations to probabilistic charities when participants were presented with a randomly selected charity in (ii). Conducting exploratory equivalence tests, we find that the data provide robust evidence in favour of the absence of an effect (or a negligibly small effect) where we fail to reject the null. This is corroborated by exploratory Bayesian analyses. We take this paper to be contributing to the literature on charitable giving via this comprehensive null-result in pursuit of contributing to a cumulative science."
+              - year: 2023
+                title: "Demanding the Morally Demanding: Experimental Evidence on the Effects of Moral Arguments and Moral Demandingness on Charitable Giving"
+                journal: "Journal of Behavioral and Experimental Economics"
+                coauthors: "Ben Grodeck"
+                url: "https://www.sciencedirect.com/science/article/abs/pii/S2214804323000149"
+                abstract: "What are the effects of confronting people with moral arguments and morally demanding statements to perform certain actions, such as donating to charity? To investigate this question, we conduct an online randomized experiment via Prolific (n=2500) where participants can donate to charity. Using a between-subject design, we provide some participants with a moral argument as to why they should donate. We then add a single sentence on top of the moral argument that expresses and varies moral demandingness at different levels. To reduce experimenter demand worries, in a follow-up experiment (n=1200) we provide the same stimulus via an external party's website—the non-profit Giving What We Can. In both experiments, we find that moral arguments significantly increase both the frequency and amount of donations compared to the control. However, we fail to find evidence that increasing the level of moral demandingness affects donation behavior in either experiment. Exploratory equivalence tests provide evidence in favor of such a null effect. Our findings suggest that charities should employ moral arguments to increase giving, though our findings give no specific recommendation as to the moral demandingness employed as there is no additive effect of morally demanding arguments."
+              - year: 2022
+                title: "Charitable Giving Under Normative Uncertainty: Experimental Evidence on the Behavioral Impact of Normative Expert Advice"
+                journal: "Available at SSRN"
+                coauthors: "Miguel Costa-Gomes"
+                url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4389737"
+                abstract: "When giving to one charity, individuals face two types of uncertainty, descriptive and normative. We report a between-subjects charitable-giving experiment which provides first data on normative uncertainty (n=1890). In our experiment, participants can bid for either descriptive information, expert advice, or both, via a Becker-DeGroot-Marschak mechanism. They can donate to one of five charities. First, we find participants are willing to pay a higher amount for descriptive information than for expert advice. Second, the data show that both information and expert advice, if randomly provided, impact charity choice, but not donation size. This also leads to a reduction in uncertainty. Third, if participants receive information or advice that they paid for, they are both more likely to change choice of charity and increase their donations compared to those who received it for free. These results suggest that randomly selected expert advice can guide behavior and reduce self-reported uncertainty."
+
+          - id: econ-decision
+            title: Decision Science
+            intro: |
+              My work in decision science broadly focuses on two areas: forecasting long-run causal effects and improving low-probability judgements. In our work on forecasting long-run causal effects, we find that experienced forecasters and academic experts outperform lay people in predicting the effects of long-term randomized controlled trials (RCTs). However, neither group consistently outperforms simple benchmarks, highlighting the difficulty of forecasting long-run events. 
+
+              In our work on improving low-probability judgements, we find that shifting from standard linear elicitation scales and Brier scoring rules to nonlinear (logarithmic) elicitation scales and logarithmic scoring rules can significantly improve accuracy for low-probability judgments. These methodological changes lead to substantial improvements in individual and aggregate accuracy, suggesting promising avenues for enhancing probability judgments of rare events.
+
+            publications:
+              - year: 2024
+                title: "Forecasting Long-Run Causal Effects"
+                journal: "SSRN"
+                coauthors: "David R. Bernard"
+                url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4702393"
+                abstract: "Randomized controlled trials (RCT) are the gold standard in causal inference and are often used by decision-makers in public and private sectors. However, RCTs are often expensive and take a long time to complete, making predicting its effects prior to completion practically important. In this paper, we test the forecasting accuracy of groups of experienced forecasters, academic experts, and lay people in predicting such long-run causal effects. To do this, we recruit 511 unique participants and collect 25,980 individual forecasts. Participants predict the short-run as well as long-run effects of seven RCTs that collected data on a treatment effect with a duration of at least 5 years. We find that experienced forecasters and academics outperform lay people. We also find evidence that experienced forecasters perform better than academics on our primary accuracy measure, and that this is, at least in part, due to their superior calibration. While we do find aggregation effects suggesting a wisdom of the crowds effect, we also show that neither experienced forecasters nor academics consistently outperform a set of simple benchmarks. Additionally, we also fail to find evidence that randomly assigned information about good forecasting practices, details about the RCT intervention, or the local study context improves forecasting accuracy. Overall, our finding that experienced forecasters can outperform academic experts is a novel addition to an otherwise mixed literature. However, the general pattern of results is largely in line with other work, showing that forecasting long-run events is extremely difficult and that improving forecasting performance remains somewhat intractable."
+              - year: 2024
+                title: "Improving Low-Probability Judgments"
+                journal: "SSRN"
+                coauthors: "Pavel D. Atanasov, Coralie Consigny, Ezra Karger, David V. Budescu, Philip E. Tetlock"
+                url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5025990"
+                abstract: "High-stakes debates often pivot on clashing estimates of outcomes that one side sees as so improbable as not to deserve policy prioritization. These debates are especially intractable when they focus on rare events ranging from disasters (e.g., existential risks from Artificial Intelligence, nuclear war, or bioengineered pandemics) to surprising successes (e.g., once inconceivable scientific discoveries). The research literature offers grounds for suspecting that the micro-probability judgments flowing into such debates are both unreliable and biased. This article covers experimental manipulations that achieve improvements in accuracy for low-probability judgments by shifting from the standard linear elicitation scale and Brier scoring rule to nonlinear (logarithmic) elicitation scales and logarithmic scoring rules. These methodological changes produced accuracy improvements of approximately d = 0.2 to 0.5 for individual accuracy scores. Improvements in aggregate accuracy varied more widely by aggregation function (mean vs. median) and accuracy scoring rule, between parity (d = 0) and a large advantage for non-linear over linear scales (d = 0.68). Judgments obtained via the linear scale and text box elicitations systematically overestimated the true values. New scales allowed forecasters to provide precise judgments at the low end of the probability scale and logarithmic scoring rules penalize large errors harshly, incentivising judges to avoid 0%and provide precise non-zero probabilities. An indirect elicitation protocol we developed, successive menus, yielded mixed results, such as improving aggregate accuracy and individual calibration at the cost of increasing outlier judgments and reducing retention. Base rate anchors provided context but no measurable accuracy benefits. These results point to next steps for improving probability judgments of rare events. The most promising next steps include a) using subject-specific Base-Rate Anchors, b) developing training programs specific to low-probability events, c) developing more robust and usable indirect elicitation protocols, and d) assessing all of these methods in longitudinal forecasting tournament featuring many forecasting questions focused on rare events."
+
+      # Philosophy Research
+      - id: philosophy
+        title: Philosophy
+        intro: |
+          My philosophical background is in analytic philosophy, with research spanning experimental philosophy, philosophy of science, and political theory. My work often employs empirical methods to address traditional philosophical questions, bridging the gap between philosophical theorising and empirical investigation.
+
+          I have published in journals such as [Synthese](https://link.springer.com/article/10.1007/s11229-023-04267-3), [Studies in History and Philosophy of Science](https://doi.org/10.1016/j.shpsa.2023.08.001), and [Philosophical Psychology](https://doi.org/10.1080/09515089.2019.1587912).
+
+        children:
+          - id: phil-experimental
+            title: Experimental Philosophy
+            intro: |
+              My experimental philosophy research focuses on moral philosophy and population ethics. I use experimental methods to investigate how people make moral judgments and the implications of these judgments for philosophical theories. 
+
+              In our work on population ethics , we find that when people face conflicts between general moral principles and specific case judgments, they are more likely to revise their general principles than their case judgments. This suggests that case judgments play a central role in reflective equilibrium reasoning in population ethics.
+
+              On more methodological work on incentivisation, we initially find evidence that the Bayesian Truth Serum (BTS) can improve honesty in experimental philosophy surveys by rewarding surprisingly common answers. However, our follow-up work fails to replicate this effect, suggesting that the effectiveness of BTS may depend on specific experimental contexts.
+
+              
+            publications:
+              - year: 2023
+                title: "Concrete Over Abstract: Experimental Evidence of Reflective Equilibrium in Population Ethics"
+                journal: "Experiments in Moral and Political Philosophy"
+                coauthors: "Ben Grodeck"
+                url: "https://www.taylorfrancis.com/chapters/edit/10.4324/9781003301424-4/concrete-abstract-philipp-schoenegger-ben-grodeck"
+                abstract: "One central method of ethics is narrow reflective equilibrium, which relates to the conflict between intuitions about general moral principles and intuitions about concrete cases. In these conflicts, general principles are refined, or judgements in concrete cases are changed until no more conflicts exist. This paper presents empirical data on this method in the context of population ethics. We conduct an online experiment (n = 543) on Prolific where participants can endorse moral principles relevant to population ethics. They also judge concrete population ethical cases that may conflict with their endorsed principles. When conflicts arise, they can choose to revoke the principle, revise their intuition about a case, or continue without having resolved the conflict. The main finding is that when there is conflict, participants are significantly more likely to revoke their endorsements of general principles than their judgements about concrete cases. This evidence suggests that for a lay population, case judgements play a central revisionary role in reflective equilibrium reasoning in the context of population ethics."
+              - year: 2019
+                title: "The Moral Behavior of Ethics Professors: A Replication-Extension in German-Speaking Countries"
+                journal: "Philosophical Psychology"
+                coauthors: "Johannes Wagner"
+                url: "https://doi.org/10.1080/09515089.2019.1587912"
+                abstract: "What is the relation between ethical reflection and moral behavior? Does professional reflection on ethical issues positively impact moral behaviors? To address these questions, Schwitzgebel and Rust empirically investigated if philosophy professors engaged with ethics on a professional basis behave any morally better or, at least, more consistently with their expressed values than do non-ethicist professors. Findings from their original US-based sample indicated that neither is the case, suggesting that there is no positive influence of ethical reflection on moral action. In the study at hand, we attempted to cross-validate this pattern of results in the German-speaking countries and surveyed 417 professors using a replication-extension research design. Our results indicate a successful replication of the original effect that ethicists do not behave any morally better compared to other academics across the vast majority of normative issues. Yet, unlike the original study, we found mixed results on normative attitudes generally. On some issues, ethicists and philosophers even expressed more lenient attitudes. However, one issue on which ethicists not only held stronger normative attitudes but also reported better corresponding moral behaviors was vegetarianism."
+              - year: 2023
+                title: "Experimental Philosophy and the Incentivisation Challenge: A Proposed Application of the Bayesian Truth Serum"
+                journal: "Review of Philosophy and Psychology"
+                coauthors: ""
+                url: "https://link.springer.com/article/10.1007/s13164-021-00571-4"
+                abstract: "A key challenge in experimental social science research is the incentivisation of subjects such that they take the tasks presented to them seriously and answer honestly. If subject responses can be evaluated against an objective baseline, a standard way of incentivising participants is by rewarding them monetarily as a function of their performance. However, the subject area of experimental philosophy is such that this mode of incentivisation is not applicable as participant responses cannot easily be scored along a true-false spectrum by the experimenters. We claim that experimental philosophers’ neglect of and claims of unimportance about incentivisation mechanisms in their surveys and experiments has plausibly led to poorer data quality and worse conclusions drawn overall, potentially threatening the research programme of experimental philosophy in the long run. As a solution to this, we propose the adoption of the Bayesian Truth Serum, an incentive-compatible mechanism used in economics and marketing, designed for eliciting honest responding in subjective data designs by rewarding participant answers that are surprisingly common. We argue that the Bayesian Truth Serum (i) adequately addresses the issue of incentive compatibility in subjective data research designs and (ii) that it should be applied to the vast majority of research in experimental philosophy. Further, we (iii) provide an empirical application of the method, demonstrating its qualified impact on the distribution of answers on a number of standard experimental philosophy items and outline guidance for researchers aiming to apply this mechanism in future research by specifying the additional costs and design steps involved."
+              - year: 2022
+                title: "Taking a Closer Look at the Bayesian Truth Serum"
+                journal: "Experimental Psychology"
+                coauthors: "Steven Verheyen"
+                url: "https://econtent.hogrefe.com/doi/10.1027/1618-3169/a000558"
+                abstract: "Over the past few decades, psychology and its cognate disciplines have undergone substantial scientific reform, ranging from advances in statistical methodology to significant changes in academic norms. One aspect of experimental design that has received comparatively little attention is incentivization, i.e., the way that participants are rewarded and incentivized monetarily for their participation in experiments and surveys. While incentive-compatible designs are the norm in disciplines like economics, the majority of studies in psychology and experimental philosophy are constructed such that individuals’ incentives to maximize their payoffs in many cases stand opposed to their incentives to state their true preferences honestly. This is in part because the subject matter is often self-report data about subjective topics, and the sample is drawn from online platforms like Prolific or MTurk where many participants are out to make a quick buck. One mechanism that allows for the introduction of an incentive-compatible design in such circumstances is the Bayesian Truth Serum (BTS; Prelec, 2004), which rewards participants based on how surprisingly common their answers are. Recently, Schoenegger (2021) applied this mechanism in the context of Likert-scale self-reports, finding that the introduction of this mechanism significantly altered response behavior. In this registered report, we further investigate this mechanism by (1) attempting to directly replicate the previous result and (2) analyzing if the Bayesian Truth Serum’s effect is distinct from the effects of its constituent parts (increase in expected earnings and addition of prediction tasks). We fail to find significant differences in response behavior between participants who were simply paid for completing the study and participants who were incentivized with the BTS. Per our pre-registration, we regard this as evidence in favor of a null effect of up to V = .1 and a failure to replicate but reserve judgment as to whether the BTS mechanism should be adopted in social science fields that rely heavily on Likert-scale items reporting subjective data, seeing that smaller effect sizes might still be of practical interest and results may differ for items different from the ones we studied. Further, we provide weak evidence that the prediction task itself influences response distributions and that this task’s effect is distinct from an increase in expected earnings, suggesting a complex interaction between the BTS’ constituent parts and its truth-telling instructions."
+
+          - id: phil-science
+            title: Philosophy of Science
+            intro: |
+              My philosophy of science research examines examines the relationship between scientific realism and science communication, as well as structural reforms in social science research practices. In our work on scientific realism and science communication, we find that science communicators tend to be more inclined towards scientific antirealism compared to scientists, with both groups showing an overall inclination towards realism. This has important implications for how scientific knowledge is conveyed to the public. 
+
+              We also argue that discussion sections in standard academic papers can contribute to epistemic malfunctions in social science research by allowing for inappropriate narrativisation of results. We propose eliminating discussion sections from social science research papers and outsourcing them to separate publications, which we argue could lead to several epistemic advantages, including a division of academic labour and better alignment of scientists' personal aims with the aims of science.
+
+            publications:
+              - year: 2023
+                title: "Social Sciences in Crisis: On the Proposed Elimination of the Discussion Section"
+                journal: "Synthese"
+                coauthors: "Raimund Pils"
+                url: "https://doi.org/10.1007/s11229-023-04267-3"
+                abstract: "The social sciences are facing numerous crises including those related to replication, theory, and applicability. We highlight that these crises imply epistemic malfunctions and affect science communication negatively. Several potential solutions have already been proposed, ranging from statistical improvements to changes in norms of scientific conduct. In this paper, we propose a structural solution: the elimination of the discussion section from social science research papers. We point out that discussion sections allow for an inappropriate narrativization of research that disguises actual results and enables the misstatement of true limitations. We go on to claim that removing this section and outsourcing it to other publications provides several epistemic advantages such as a division of academic labour, adversarial modes of progress, and a better alignment of the personal aims of scientists with the aims of science. After responding to several objections, we conclude that the potential benefits of moving away from the traditional model of academic papers outweigh the costs and have the potential to play a part in addressing the crises in the social sciences alongside other reforms. As such, we take our paper as proffering a further potential solution that should be applied complimentarily with other reform movements such as Open Science and hope that our paper can start a debate on this or similar proposals."
+              - year: 2024
+                title: "Scientific Realism, Scientific Practice, and Science Communication: An Empirical Investigation of Academics and Science Communicators"
+                journal: "Studies in History and Philosophy of Science"
+                coauthors: "Raimund Pils"
+                url: "https://www.sciencedirect.com/science/article/pii/S0039368124000475"
+                abstract: "We argue that the societal consequences of the scientific realism debate, in the context of science-to-public communication are often overlooked and careful theorizing about it needs further empirical groundwork. As such, we conducted a survey experiment with 130 academics (from physics, chemistry, and biology) and 137 science communicators. We provided them with an 11-item questionnaire probing their views of scientific realism and related concepts. Contra theoretical expectations, we find that (a) science communicators are generally more inclined towards scientific antirealism when compared to scientists in the same academic fields, though both groups show an inclination towards realism and (b) academics who engage in more theoretical work are not less (or more) realist than experimentalists. Lastly, (c), we fail to find differences with respect to selective realism but find that science communicators are significantly less epistemically voluntarist compared to their academic counterparts. Overall, our results provide first empirical evidence on the views of scientists and science communicators on scientific realism, with some results running contra to the theoretical expectations, opening up new empirical and theoretical research directions."
+
+          - id: phil-political
+            title: Political Theory
+            intro: |
+              My political theory research focuses is in the liberal tradition, examining the epistemological foundations of market liberalism and its intersections with feminist standpoint theory, as well as Lockean political philosophy more generally.
+
+              In our work on Locke, we focus on prerogative power as central to Locke's political theory. First, we argue that Locke's conception of prerogative is political rather than natural, distinguishing between natural and political executive power. Second, we argue that Locke's strong executive power is restricted only by the public good, which conflicts with libertarian interpretations of Locke. We conclude that Locke's philosophy is better understood as proto-utilitarian, challenging libertarian and democratic readings of his work. Moreover, in other work take a closer look at market liberalism and feminist standpoint theory, arguing that both traditions share similar epistemological foundations related to the fragmentation of knowledge in society. 
+
+            publications:
+              - year: 2024
+                title: "On the Epistemological Similarities of Market Liberalism and Standpoint Theory"
+                journal: "Episteme"
+                coauthors: "Raimund Pils"
+                url: "https://www.cambridge.org/core/journals/episteme/article/on-the-epistemological-similarities-of-market-liberalism-and-standpoint-theory/B28FB4DAB495006A07DA4DF23C00DCA3"
+                abstract: "In this paper, we draw attention to the epistemological assumptions of market liberalism and standpoint theory and argue that they have more in common than previously thought. We show that both traditions draw on a similar epistemological bedrock, specifically relating to the fragmentation of knowledge in society and the fact that some of this knowledge cannot easily be shared between agents. We go on to investigate how market liberals and standpoint theorists argue with recourse to these similar foundations, and sometimes diverge, primarily because of normative pre-commitments. One conclusion we draw from this is that these similarities suggest that market liberals ought to, by their own epistemological lights, be more attentive towards various problems raised by feminist standpoint theorists, and feminist standpoint theorists ought to be more open to various claims made by market liberals."
+              - year: 2023
+                title: "Locke on Prerogative: Democracy, Libertarianism, and Proto-Utilitarianism"
+                journal: "Locke Studies"
+                coauthors: "Henrik Skaug Sætra"
+                url: "https://ojs.lib.uwo.ca/index.php/locke/article/view/16399"
+                abstract: "John Locke’s role in the advent of modernity has been debated widely. His work has been (ab)used by those arguing from libertarian, democratic, communitarian, socialist, feminist, or postcolonial points of view, either portraying him as a forefather of their preferred political theory or as an antagonist to their avowed political and philosophical goals. In this paper, we are primarily concerned with highlighting the importance of the executive’s prerogative in Locke’s philosophy, as we argue that this concept, often banished to the side-lines, is indeed central to Locke’s political theory. This partial neglect entails that some of the most popular readings of Locke are potentially based on faulty premises. We focus on how Locke’s prerogative is antithetical to the project of seeing Locke as a forefather of libertarianism. Furthermore, this paper’s arguments could also support challenges to interpretations of Locke as an early and important proponent of democracy. Rather than seeking to find support for modern theories through anachronistic and dubious readings of Locke, we focus on how he conceived of an exceedingly strong executive whose actions are exclusively restricted by the public good. We conclude that there is good reason to consider his philosophy proto-utilitarian, something that further highlights the conflict with libertarianism. As such, we conclude that libertarian or democratic theories postulating Locke as their direct predecessor should be re-examined to account for these findings."
+              - year: 2020
+                title: "The Lockean Prerogative, Natural Law, and Political Power"
+                journal: "Locke Studies"
+                coauthors: ""
+                url: "https://ojs.lib.uwo.ca/index.php/locke/article/view/8056"
+                abstract: "In this paper, I argue that Lockean prerogative power is political and not natural. After introducing two arguments in favour of the notion of prerogative as a natural power I offer two arguments contra this view. First, I claim that Locke’s conception of executive power is not unitary; rather, he distinguishes between natural and political executive power. Second, I distinguish two types of public good; the general public good and the specific public good. Drawing on these two distinctions, I respond to the arguments in favour of a natural prerogative and argue that they fail."
+
+      # Psychology Research
+      - id: psychology
+        title: Psychology
+        intro: |
+          My research in psychology is primarily in social, personality, and environmental psychology. In my personality psychology research, I have developed and validated scales for measuring antinatalist attitudes and explored their relationship to dark triad traits. In social psychology, I have contributed to large international studies examining the social psychology of the COVID-19 pandemic and national identity. This work has been published in outlets such as 
+          [Psychological Test Adaptation and Development](https://doi.org/10.1027/2698-1866/a000036), [Environmental Psychology](https://doi.org/10.1016/j.jenvp.2021.101751), and [Nature Communications](https://doi.org/10.1038/s41467-022-29607-5).
+
+        children:
+          - id: psych-personality
+            title: Personality Psychology
+            intro: |
+              My personality psychology research focuses on antinatalism, the philosophical view that procreation is morally wrong. Some of my early work showed that dark triad personality traits are associated with antinatalist views. More recently, we have developed and validated the Short Antinatalism Scale (S-ANS), a brief instrument for measuring antinatalist attitudes. This scale has been validated across multiple studies and populations, providing a reliable tool for future research on antinatalism.
+          
+            publications:
+              - year: 2023
+                title: "Introduction and Validation of the Short Antinatalism Scale (S-ANS)"
+                journal: "Psychological Test Adaptation and Development"
+                coauthors: "Maximilian Maier, Ryan V.S. Bastos"
+                url: "https://doi.org/10.1027/2698-1866/a000036"
+                abstract: "Antinatalism is the view that procreation is morally wrong. This paper introduces and validates the Short Antinatalism Scale (S-ANS) that allows researchers to measure antinatalist views. We conducted four preregistered studies with a total of 1,088 participants. First, we ran a study on Prolific (N = 296) and conducted an exploratory factor analysis of an initial scale including 22 items drawn from the philosophical literature on antinatalism. In Study 2, we conducted a confirmatory factor analysis of a reduced 12-item scale, also on Prolific (N = 396). Based on a Mokken scale analysis, we further reduced the scale to a 5-item version which we tested in a second confirmatory factor analysis, Study 3, on Prolific (N = 297), where we also aimed to provide evidence of validity. The results indicated excellent model fit (RMSEA = 0.012) and evidence for validity (with life satisfaction, affective empathy, and conservatism correlating negatively with antinatalism). Lastly, we conducted Study 4 with a sample of self-identified antinatalists on Reddit (N = 99) to provide additional evidence of validity. We find that the instrument is measurement invariant between self-described antinatalists and the general population and that antinatalists score significantly higher on the scale (d = 2.80). This provides evidence in favor of reliability and validity with respect to the final 5-item Short Antinatalism Scale (S-ANS). We hope that the S-ANS, which is freely available to all researchers, advances rigorous research into antinatalism and its determinants across a variety of fields that relate to the value of life and procreation."
+              - year: 2022
+                title: "What's Up With Anti-Natalists? An Observational Study on the Relationship Between Dark Triad Personality Traits and Anti-Natalist Views"
+                journal: "Philosophical Psychology"
+                coauthors: ""
+                url: "https://doi.org/10.1080/09515089.2021.1946026"
+                abstract: "In the past decade, research on the dark triad of personality (Machiavellianism, narcissism, and psychopathy) has demonstrated a strong relationship to a number of socially aversive moral judgments such as sacrificial utilitarian decisions in moral dilemmas. This study widens the scope of this research program and investigates the association between dark triad personality traits and anti-natalist views, i.e., views holding that procreation is morally wrong. The results of this study indicate that the dark triad personality traits of Machiavellianism and psychopathy are strongly associated with anti-natalist views. Further, depression is found to be both standing independently in a relationship with anti-natalist views as well as functioning as a mediator in the relationships between Machiavellianism/psychopathy and anti-natalist views. This pattern was replicated in a follow-up study. These findings add to the literature on dark triad personality traits and their relationship to moral judgments, suggesting that personality and mood play a substantive part in variation in anti-natalist views in a lay population."
+
+          - id: psych-social
+            title: Social Psychology
+            intro: |
+              With a large international research consortium, I have contributed to several large-scale studies on the social and moral psychology of the COVID-19 pandemic. This work has examined factors influencing public health compliance, national identity, and moral psychology during the pandemic.
+              
+            publications:
+              - year: 2023
+                title: "Social and Moral Psychology of COVID-19 Across 69 Countries"
+                journal: "Scientific Data"
+                coauthors: "Flavio Azevedo, Tomislav Pavlović, Gabriel G. Rêgo, F. Ceren Ay, Biljana Gjoneska, Tom W. Etienne, ..., Paulo S. Boggio & Waldir M. Sampaio"
+                url: "https://doi.org/10.1038/s41597-023-02080-8"
+                abstract: "The COVID-19 pandemic has affected all domains of human life, including the economic and social fabric of societies. One of the central strategies for managing public health throughout the pandemic has been through persuasive messaging and collective behaviour change. To help scholars better understand the social and moral psychology behind public health behaviour, we present a dataset comprising of 51,404 individuals from 69 countries. This dataset was collected for the International Collaboration on Social & Moral Psychology of COVID-19 project (ICSMP COVID-19). This social science survey invited participants around the world to complete a series of moral and psychological measures and public health attitudes about COVID-19 during an early phase of the COVID-19 pandemic (between April and June 2020). The survey included seven broad categories of questions: COVID-19 beliefs and compliance behaviours; identity and social attitudes; ideology; health and well-being; moral beliefs and motivation; personality traits; and demographic variables. We report both raw and cleaned data, along with all survey materials, data visualisations, and psychometric evaluations of key variables."
+              - year: 2022
+                title: "Predicting Attitudinal and Behavioral Responses to COVID-19 Pandemic Using Machine Learning"
+                journal: "PNAS Nexus"
+                coauthors: "Tomislav Pavlović, Flavio Azevedo, Koustav De, Julián C. Riaño-Moreno, Marina Maglić, Theofilos Gkinopoulos, ..., Jay Joseph Van Bavel"
+                url: "https://doi.org/10.1093/pnasnexus/pgac093"
+                abstract: "At the beginning of 2020, COVID-19 became a global problem. Despite all the efforts to emphasize the relevance of preventive measures, not everyone adhered to them. Thus, learning more about the characteristics determining attitudinal and behavioral responses to the pandemic is crucial to improving future interventions. In this study, we applied machine learning on the multinational data collected by the International Collaboration on the Social and Moral Psychology of COVID-19 (N = 51,404) to test the predictive efficacy of constructs from social, moral, cognitive, and personality psychology, as well as socio-demographic factors, in the attitudinal and behavioral responses to the pandemic. The results point to several valuable insights. Internalized moral identity provided the most consistent predictive contribution—individuals perceiving moral traits as central to their self-concept reported higher adherence to preventive measures. Similar results were found for morality as cooperation, symbolized moral identity, self-control, open-mindedness, and collective narcissism, while the inverse relationship was evident for the endorsement of conspiracy theories. However, we also found a non-neglible variability in the explained variance and predictive contributions with respect to macro-level factors such as the pandemic stage or cultural region. Overall, the results underscore the importance of morality-related and contextual factors in understanding adherence to public health recommendations during the pandemic."
+              - year: 2022
+                title: "National Identity Predicts Public Health Support During a Global Pandemic"
+                journal: "Nature Communications"
+                coauthors: "Jay J. Van Bavel, Aleksandra Cichocka, Valerio Capraro, Hallgeir Sjåstad, John B. Nezlek, Tomislav Pavlović, ..., Paulo S. Boggio"
+                url: "https://doi.org/10.1038/s41467-021-27668-9"
+                abstract: "Changing collective behaviour and supporting non-pharmaceutical interventions is an important component in mitigating virus transmission during a pandemic. In a large international collaboration (Study 1, N = 49,968 across 67 countries), we investigated self-reported factors associated with public health behaviours (e.g., spatial distancing and stricter hygiene) and endorsed public policy interventions (e.g., closing bars and restaurants) during the early stage of the COVID-19 pandemic (April-May 2020). Respondents who reported identifying more strongly with their nation consistently reported greater engagement in public health behaviours and support for public health policies. Results were similar for representative and non-representative national samples. Study 2 (N = 42 countries) conceptually replicated the central finding using aggregate indices of national identity (obtained using the World Values Survey) and a measure of actual behaviour change during the pandemic (obtained from Google mobility reports). Higher levels of national identification prior to the pandemic predicted lower mobility during the early stage of the pandemic (r = −0.40). We discuss the potential implications of links between national identity, leadership, and public health for managing COVID-19 and future pandemics."
+
+          - id: psych-environmental
+            title: Environmental Psychology
+            intro: |
+              My environmental psychology research focuses on climate change communication and behavioral interventions to promote pro-environmental behavior. In our work on solar radiation management (SRM), we conducted a large-scale online experiment to investigate whether information about SRM leads to a reduction in climate change mitigation efforts, finding no significant moral hazard effect. In other work with a large international collaboration, we collected climate change-related data from 63 countries to better understand the psychology of climate change and the effectiveness of various interventions, finding that the impact of behavioral climate interventions was small and varied across audiences and target behaviors.
+
+            publications:
+              - year: 2024
+                title: "Moral Hazards and Solar Radiation Management: Evidence From a Large-Scale Online Experiment"
+                journal: "Journal of Environmental Psychology"
+                coauthors: "Kian Mintz-Woo"
+                url: "https://www.sciencedirect.com/science/article/pii/S0272494424000616"
+                abstract: "Solar radiation management (SRM) may help to reduce the negative outcomes of climate change by minimising or reversing global warming. However, many express the worry that SRM may pose a moral hazard, i.e., that information about SRM may lead to a reduction in climate change mitigation efforts. In this paper, we report a large-scale preregistered, money-incentivised, online experiment with a representative US sample (N = 2284). We compare actual behaviour (donations to climate change charities and clicks on climate change petition links) as well as stated preferences (support for a carbon tax and self-reported intentions to reduce emissions) between participants who receive information about SRM with two control groups (a salience control that includes information about climate change generally and a content control that includes information about a different topic). Behavioural choices are made with an earned real-money endowment, and stated preference responses are incentivised via the Bayesian Truth Serum. We fail to find a significant impact of receiving information about SRM and, based on equivalence tests, we provide evidence in favour of the absence of a meaningfully large effect. Our results thus provide evidence for the claim that there is no detectable moral hazard with respect to SRM."
+              - year: 2024
+                title: "The International Climate Psychology Collaboration: Climate Change-Related Data Collected From 63 Countries"
+                journal: "Scientific Data"
+                coauthors: "Kimberly C. Doell, Boryana Todorova, Madalina Vlasceanu, Joseph B. Bak Coleman, Ekaterina Pronizius, Philipp Schumann, ..., Jay J. Van Bavel"
+                url: "https://doi.org/10.1038/s41597-024-03865-1"
+                abstract: "Climate change is currently one of humanity’s greatest threats. To help scholars understand the psychology of climate change, we conducted an online quasi-experimental survey on 59,508 participants from 63 countries (collected between July 2022 and July 2023). In a between-subjects design, we tested 11 interventions designed to promote climate change mitigation across four outcomes: climate change belief, support for climate policies, willingness to share information on social media, and performance on an effortful pro-environmental behavioural task. Participants also reported their demographic information (e.g., age, gender) and several other independent variables (e.g., political orientation, perceptions about the scientific consensus). In the no-intervention control group, we also measured important additional variables, such as environmentalist identity and trust in climate science. We report the collaboration procedure, study design, raw and cleaned data, all survey materials, relevant analysis scripts, and data visualisations. This dataset can be used to further the understanding of psychological, demographic, and national-level factors related to individual-level climate action and how these differ across countries."
+              - year: 2024
+                title: "Addressing Climate Change With Behavioral Science: A Global Intervention Tournament in 63 Countries"
+                journal: "Science Advances"
+                coauthors: "Madalina Vlasceanu, Kimberly C. Doell, Joseph B. Bak-Coleman, Boryana Todorova, ..., Jay J. Van Bavel"
+                url: "https://doi.org/10.1126/sciadv.adj5778"
+                abstract: "Effectively reducing climate change requires marked, global behavior change. However, it is unclear which strategies are most likely to motivate people to change their climate beliefs and behaviors. Here, we tested 11 expert-crowdsourced interventions on four climate mitigation outcomes: beliefs, policy support, information sharing intention, and an effortful tree-planting behavioral task. Across 59,440 participants from 63 countries, the interventions’ effectiveness was small, largely limited to nonclimate skeptics, and differed across outcomes: Beliefs were strengthened mostly by decreasing psychological distance (by 2.3%), policy support by writing a letter to a future-generation member (2.6%), information sharing by negative emotion induction (12.1%), and no intervention increased the more effortful behavior—several interventions even reduced tree planting. Last, the effects of each intervention differed depending on people’s initial climate beliefs. These findings suggest that the impact of behavioral climate interventions varies across audiences and target behaviors."
+
+      # Other Research
+      - id: research-other
+        title: Other
+        intro: |
+          Some of my interdisciplinary work extended into epidemiology and historical research. In epidemiology, our research looking at causal language in medical and public health literature found that much of the language used implies causality, even when not explicitly stated. In historical research, we examined dissertations written during and after the second world war at the University of Graz, finding continuities in thought and terminology that reflected the lingering influence of National Socialism in academic work. 
+
+        publications:
+          - year: 2022
+            title: "Causal and Associational Language in Observational Health Research: A Systematic Evaluation"
+            journal: "American Journal of Epidemiology"
+            coauthors: "Noah A. Haber, Sarah E. Wieten, Julia M. Rohrer, Onyebuchi A. Arah, Peter W.G. Tennant, Elizabeth A. Stuart, ..."
+            url: "https://doi.org/10.1093/aje/kwac137"
+            abstract: "We estimated the degree to which language used in the high-profile medical/public health/epidemiology literature implied causality using language linking exposures to outcomes and action recommendations; examined disconnects between language and recommendations; identified the most common linking phrases; and estimated how strongly linking phrases imply causality. We searched for and screened 1,170 articles from 18 high-profile journals (65 per journal) published from 2010–2019. Based on written framing and systematic guidance, 3 reviewers rated the degree of causality implied in abstracts and full text for exposure/outcome linking language and action recommendations. Reviewers rated the causal implication of exposure/outcome linking language as none (no causal implication) in 13.8%, weak in 34.2%, moderate in 33.2%, and strong in 18.7% of abstracts. The implied causality of action recommendations was higher than the implied causality of linking sentences for 44.5% or commensurate for 40.3% of articles. The most common linking word in abstracts was “associate” (45.7%). Reviewers’ ratings of linking word roots were highly heterogeneous; over half of reviewers rated “association” as having at least some causal implication. This research undercuts the assumption that avoiding “causal” words leads to clarity of interpretation in medical research."
+          - year: 2017
+            title: "Nationalsozialismus und Mediävistik: Ein Vergleich der 1938-1945 und 1946-1964 an der Karl-Franzens-Universität Graz Verfassten Dissertationen mit Mittelalterlichem Schwerpunkt"
+            journal: "Die Karl-Franzens-Universität und der Lange Schatten des Hakenkreuzes"
+            coauthors: "Christina Deutschl, Claudia Mayr, Florian Zeilinger"
+            url: "https://www.unipress-graz.com/buecher/die-karl-franzens-universitat-graz-und-der-lange-schatten-des-hakenkreuzes"
+            abstract: "Der vorliegende Beitrag behandelt die an der Karl-Franzens-Universität Graz in den Zeiträumen 1938-1945 sowie 1946-1964 verfassten Dissertationen. In der NS-Zeit von 1938 bis 1945 war Walther Kienast Professor für Mittelalterliche Geschichte und Burkhard Seuffert Professor für Historische Hilfswissenschaften. Um den Untersuchungszeitraum nach 1945 einzugrenzen, wurde das Jahr 1964 gewählt, das den Weggang Heinrich Appelts, des ersten Professors für beide Fachgebiete nach der NS-Zeit, markiert. In diesem zweiten Abschnitt wurden die Dissertationen von 1946 bis 1949 genauer untersucht, da es sich bei diesem Zeitraum um die unmittelbare Nachkriegszeit handelt und weil dessen DissertantInnen noch in der Zeit des Nationalsozialismus ihr Studium bzw. ihre Dissertationen begonnen haben können, die eventuell auch nicht vollständig von entsprechendem Gedankengut oder damit verbundenen Begrifflichkeiten „befreit“ wurden."
+
+  # --------------------------------------------------------------------------
+  # PREVIOUS POSITIONS
+  # --------------------------------------------------------------------------
+  - id: positions
+    title: Previous Positions
+    intro: |
+      My previous positions range from academic roles to professional forecasting. Previously, I have worked as a post-doctoral researcher at the London School of Economics, the Forecasting Research Institute, and completed a PhD in philosophy and economics at the University of St Andrews. I also worked as a professional forecaster at places like Metaculus and Swift, while leading a forecasting team at Seldon Capital. During this time I have taught, presented, and published extensively, with my work receiving coverage in various media outlets, while also engaging in direct forecasting work for corporations, non-governmental organisations, and governments.
+
+
+    children:
+      # Academic Positions
+      - id: academic
+        title: Academic
+        intro: |
+          My academic positions have included post-doctoral research roles at the London School of Economics's Behavioural Lab, where I worked on applied AI and behavioural science, and at the Forecasting Research Institute, where I collaborated with Philip Tetlock on AI forecasting and prediction methodology. Before that I had completed a PhD  at the University of St Andrews for the dissertation entitled 'Moral Decision-Making: Essays from Philosophy and Economics'. 
+
+
+        children:
+          - id: lse
+            title: London School of Economics
+            period: "2023-2025"
+            intro: |
+              
+              From 2023-2025, I was a post-doctoral researcher at the [London School of Economics](https://www.lse.ac.uk/), working at the [Behavioural Lab](https://www.lse.ac.uk/behavioural-lab/?entryId=2319c173-7bdc-45d3-9a69-d12fd54340d7&nodeId=e2e64854-5d30-44fa-a289-a5ef76104f3e) with Barbara Fasolo and Matteo Galizzi. I worked at the intersection of applied AI and behavioural science, publishing in outlets such as [ACM Transactions on Interactive Intelligent Systems](https://dl.acm.org/doi/pdf/10.1145/3707649) and [Behaviour Research Methods](https://link.springer.com/article/10.3758/s13428-023-02307-x). 
+              
+              My position was funded by [Longview Philanthropy](https://www.longview.org/), with research funding support from the [LSE Department of Management](https://www.lse.ac.uk/management), the [Wharton-INSEAD Alliance](https://insead.wharton.upenn.edu/), and the [Wharton AI & Analytics Initiative](https://ai-analytics.wharton.upenn.edu/).
+              
+              During this time, I also taught guest lectures at the [LSE](https://www.lse.ac.uk/) and [INSEAD](https://www.insead.edu/), and presented at governmental agencies like the [UK Ministry of Defence](https://www.gov.uk/government/organisations/ministry-of-defence), academic conferences like one at the [King's College London](https://www.kcl.ac.uk/), and business conferences like the [TBD Conference](https://www.thetbdconference.com/), among others.
+
+              My work received media coverage in [Forbes](https://www.forbes.com/sites/tomasgorny/2024/12/02/should-businesses-trust-ai-to-predict-customer-behaviors/), [BigThink](https://bigthink.com/thinking/anti-natalism-psychopaths-having-children-immoral/), [Astral Codex Ten](https://www.astralcodexten.com/p/mantic-monday-31124), and [Marginal Revolution](https://marginalrevolution.com/marginalrevolution/2023/09/do-llms-diminish-diversity-of-thought.html). I also servered as a peer reviewer for [Decision](https://www.apa.org/pubs/journals/dec), [Cognition](https://www.sciencedirect.com/journal/cognition), [Personality and Individual Differences](https://www.sciencedirect.com/journal/personality-and-individual-differences), [Royal Society Open](https://royalsocietypublishing.org/rsos), and [PCI RR](https://rr.peercommunityin.org/), among other outlets. 
+
+          - id: fri
+            title: Forecasting Research Institute
+            period: "2023"
+            intro: |
+              In 2023, I worked as a research analyst at the [Forecasting Research Institute](https://forecastingresearch.org/), collaborating on AI forecasting, low-probability event elicitation, and prediction methodology with Philip Tetlock and other researchers.
+            
+          - id: standrews
+            title: University of St Andrews
+            period: "2018-2022"
+            intro: |
+              From 2018-2022, I completed first a Master's and an then PhD for a thesis entitled 'Moral Decision-Making: Essays from Philosophy and Economics' at St Andrews, where my research moved more heavily into economics and experimental philosophy/psychology as my methods became more quantitatively focused. 
+            children:
+              - id: standrews-phd
+                title: PhD
+                period: "Completed 2022"
+                intro: |
+                  In 2022, I completed a PhD in Philosophy and Economics with the title 'Moral Decision-Making: Essays from Philosophy and Economics' under the supervision of Theron Pummer and Miguel Costa-Gomes at [St Andrews](https://www.st-andrews.ac.uk/). The dissertation comprises three philosophy papers and three economics papers, ranging from research on charitable giving to reflective equilibrium reasoning.
+                  
+                  My research was funded by the Forethought Foundation, the [Centre for Effective Altruism](https://www.centreforeffectivealtruism.org/), [Giving What We Can](https://www.givingwhatwecan.org/), and the [Long-Term Future Fund](https://funds.effectivealtruism.org/funds/far-future). 
+                  
+                  During this time, I presented my research at the [Scottish Economic Society Annual Conference](https://scotecon.org/), the [UK Experimental Philosophy Workshop](https://x-phi.uea.ac.uk/online-workshop/), the [Behavioural Economics, Society, and Technology Conference](https://research.qut.edu.au/best/), and the [London Graduate Conference in History of Political Thought](https://projects.history.qmul.ac.uk/hpt/category/london-graduate-conference-in-history-of-political-thought/), among others. 
+                  
+                  My work received coverage in [Süddeutsche Zeitung](https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347), [The Times](https://www.thetimes.co.uk/article/ethics-professors-don-t-walk-the-walk-d7n6097m8), [Psychology Today](https://www.psychologytoday.com/us/blog/unique-everybody-else/202109/are-dark-triad-traits-adaptive), [Die Zeit](https://www.zeit.de/2021/49/liberalismus-corona-klima-fdp-friedrich-august-von-hayek/komplettansicht), and [PsyPost](https://www.psypost.org/2022/03/dark-triad-personality-traits-are-more-common-among-those-who-believe-procreation-is-morally-wrong-62746), and is cited on [Wikipedia](https://es.wikipedia.org/?curid=1309987).
+                children:
+                  - id: standrews-mlitt
+                    title: MLitt
+                    period: "Completed 2018"
+                    intro: |
+                      In 2018, I completed the MLitt in Moral, Political, and Legal Philosophy at [St Andrews](https://www.st-andrews.ac.uk/), where I was on the 2018-2019 Dean's List.
+
+              - id: standrews-fellowships
+                title: Fellowships
+                intro: |
+                  During my time at St Andrews, I held several fellowships: I was an Associate Fellow at [AdvanceHE](https://www.advance-he.ac.uk/fellowship/associate-fellowship) for continued education in teaching, a Bernard Marcus Fellow at the [Institute for Human Studies](https://www.theihs.org/) focusing on Locke and liberalism, an ECCP programme visitor and Global Priorities Fellow at the [Global Priorities Institute](https://www.globalprioritiesinstitute.org/) at the University of Oxford working on effective charitable giving, and an Oscar Morgenstern Fellow at the [Mercatus Center](https://www.mercatus.org/) at George Mason University working on mainline economics.
+
+      # Forecasting Positions
+      - id: forecasting
+        title: Forecasting
+        intro: |
+          In 2022, I qualified as a Pro Forecaster on Metaculus based on my forecasting track record, calibration, and quality of written rationales. As a forecaster for Metaculus and then Swift, I worked on forecasting projects with the Federation of American Scientists, the [Carnegie Endowment for International Peace](https://carnegieendowment.org/research/2025/04/forecasting-nuclear-escalation-risks-cloudy-with-a-chance-of-fallout?lang=en), and Google DeepMind. Later, I led the forecasting team at Seldon Capital for a year, working on macroeconomic and technology factors.
+        children:
+          - id: seldon
+            title: Seldon Capital
+            period: "2024-2025"
+            intro: |
+              Between 2024 and 2025, I led the forecasting team at [Seldon Capital](https://www.seldon.capital/) for a year, working on macroeconomic and technology factors. 
+
+          - id: swift
+            title: Swift Centre
+            period: "2023-2025"
+            intro: |
+              Between 2023 and 2025, I was a forecaster for the [Swift Centre](https://www.swiftcentre.org/), working on questions including [coal consumption](https://www.swiftcentre.org/publicforecasts/global-coal-consumption-will-defy-expectations), drug overdose trends, geopolitical developments, and AI progress. This included forecasting for the future capabilities of frontier AI models for Google DeepMind (see our [forecasting paper](https://arxiv.org/pdf/2403.13793)).
+
+          - id: metaculus
+            title: Metaculus
+            period: "2022-2025"
+            intro: |
+              Between 2022 and 2025, I was a [Pro Forecaster](https://www.metaculus.com/pro-forecasters/) at [Metaculus](https://www.metaculus.com/), qualifying based on my track record, calibration, and quality of written rationales. I worked on projects with the [Federation of American Scientists](https://fas.org/publication/mathematically-predicting-the-future-with-professional-forecaster-philip-schoenegger/) and the [Carnegie Endowment for International Peace](https://carnegieendowment.org/research/2025/04/forecasting-nuclear-escalation-risks-cloudy-with-a-chance-of-fallout?lang=en).
+
+      # Undergraduate
+      - id: undergraduate
+        title: Undergraduate
+        intro: |
+          My undergraduate studies were at the University of Graz, where I completed three concurrent degrees in Psychology, Philosophy, and German Philology. During this time, I was also a semi-professional Magic: The Gathering player, achieving a top-5 world ranking in the Legacy format and multiple Grand Prix Top 8 finishes.
+        children:
+          - id: graz
+            title: University of Graz
+            period: "2014-2018"
+            intro: |
+              From 2014-2018, I was an undergraduate student at the University of Graz, completing three concurrent degrees: a Mag.phil. teaching degree in Psychology, Philosophy and German, a BA in Philosophy, and a BA in German Philology. I earned two academic performance scholarships. At the end of my studies, I was an unofficial visiting student at the [University Center for Human Values](https://uchv.princeton.edu/) at [Princeton University](https://www.princeton.edu/), where I finished my Mag.phil. thesis under the supervision of Peter Singer.
+            children:
+              - id: mtg
+                title: "Magic: The Gathering"
+                period: "2012-2015"
+                intro: |
+                  Before and early on during my undergraduate studies, I was a semi-professional Magic: The Gathering player in the Legacy format, achieving a [74.6% win-rate](/Legacy%20win-rate.png) in Grand Prix-level tournaments, the fifth highest in the world at the time. 
+                  
+                  My main accomplishments were a 4th place at GP Paris (1,587 players) and another 4th place  at GP New Jersey (4,003 players). During this period, I was sponsored by [Team MTG Mint Card](https://www.mtgmintcard.com/team-mtgmintcard) and [MTG Madness](https://web.archive.org/web/20140208062415/https://www.mtgmadness.com/), and have written for outlets such as Eternal Central for the [GP Paris Top 4 report](https://www.eternalcentral.com/there-and-back-again-grand-prix-paris-top-4-report-with-miracles/) and StarCityGames for the [GP New Jersey Story](https://articles.starcitygames.com/articles/one-journey-one-miracle-a-grand-prix-new-jersey-story/), among others. 

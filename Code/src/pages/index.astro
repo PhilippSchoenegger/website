@@ -32,8 +32,15 @@ function flattenItems(items: any[], parentPath: string[] = []): any[] {
 
 const allItems = flattenItems(sections);
 
-// Parse intro markdown to HTML
-const introHtml = marked.parseInline(site.intro.trim());
+// Create a map of path -> title for breadcrumb lookups
+const pathToTitle = new Map<string, string>();
+for (const item of allItems) {
+  pathToTitle.set(item.path.join('/'), item.title);
+}
+
+// Parse intro/tagline markdown to HTML (with paragraph support)
+const introHtml = marked.parse(site.intro.trim());
+const taglineHtml = marked.parse(site.tagline.trim());
 ---
 
 <BaseLayout title="Philipp Schoenegger" description={site.intro}>
@@ -51,8 +58,8 @@ const introHtml = marked.parseInline(site.intro.trim());
           loading="eager"
         />
         <h1 class="hero-name">{site.title}</h1>
-        <p class="hero-tagline">{site.tagline}</p>
-        <p class="hero-intro" set:html={introHtml}></p>
+        <p class="hero-tagline" set:html={taglineHtml}></p>
+        <div class="hero-intro" set:html={introHtml}></div>
       </div>
       
       <!-- Root navigation - always visible -->
@@ -79,11 +86,10 @@ const introHtml = marked.parseInline(site.intro.trim());
     
     <!-- Back to top button -->
     <div class="back-to-top-container" id="back-to-top" hidden>
-      <button class="back-to-top-btn" data-scroll-to="hero" type="button">
+      <button class="back-to-top-btn" data-scroll-to="hero" type="button" aria-label="Back to top">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 15l-6-6-6 6"/>
         </svg>
-        <span>Back to Top</span>
       </button>
     </div>
   </div>
@@ -105,6 +111,7 @@ const introHtml = marked.parseInline(site.intro.trim());
             </button>
             {item.path.slice(0, -1).map((id: string, idx: number) => {
               const ancestorPath = item.path.slice(0, idx + 1);
+              const ancestorTitle = pathToTitle.get(ancestorPath.join('/')) || id;
               return (
                 <Fragment>
                   <span class="breadcrumb-sep">→</span>
@@ -113,7 +120,7 @@ const introHtml = marked.parseInline(site.intro.trim());
                     data-scroll-to={ancestorPath.join('/')}
                     type="button"
                   >
-                    {id}
+                    {ancestorTitle}
                   </button>
                 </Fragment>
               );
@@ -127,7 +134,14 @@ const introHtml = marked.parseInline(site.intro.trim());
             <header class="chapter-header">
               <h2 class="chapter-title">{item.title.toUpperCase()}</h2>
               {item.period && <p class="chapter-period">{item.period}</p>}
-              {item.intro && <p class="chapter-intro" set:html={item.intro.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')} />}
+              {item.intro && (
+                <p
+                  class="chapter-intro"
+                  set:html={item.intro
+                    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+                    .replace(/\n\s*\n/g, '<br><br>')}
+                />
+              )}
             </header>
             
             <!-- Position/Experience details -->
@@ -145,7 +159,6 @@ const introHtml = marked.parseInline(site.intro.trim());
           <!-- Child navigation -->
           {item.children && item.children.length > 0 && (
             <nav class="chapter-nav" aria-label={`${item.title} subsections`}>
-              <p class="nav-label">Continue exploring:</p>
               <div class="nav-buttons">
                 {item.children.map((child: any) => (
                   <button 
@@ -207,16 +220,16 @@ const introHtml = marked.parseInline(site.intro.trim());
       const startY = window.scrollY;
       const distance = targetY - startY;
       
-      // Adaptive duration: longer for bigger distances, but capped
-      const baseDuration = options.duration ?? Math.min(1500, Math.max(600, Math.abs(distance) * 0.6));
+      // Adaptive duration: a bit longer for a softer feel
+      const baseDuration = options.duration ?? Math.min(1800, Math.max(700, Math.abs(distance) * 0.8));
       
       let startTime: number | null = null;
       
-      // Cinematic ease-in-out-quint for buttery smooth motion
-      function easeInOutQuint(t: number): number {
-        return t < 0.5 
-          ? 16 * t * t * t * t * t 
-          : 1 - Math.pow(-2 * t + 2, 5) / 2;
+      // Softer ease-in-out cubic for gentler motion
+      function easeInOutCubic(t: number): number {
+        return t < 0.5
+          ? 4 * t * t * t
+          : 1 - Math.pow(-2 * t + 2, 3) / 2;
       }
       
       isNavigating = true;
@@ -225,7 +238,7 @@ const introHtml = marked.parseInline(site.intro.trim());
         if (startTime === null) startTime = currentTime;
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / baseDuration, 1);
-        const easedProgress = easeInOutQuint(progress);
+        const easedProgress = easeInOutCubic(progress);
         
         window.scrollTo(0, startY + distance * easedProgress);
         
@@ -739,6 +752,19 @@ const introHtml = marked.parseInline(site.intro.trim());
       if (scrollBtn) {
         const scrollTarget = scrollBtn.dataset.scrollTo;
         if (scrollTarget) {
+          if (scrollTarget === 'hero') {
+            // Take a calm ride to the top, then clear everything
+            const keys = Array.from(state.chapters.keys());
+            const clearChapters = () => {
+              state.activePath = [];
+              keys.forEach(key => removeChapter(key.split('/')));
+              updateURL([]);
+              updateBackToTopVisibility();
+            };
+            const gentleDuration = Math.min(1800, Math.max(900, window.scrollY * 0.9));
+            smoothScrollTo(0, { duration: gentleDuration, onComplete: clearChapters });
+            return;
+          }
           scrollToPath(scrollTarget);
         }
         return;

@@ -1,5 +1,5 @@
 ---
-import type { Publication } from './NavigationLayer.astro';
+import type { Publication } from '../types';
 
 interface Props {
   publications: Publication[];
@@ -28,6 +28,10 @@ const sortedPubs = [...publications].sort((a, b) => b.year - a.year);
       {pub.coauthors && (
         <div class="publication-coauthors">with {pub.coauthors}</div>
       )}
+      <details class="publication-abstract">
+        <summary class="abstract-toggle">+ Abstract</summary>
+        <div class="abstract-body">{pub.abstract ?? 'This is the abstrct'}</div>
+      </details>
     </article>
   ))}
 </div>
