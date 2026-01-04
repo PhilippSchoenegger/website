@@ -1,8 +1,8 @@
-# philipp.schoenegger.info
+# philippschoenegger.com
 
 Personal website for Philipp Schoenegger.
 
-**Live:** [philipp.schoenegger.info](https://philipp.schoenegger.info)
+**Live:** [philippschoenegger.com](https://philippschoenegger.com)
 
 ---
 
