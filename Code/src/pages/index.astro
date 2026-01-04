@@ -39,8 +39,11 @@ for (const item of allItems) {
 }
 
 // Parse intro/tagline markdown to HTML (with paragraph support)
-const introHtml = marked.parse(site.intro.trim());
-const taglineHtml = marked.parse(site.tagline.trim());
+const addLinkTargets = (html: string) =>
+  html.replace(/<a\s+/g, '<a target="_blank" rel="noopener noreferrer" ');
+
+const introHtml = addLinkTargets(marked.parse(site.intro.trim()));
+const taglineHtml = addLinkTargets(marked.parse(site.tagline.trim()));
 ---
 
 <BaseLayout title="Philipp Schoenegger" description={site.intro}>
