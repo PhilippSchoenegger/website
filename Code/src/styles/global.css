@@ -151,24 +151,7 @@ a:hover {
 }
 
 .hero-tagline {
-  font-size: 1.1rem !important;
-  color: var(--color-text);
-  margin-bottom: var(--space-xl);
-  line-height: 1.8;
-  font-weight: 700;
-  text-align: left;
-  max-width: 650px;
-}
-
-.hero-tagline p {
-  margin: 0;
-  font-size: 1.1rem !important;
-  line-height: 1.8;
-}
-
-.hero-tagline strong {
-  font-size: 1.1rem !important;
-  font-weight: 700;
+  display: none;
 }
 
 .hero-intro {
@@ -177,6 +160,17 @@ a:hover {
   line-height: 1.8;
   text-align: left;
   max-width: 650px;
+}
+
+.hero-intro p:first-child {
+  font-size: 1.25rem;
+  color: var(--color-text);
+  font-weight: 600;
+  margin-bottom: var(--space-lg);
+}
+
+.hero-intro p:first-child strong {
+  font-weight: 600;
 }
 
 .hero-intro p {

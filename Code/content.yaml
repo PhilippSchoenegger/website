@@ -13,8 +13,10 @@
 
 site:
   title: "Philipp Schoenegger"
-  tagline: "**I work on [Microsoft AI](https://microsoft.ai/)'s Futures team in the Office of the CEO.**"
+  tagline: ""
   intro: |
+    **I work on [Microsoft AI](https://microsoft.ai/)'s Futures team in the Office of the CEO.**
+    
     My current research focuses on the future impacts of advanced artificial intelligence and relies on judgemental forecasting, survey studies, open model experiments, strategy / policy gaming, modelling and simulation studies, as well as frontier safety analysis.
 
     Connect on [Twitter](https://x.com/SchoeneggerPhil), [LinkedIn](https://www.linkedin.com/in/philipp-schoenegger-755117211/), or reach out via email at contact.schoenegger@gmail.com.
