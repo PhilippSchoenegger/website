@@ -44,9 +44,23 @@ const addLinkTargets = (html: string) =>
 
 const introHtml = addLinkTargets(marked.parse(site.intro.trim()));
 const taglineHtml = addLinkTargets(marked.parse(site.tagline.trim()));
+
+// Strip markdown formatting for clean meta descriptions
+const stripMarkdown = (text: string) =>
+  text
+    .replace(/\*\*(.+?)\*\*/g, '$1') // Remove bold
+    .replace(/\*(.+?)\*/g, '$1') // Remove italic
+    .replace(/\[(.+?)\]\(.+?\)/g, '$1') // Remove links, keep text
+    .replace(/`(.+?)`/g, '$1') // Remove code formatting
+    .replace(/^#+\s+/gm, '') // Remove headings
+    .replace(/\n{2,}/g, ' ') // Replace multiple newlines with space
+    .replace(/\n/g, ' ') // Replace single newlines with space
+    .trim();
+
+const cleanDescription = stripMarkdown(site.intro);
 ---
 
-<BaseLayout title="Philipp Schoenegger" description={site.intro}>
+<BaseLayout title="Philipp Schoenegger" description={cleanDescription}>
   <div class="journey-wrapper" id="journey-wrapper">
     
     <!-- Hero: The starting point -->
