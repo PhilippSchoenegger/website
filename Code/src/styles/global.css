@@ -151,7 +151,7 @@ a:hover {
 }
 
 .hero-tagline {
-  font-size: 1.8rem;
+  font-size: 1.35rem !important;
   color: var(--color-text);
   margin-bottom: var(--space-xl);
   line-height: 1.4;
@@ -162,6 +162,12 @@ a:hover {
 
 .hero-tagline p {
   margin: 0;
+  font-size: 1.35rem !important;
+}
+
+.hero-tagline strong {
+  font-size: 1.35rem !important;
+  font-weight: 700;
 }
 
 .hero-intro {
