@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 interface Props {
   title?: string;
@@ -65,9 +66,40 @@ const {
     <meta name="theme-color" content="#0284c7" />
     
     <title>{title}</title>
+
+    <!-- Theme Initialization Script -->
+    <script is:inline>
+      const theme = localStorage.getItem('theme');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      
+      if (theme === 'dark' || (!theme && systemTheme === 'dark')) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    </script>
   </head>
   <body>
+    <div class="theme-toggle-container">
+      <ThemeToggle />
+    </div>
     <slot />
+
+    <style>
+      .theme-toggle-container {
+        position: fixed;
+        top: 1rem;
+        right: 1.5rem;
+        z-index: 100;
+        mix-blend-mode: difference; /* Ensures visibility on all backgrounds */
+        color: white; /* For difference mode */
+      }
+
+      @media (max-width: 768px) {
+        .theme-toggle-container {
+          top: 0.75rem;
+          right: 0.75rem;
+        }
+      }
+    </style>
     
     <!-- Structured data for SEO -->
     <script type="application/ld+json">
