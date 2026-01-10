@@ -1,79 +1,91 @@
 ---
-import '../styles/global.css';
-import ThemeToggle from '../components/ThemeToggle.astro';
+import "../styles/global.css";
+import ThemeToggle from "../components/ThemeToggle.astro";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { 
-  title = 'Philipp Schoenegger', 
-  description = 'Research on AI, economics, philosophy, and psychology. Microsoft AI Futures team.'
+const {
+  title = "Philipp Schoenegger",
+  description = "Research on AI, economics, philosophy, and psychology. Microsoft AI Futures team.",
 } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Philipp Schoenegger" />
-    <meta name="keywords" content="Philipp Schoenegger, Philip Schoenegger, Philippe Schoenegger, Philipp Schönegger, Philip Schönegger, Philipp Schonegger, Philip Schonegger, Schoenegger, Schönegger, Microsoft AI, Microsoft AI Futures, AI Futures team, Office of the CEO, artificial intelligence researcher, AI research, AI forecasting, LLM forecasting, large language models, AI evaluations, AI capabilities, AI persuasion, reinforcement learning, RLVR, prompt engineering, frontier AI, AI economics, AI philosophy, AI psychology, machine learning, behavioural science, behavioral economics, decision science, experimental philosophy, forecasting, superforecasting, pro forecaster, prediction markets, judgemental forecasting, AI safety, alignment research, climate psychology, environmental psychology, population ethics" />
-    
+    <meta
+      name="keywords"
+      content="Philipp Schoenegger, Philip Schoenegger, Philippe Schoenegger, Philipp Schönegger, Philip Schönegger, Philipp Schonegger, Philip Schonegger, Schoenegger, Schönegger, Microsoft AI, Microsoft AI Futures, AI Futures team, Office of the CEO, artificial intelligence researcher, AI research, AI forecasting, LLM forecasting, large language models, AI evaluations, AI capabilities, AI persuasion, reinforcement learning, RLVR, prompt engineering, frontier AI, AI economics, AI philosophy, AI psychology, machine learning, behavioural science, behavioral economics, decision science, experimental philosophy, forecasting, superforecasting, pro forecaster, prediction markets, judgemental forecasting, AI safety, alignment research, climate psychology, environmental psychology, population ethics"
+    />
+
     <!-- Security headers (meta fallbacks) -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://philippschoenegger.com" />
-    <meta property="og:image" content="https://philippschoenegger.com/pic.jpg" />
-    
+    <meta
+      property="og:image"
+      content="https://philippschoenegger.com/pic.jpg"
+    />
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://philippschoenegger.com/pic.jpg" />
-    
+    <meta
+      name="twitter:image"
+      content="https://philippschoenegger.com/pic.jpg"
+    />
+
     <!-- Canonical URL -->
     <link rel="canonical" href={Astro.url.href} />
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
+
     <!-- Preload critical resources -->
     <link rel="preload" href="/pic.jpg" as="image" />
-    
+
     <!-- Fonts with optimal loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
-      rel="stylesheet" 
-      media="print" 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
       onload="this.media='all'"
     />
     <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
     </noscript>
-    
+
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#0284c7" />
-    
+
     <title>{title}</title>
 
     <!-- Theme Initialization Script -->
     <script is:inline>
-      const theme = localStorage.getItem('theme');
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      
-      if (theme === 'dark' || (!theme && systemTheme === 'dark')) {
-        document.documentElement.setAttribute('data-theme', 'dark');
+      const theme = localStorage.getItem("theme");
+
+      // Default to Light Mode unless explicitly set to Dark
+      if (theme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
       }
     </script>
   </head>
@@ -100,25 +112,38 @@ const {
         }
       }
     </style>
-    
+
     <!-- Structured data for SEO -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Philipp Schoenegger",
-      "alternateName": ["Philip Schoenegger", "Philipp Schönegger", "Philip Schönegger"],
-      "url": "https://philippschoenegger.com",
-      "jobTitle": "Researcher",
-      "description": "Researcher on AI, economics, philosophy, and psychology at Microsoft AI Futures team",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Microsoft",
-        "department": "AI Futures"
-      },
-      "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Economics", "Philosophy", "Psychology", "Behavioral Science", "AI Safety", "Forecasting"],
-      "sameAs": []
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Philipp Schoenegger",
+        "alternateName": [
+          "Philip Schoenegger",
+          "Philipp Schönegger",
+          "Philip Schönegger"
+        ],
+        "url": "https://philippschoenegger.com",
+        "jobTitle": "Researcher",
+        "description": "Researcher on AI, economics, philosophy, and psychology at Microsoft AI Futures team",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Microsoft",
+          "department": "AI Futures"
+        },
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "Machine Learning",
+          "Economics",
+          "Philosophy",
+          "Psychology",
+          "Behavioral Science",
+          "AI Safety",
+          "Forecasting"
+        ],
+        "sameAs": []
+      }
     </script>
   </body>
 </html>

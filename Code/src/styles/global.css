@@ -291,6 +291,20 @@ a:hover {
   }
 }
 
+/* Dark Mode Button Overrides */
+[data-theme="dark"] .nav-btn {
+  background: white;
+  border-color: transparent;
+  color: black;
+  /* Force black text on white bg for contrast */
+}
+
+[data-theme="dark"] .nav-btn:hover {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+}
+
 /* ============================================================================
    CONTENT CHAPTERS - The journey sections
    ============================================================================ */
