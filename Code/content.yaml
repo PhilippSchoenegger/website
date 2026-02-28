@@ -15,9 +15,9 @@ site:
   title: "Philipp Schoenegger"
   tagline: ""
   intro: |
-    **I work on [Microsoft AI](https://microsoft.ai/)'s Futures team in the Office of the CEO.**
-    
-    My current research focuses on the future impacts of advanced artificial intelligence and relies on judgemental forecasting, survey studies, open model experiments, strategy / policy gaming, modelling and simulation studies, as well as frontier safety analysis.
+    **I am a Futures Researcher on [Microsoft AI](https://microsoft.ai/)'s Futures team in the Office of the CEO.**
+
+    My current work focuses on the future impacts of advanced artificial intelligence and ranges from forecasting, frontier safety analysis, economic modelling and AI security and privacy to large-scale data analysis and policy gaming.
 
     Connect on [Twitter](https://x.com/SchoeneggerPhil), [LinkedIn](https://www.linkedin.com/in/philipp-schoenegger-755117211/), or reach out via email at contact.schoenegger@gmail.com.
 
@@ -133,6 +133,12 @@ sections:
                 coauthors: "Beatriz Costa-Gomes, Sophia Chen, Connie Hsueh, Deborah Morgan, Yash Shah, Sam Way, Yuki Zhu, Timothé Adeline, Michael Bhaskar, Mustafa Suleyman, Seth Spielman"
                 url: "https://arxiv.org/abs/2512.11879"
                 abstract: "We analyze 37.5 million deidentified conversations with Microsoft's Copilot between January and September 2025. Unlike prior analyses of AI usage, we focus not just on what people do with AI, but on how and when they do it. We find that how people use AI depends fundamentally on context and device type. On mobile, health is the dominant topic, which is consistent across every hour and every month we observed - with users seeking not just information but also advice. On desktop, the pattern is strikingly different: work and technology dominate during business hours, with 'Work and Career' overtaking 'Technology' as the top topic precisely between 8 a.m. and 5 p.m. These differences extend to temporal rhythms: programming queries spike on weekdays while gaming rises on weekends, philosophical questions climb during late-night hours, and relationship conversations surge on Valentine's Day. These patterns suggest that users have rapidly integrated AI into the full texture of their lives, as a work aid at their desks and a companion on their phones."
+              - year: 2025
+                title: "Verifiable Semantics for Agent-to-Agent Communication"
+                journal: "arXiv Preprint arXiv:2602.16424"
+                coauthors: "Matt Carlson, Chris Schneider, Chris Daly"
+                url: "https://arxiv.org/abs/2602.16424"
+                abstract: "Multiagent AI systems require consistent communication, but we lack methods to verify that agents share the same understanding of the terms used. Natural language is interpretable but vulnerable to semantic drift, while learned protocols are efficient but opaque. We propose a certification protocol based on the stimulus-meaning model, where agents are tested on shared observable events and terms are certified if empirical disagreement falls below a statistical threshold. In this protocol, agents restricting their reasoning to certified terms ('core-guarded reasoning') achieve provably bounded disagreement. We also outline mechanisms for detecting drift (recertification) and recovering shared vocabulary (renegotiation). In simulations with varying degrees of semantic divergence, core-guarding reduces disagreement by 72-96%. In a validation with fine-tuned language models, disagreement is reduced by 51%. Our framework provides a first step towards verifiable agent-to-agent communication."
 
       # Economics Research
       - id: economics
