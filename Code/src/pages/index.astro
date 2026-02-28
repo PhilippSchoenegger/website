@@ -135,6 +135,19 @@ const cleanDescription = stripMarkdown(site.intro);
         </svg>
       </button>
     </div>
+
+    <!-- Footer -->
+    <footer class="site-footer" id="site-footer" hidden>
+      <div class="footer-content">
+        <span class="footer-name">Philipp Schoenegger</span>
+        <div class="footer-links">
+          <a href="https://x.com/SchoeneggerPhil" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://www.linkedin.com/in/philipp-schoenegger-755117211/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+          <a href="mailto:contact.schoenegger@gmail.com">Email</a>
+        </div>
+      </div>
+    </footer>
   </div>
   
   <!-- Hidden templates for all content sections -->
@@ -985,9 +998,13 @@ const cleanDescription = stripMarkdown(site.intro);
     
     function updateBackToTopVisibility(): void {
       const backToTop = document.getElementById('back-to-top');
+      const footer = document.getElementById('site-footer');
+      const hasChapters = state.chapters.size > 0;
       if (backToTop) {
-        const hasChapters = state.chapters.size > 0;
         backToTop.hidden = !hasChapters;
+      }
+      if (footer) {
+        footer.hidden = !hasChapters;
       }
     }
     

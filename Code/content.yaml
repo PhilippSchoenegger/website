@@ -19,6 +19,8 @@ site:
 
     My current work focuses on the future impacts of advanced artificial intelligence and ranges from forecasting, frontier safety analysis, economic modelling and AI security and privacy to large-scale data analysis and policy gaming.
 
+    Previously, I was a post-doctoral researcher at the [London School of Economics](https://www.lse.ac.uk/) and the [Forecasting Research Institute](https://forecastingresearch.org/), and hold a PhD from the [University of St Andrews](https://www.st-andrews.ac.uk/). I have also worked as a professional forecaster at [Metaculus](https://www.metaculus.com/) and [Swift](https://www.swiftcentre.org/), and led a forecasting team at [Seldon Capital](https://www.seldon.capital/).
+
     Connect on [Twitter](https://x.com/SchoeneggerPhil), [LinkedIn](https://www.linkedin.com/in/philipp-schoenegger-755117211/), [Google Scholar](https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate), or reach out via email at contact.schoenegger@gmail.com.
 
 # ============================================================================
@@ -37,16 +39,16 @@ sections:
       
       So far, I have published 35+ papers (peer-reviewed articles, preprints, book chapters, etc), which have been cited more than 1,600 times with an h-index of 15. See my [Google Scholar](https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate) for a full list of publications.
 
-      There has also been some media coverage of my work in outlets such as [Forbes](https://www.forbes.com/sites/tomasgorny/2024/12/02/should-businesses-trust-ai-to-predict-customer-behaviors/), [BigThink](https://bigthink.com/thinking/anti-natalism-psychopaths-having-children-immoral/), [Süddeutsche Zeitung](https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347), [The Times](https://www.thetimes.co.uk/article/ethics-professors-don-t-walk-the-walk-d7n6097m8), [Psychology Today](https://www.psychologytoday.com/us/blog/unique-everybody-else/202109/are-dark-triad-traits-adaptive), and [Die Zeit](https://www.zeit.de/2021/49/liberalismus-corona-klima-fdp-friedrich-august-von-hayek/komplettansicht).
+      There has also been some media coverage of my work in outlets such as [Forbes](https://www.forbes.com/sites/tomasgorny/2024/12/02/should-businesses-trust-ai-to-predict-customer-behaviors/), [BigThink](https://bigthink.com/thinking/anti-natalism-psychopaths-having-children-immoral/), [Süddeutsche Zeitung](https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347), [The Times](https://www.thetimes.co.uk/article/ethics-professors-don-t-walk-the-walk-d7n6097m8), [Psychology Today](https://www.psychologytoday.com/us/blog/unique-everybody-else/202109/are-dark-triad-traits-adaptive), and [Die Zeit](https://www.zeit.de/2021/49/liberalismus-corona-klima-fdp-friedrich-august-von-hayek/komplettansicht). I have also presented my research at governmental agencies like the [UK Ministry of Defence](https://www.gov.uk/government/organisations/ministry-of-defence), academic institutions like [King's College London](https://www.kcl.ac.uk/) and [INSEAD](https://www.insead.edu/), and business conferences like the [TBD Conference](https://www.thetbdconference.com/).
 
     children:
       # AI Research
       - id: ai
         title: Artificial Intelligence
         intro: |
-          My work in artificial intelligence is largely situated at the intersection of AI and social science and has been published in journals such as [Transactions on Machine Learning Research](https://openreview.net/pdf?id=bbhdeL8EUX) and [ACM Transactions on Interactive Intelligent Systems](https://doi.org/10.1145/3707649). 
+          My work in artificial intelligence is largely situated at the intersection of AI and social science and has been published in journals such as [Transactions on Machine Learning Research](https://openreview.net/pdf?id=bbhdeL8EUX) and [ACM Transactions on Interactive Intelligent Systems](https://doi.org/10.1145/3707649).
 
-          In my papers on AI, I focus on two sets of questions: First, how well AI systems can perform in a set of relevant tasks such as real-world geopolitical and economic forecasting, personality estimation, and persuasion. Second, how AI systems can be improved through posttraining methods such as reinforcement learning from verifiable outcomes and prompt engineering to increase their forecasting capabilities. 
+          In my papers on AI, I focus on three sets of questions: First, how well AI systems can perform in a set of relevant tasks such as real-world geopolitical and economic forecasting, personality estimation, and persuasion. Second, how AI systems can be improved through posttraining methods such as reinforcement learning from verifiable outcomes and prompt engineering to increase their forecasting capabilities. Third, how multiagent AI systems can communicate reliably, including work on verifiable agent-to-agent communication protocols and the analysis of large-scale AI usage patterns.
     
         children:
           - id: ai-evaluations

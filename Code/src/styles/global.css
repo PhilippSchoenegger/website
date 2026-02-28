@@ -881,6 +881,56 @@ a:hover {
 }
 
 /* ============================================================================
+   SITE FOOTER
+   ============================================================================ */
+
+.site-footer {
+  padding: var(--space-lg) var(--chapter-padding);
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.footer-content {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.footer-name {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--color-accent);
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ============================================================================
    DARK MODE (future enhancement)
    ============================================================================ */
 
