@@ -30,7 +30,7 @@ const sortedPubs = [...publications].sort((a, b) => b.year - a.year);
       )}
       <details class="publication-abstract">
         <summary class="abstract-toggle">+ Abstract</summary>
-        <div class="abstract-body">{pub.abstract ?? 'This is the abstrct'}</div>
+        <div class="abstract-body">{pub.abstract ?? 'Abstract not available.'}</div>
       </details>
     </article>
   ))}

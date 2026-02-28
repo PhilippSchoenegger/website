@@ -19,7 +19,7 @@ site:
 
     My current work focuses on the future impacts of advanced artificial intelligence and ranges from forecasting, frontier safety analysis, economic modelling and AI security and privacy to large-scale data analysis and policy gaming.
 
-    Connect on [Twitter](https://x.com/SchoeneggerPhil), [LinkedIn](https://www.linkedin.com/in/philipp-schoenegger-755117211/), or reach out via email at contact.schoenegger@gmail.com.
+    Connect on [Twitter](https://x.com/SchoeneggerPhil), [LinkedIn](https://www.linkedin.com/in/philipp-schoenegger-755117211/), [Google Scholar](https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate), or reach out via email at contact.schoenegger@gmail.com.
 
 # ============================================================================
 # MAIN NAVIGATION SECTIONS
@@ -35,7 +35,7 @@ sections:
       
       My work has been published specialist journals such as [Journal of Behavioral and Experimental Economics](https://www.sciencedirect.com/science/article/abs/pii/S2214804323000149), [Transactions on Machine Learning Research](https://openreview.net/pdf?id=bbhdeL8EUX), and [Environmental Psychology](https://www.sciencedirect.com/science/article/pii/S0272494424000616), as well as generalist journals like [Science Advances](https://doi.org/10.1126/sciadv.adp1528) and [Nature Communications](https://doi.org/10.1038/s41467-021-27668-9). 
       
-      So far, I have published 36 papers (peer-reviewed articles, preprints, book chapters, etc), which have been cited more than 1,500 times with an h-index of 15. See my [Google Scholar](https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate) for a full list of publications.
+      So far, I have published 35+ papers (peer-reviewed articles, preprints, book chapters, etc), which have been cited more than 1,600 times with an h-index of 15. See my [Google Scholar](https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate) for a full list of publications.
 
       There has also been some media coverage of my work in outlets such as [Forbes](https://www.forbes.com/sites/tomasgorny/2024/12/02/should-businesses-trust-ai-to-predict-customer-behaviors/), [BigThink](https://bigthink.com/thinking/anti-natalism-psychopaths-having-children-immoral/), [Süddeutsche Zeitung](https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347), [The Times](https://www.thetimes.co.uk/article/ethics-professors-don-t-walk-the-walk-d7n6097m8), [Psychology Today](https://www.psychologytoday.com/us/blog/unique-everybody-else/202109/are-dark-triad-traits-adaptive), and [Die Zeit](https://www.zeit.de/2021/49/liberalismus-corona-klima-fdp-friedrich-august-von-hayek/komplettansicht).
 
@@ -126,6 +126,8 @@ sections:
             title: Other
             intro: |
               With teams at Microsoft AI, we conducted a descriptive analysis of Copilot usage patterns throughout 2025, examining temporal and modal dynamics of how users interact with AI assistants. We find that usage patterns vary significantly by device type and context, with mobile users focusing on health-related topics consistently across time, while desktop users exhibit work and technology-related queries that align with business hours. These findings highlight the integration of AI into various facets of daily life, serving as both a professional tool and a personal companion.
+
+              In other work, we propose a certification protocol for verifiable agent-to-agent communication, addressing the challenge that multiagent AI systems lack methods to verify shared understanding of terms. Based on a stimulus-meaning model, agents are tested on shared observable events and terms are certified when empirical disagreement falls below a statistical threshold. In simulations, core-guarded reasoning reduces disagreement by 72-96%, and by 51% in a validation with fine-tuned language models.
             publications:
               - year: 2025
                 title: "It's About Time: The Temporal and Modal Dynamics of Copilot Usage"
