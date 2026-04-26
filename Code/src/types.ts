@@ -20,6 +20,7 @@ export interface Publication {
   coauthors?: string;
   url?: string;
   abstract?: string;
+  featured?: boolean;
 }
 
 export interface NavItem {

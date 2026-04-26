@@ -32,6 +32,22 @@ function flattenItems(items: any[], parentPath: string[] = []): any[] {
 
 const allItems = flattenItems(sections);
 
+// Collect featured publications across all sections
+function collectFeatured(items: any[]): any[] {
+  const result: any[] = [];
+  for (const item of items) {
+    if (item.publications) {
+      for (const pub of item.publications) {
+        if (pub.featured) result.push(pub);
+      }
+    }
+    if (item.children) result.push(...collectFeatured(item.children));
+  }
+  return result;
+}
+
+const featuredPapers = collectFeatured(sections).sort((a, b) => b.year - a.year);
+
 // Create a map of path -> title for breadcrumb lookups
 const pathToTitle = new Map<string, string>();
 for (const item of allItems) {
@@ -104,7 +120,29 @@ const cleanDescription = stripMarkdown(site.intro);
         <p class="hero-tagline" set:html={taglineHtml}></p>
         <div class="hero-intro" set:html={introHtml}></div>
       </div>
-      
+
+      {featuredPapers.length > 0 && (
+        <section class="featured-papers" aria-labelledby="featured-papers-heading">
+          <h2 class="featured-papers-heading" id="featured-papers-heading">Recent Work at Microsoft AI</h2>
+          <div class="featured-papers-grid">
+            {featuredPapers.map((pub: any) => (
+              <article class="featured-paper-card">
+                <div class="featured-paper-year">{pub.year}</div>
+                <h3 class="featured-paper-title">
+                  {pub.url ? (
+                    <a href={pub.url} target="_blank" rel="noopener noreferrer">{pub.title}</a>
+                  ) : (
+                    pub.title
+                  )}
+                </h3>
+                {pub.journal && <div class="featured-paper-journal">{pub.journal}</div>}
+                {pub.coauthors && <div class="featured-paper-coauthors">with {pub.coauthors}</div>}
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       <!-- Root navigation - always visible -->
       <nav class="chapter-nav" aria-label="Main sections">
         <div class="nav-buttons">

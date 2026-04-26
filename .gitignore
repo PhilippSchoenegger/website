@@ -24,3 +24,6 @@ pnpm-debug.log*
 .idea/
 *.docx
 *.png
+
+# CV drafts (local only)
+cv/
