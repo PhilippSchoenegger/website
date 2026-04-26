@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page not found — Philipp Schoenegger"
+  description="The page you were looking for could not be found."
+>
+  <main class="not-found">
+    <h1 class="not-found-code">404</h1>
+    <p class="not-found-message">The page you were looking for could not be found.</p>
+    <a href="/" class="not-found-link">← Back to home</a>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--chapter-padding);
+    text-align: center;
+    gap: var(--space-md);
+  }
+
+  .not-found-code {
+    font-size: clamp(4rem, 12vw, 7rem);
+    font-weight: 700;
+    color: var(--color-accent);
+    margin: 0;
+    letter-spacing: -0.04em;
+  }
+
+  .not-found-message {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    max-width: 500px;
+    margin: 0;
+  }
+
+  .not-found-link {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-sm) var(--space-lg);
+    background: white;
+    border: 2px solid var(--color-border);
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-top: var(--space-md);
+    transition: all var(--transition-normal);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .not-found-link:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -8px rgba(9, 105, 218, 0.3);
+  }
+
+  [data-theme="dark"] .not-found-link {
+    background: white;
+    color: black;
+    border-color: transparent;
+  }
+
+  [data-theme="dark"] .not-found-link:hover {
+    background: var(--color-accent);
+    color: white;
+  }
+</style>

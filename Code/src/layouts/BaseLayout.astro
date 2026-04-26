@@ -20,34 +20,26 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Philipp Schoenegger" />
-    <meta
-      name="keywords"
-      content="Philipp Schoenegger, Philip Schoenegger, Philippe Schoenegger, Philipp Schönegger, Philip Schönegger, Philipp Schonegger, Philip Schonegger, Schoenegger, Schönegger, Microsoft AI, Microsoft AI Futures, AI Futures team, Office of the CEO, artificial intelligence researcher, AI research, AI forecasting, LLM forecasting, large language models, AI evaluations, AI capabilities, AI persuasion, reinforcement learning, RLVR, prompt engineering, frontier AI, AI economics, AI philosophy, AI psychology, machine learning, behavioural science, behavioral economics, decision science, experimental philosophy, forecasting, superforecasting, pro forecaster, judgemental forecasting, AI safety, alignment research, climate psychology, environmental psychology, population ethics"
-    />
-
-    <!-- Security headers (meta fallbacks) -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://philippschoenegger.com" />
-    <meta
-      property="og:image"
-      content="https://philippschoenegger.com/pic.jpg"
-    />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:site_name" content="Philipp Schoenegger" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content="https://philippschoenegger.com/pic.jpg" />
+    <meta property="og:image:width" content="1619" />
+    <meta property="og:image:height" content="1080" />
+    <meta property="og:image:alt" content="Portrait of Philipp Schoenegger" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta
-      name="twitter:image"
-      content="https://philippschoenegger.com/pic.jpg"
-    />
+    <meta name="twitter:image" content="https://philippschoenegger.com/pic.jpg" />
+    <meta name="twitter:image:alt" content="Portrait of Philipp Schoenegger" />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={Astro.url.href} />
