@@ -5,11 +5,13 @@ import ThemeToggle from "../components/ThemeToggle.astro";
 interface Props {
   title?: string;
   description?: string;
+  scholarlyArticles?: any[];
 }
 
 const {
-  title = "Philipp Schoenegger",
-  description = "Research on AI, economics, philosophy, and psychology. Microsoft AI Futures team.",
+  title = "Philipp Schoenegger — Futures Researcher, Microsoft AI",
+  description = "Philipp Schoenegger — Futures Researcher at Microsoft AI. Research on AI evaluations, frontier safety, AI usage, forecasting, and behavioural science.",
+  scholarlyArticles = [],
 } = Astro.props;
 ---
 
@@ -30,8 +32,8 @@ const {
     <meta property="og:site_name" content="Philipp Schoenegger" />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:image" content="https://philippschoenegger.com/pic.jpg" />
-    <meta property="og:image:width" content="1619" />
-    <meta property="og:image:height" content="1080" />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="800" />
     <meta property="og:image:alt" content="Portrait of Philipp Schoenegger" />
 
     <!-- Twitter -->
@@ -106,40 +108,105 @@ const {
     </style>
 
     <!-- Structured data for SEO -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Philipp Schoenegger",
-        "alternateName": [
-          "Philip Schoenegger",
-          "Philipp Schönegger",
-          "Philip Schönegger"
-        ],
-        "url": "https://philippschoenegger.com",
-        "jobTitle": "Futures Researcher",
-        "description": "Futures Researcher on AI, economics, philosophy, and psychology at Microsoft AI Futures team",
-        "worksFor": {
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Philipp Schoenegger",
+      "alternateName": [
+        "Philip Schoenegger",
+        "Philipp Schönegger",
+        "Philip Schönegger"
+      ],
+      "url": "https://philippschoenegger.com",
+      "image": "https://philippschoenegger.com/pic.jpg",
+      "jobTitle": "Futures Researcher",
+      "description": "Futures Researcher on Microsoft AI's Futures team in the Office of the CEO, working within Microsoft Superintelligence. Research on AI evaluations, frontier safety, forecasting, and behavioural science.",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "ORCID",
+        "value": "0000-0001-9930-487X"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Microsoft AI",
+        "url": "https://microsoft.ai/",
+        "department": {
           "@type": "Organization",
-          "name": "Microsoft",
-          "department": "AI Futures"
+          "name": "Futures team, Office of the CEO"
+        }
+      },
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Microsoft AI",
+          "url": "https://microsoft.ai/"
+        }
+      ],
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "University of St Andrews",
+          "url": "https://www.st-andrews.ac.uk/"
         },
-        "knowsAbout": [
-          "Artificial Intelligence",
-          "Machine Learning",
-          "Economics",
-          "Philosophy",
-          "Psychology",
-          "Behavioral Science",
-          "AI Safety",
-          "Forecasting"
-        ],
-        "sameAs": [
-          "https://x.com/SchoeneggerPhil",
-          "https://www.linkedin.com/in/philipp-schoenegger-755117211/",
-          "https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate"
-        ]
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Graz",
+          "url": "https://www.uni-graz.at/"
+        }
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Researcher",
+        "occupationLocation": {
+          "@type": "Organization",
+          "name": "Microsoft AI"
+        }
+      },
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "AI Evaluations",
+        "AI Usage Analysis",
+        "Frontier AI Safety",
+        "AI Security and Privacy",
+        "Large Language Models",
+        "Machine Learning",
+        "Behavioural Economics",
+        "Decision Science",
+        "Experimental Philosophy",
+        "Social Psychology",
+        "Forecasting",
+        "Superforecasting",
+        "Judgemental Forecasting"
+      ],
+      "award": [
+        "Runner-up, 2025 Best Paper Award (ACM Transactions on Interactive Intelligent Systems)"
+      ],
+      "sameAs": [
+        "https://x.com/SchoeneggerPhil",
+        "https://www.linkedin.com/in/philipp-schoenegger-755117211/",
+        "https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate",
+        "https://orcid.org/0000-0001-9930-487X"
+      ]
+    })} />
+
+    <!-- WebSite schema for sitelinks search box -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Philipp Schoenegger",
+      "url": "https://philippschoenegger.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://scholar.google.com/scholar?q=Schoenegger+{search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
       }
-    </script>
+    })} />
+
+    {scholarlyArticles.length > 0 && scholarlyArticles.map((article: any) => (
+      <script type="application/ld+json" set:html={JSON.stringify(article)} />
+    ))}
   </body>
 </html>

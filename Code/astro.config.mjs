@@ -4,7 +4,11 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://philippschoenegger.com',
-  integrations: [sitemap()],
+  integrations: [sitemap({
+    changefreq: 'monthly',
+    priority: 0.7,
+    lastmod: new Date(),
+  })],
   
   // Build optimizations
   build: {

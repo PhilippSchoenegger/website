@@ -48,6 +48,49 @@ function collectFeatured(items: any[]): any[] {
 
 const featuredPapers = collectFeatured(sections).sort((a, b) => b.year - a.year);
 
+// Collect all publications across all sections for ScholarlyArticle JSON-LD
+function collectAllPublications(items: any[]): any[] {
+  const result: any[] = [];
+  for (const item of items) {
+    if (item.publications) result.push(...item.publications);
+    if (item.children) result.push(...collectAllPublications(item.children));
+  }
+  return result;
+}
+
+const allPublications = collectAllPublications(sections);
+
+// Build ScholarlyArticle JSON-LD entries for each publication
+const scholarlyArticles = allPublications.map((pub: any) => {
+  const authors = [{ "@type": "Person", "name": "Philipp Schoenegger" }];
+  if (pub.coauthors) {
+    const coauthorList = pub.coauthors
+      .split(/,\s*(?![^()]*\))/)
+      .map((name: string) => name.trim())
+      .filter((name: string) => name.length > 0 && !name.startsWith("..."));
+    for (const name of coauthorList) {
+      authors.push({ "@type": "Person", "name": name });
+    }
+  }
+  const article: any = {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "name": pub.title,
+    "headline": pub.title,
+    "datePublished": String(pub.year),
+    "author": authors,
+  };
+  if (pub.url) article.url = pub.url;
+  if (pub.journal) {
+    article.isPartOf = {
+      "@type": "Periodical",
+      "name": pub.journal.replace(/\s*\(.*?\)$/, ""),
+    };
+  }
+  if (pub.abstract) article.abstract = pub.abstract;
+  return article;
+});
+
 // Create a map of path -> title for breadcrumb lookups
 const pathToTitle = new Map<string, string>();
 for (const item of allItems) {
@@ -87,22 +130,10 @@ const addLinkTargets = (html: string) =>
 const introHtml = addLinkTargets(marked.parse(site.intro.trim()));
 const taglineHtml = addLinkTargets(marked.parse(site.tagline.trim()));
 
-// Strip markdown formatting for clean meta descriptions
-const stripMarkdown = (text: string) =>
-  text
-    .replace(/\*\*(.+?)\*\*/g, '$1') // Remove bold
-    .replace(/\*(.+?)\*/g, '$1') // Remove italic
-    .replace(/\[(.+?)\]\(.+?\)/g, '$1') // Remove links, keep text
-    .replace(/`(.+?)`/g, '$1') // Remove code formatting
-    .replace(/^#+\s+/gm, '') // Remove headings
-    .replace(/\n{2,}/g, ' ') // Replace multiple newlines with space
-    .replace(/\n/g, ' ') // Replace single newlines with space
-    .trim();
-
-const cleanDescription = stripMarkdown(site.intro);
+const homepageDescription = "Philipp Schoenegger — Futures Researcher at Microsoft AI's Futures team within Microsoft Superintelligence. Research on AI evaluations, frontier safety, AI usage analysis, forecasting, and behavioural science.";
 ---
 
-<BaseLayout title="Philipp Schoenegger" description={cleanDescription}>
+<BaseLayout title="Philipp Schoenegger — Futures Researcher, Microsoft AI" description={homepageDescription} scholarlyArticles={scholarlyArticles}>
   <div class="journey-wrapper" id="journey-wrapper">
     
     <!-- Hero: The starting point -->
