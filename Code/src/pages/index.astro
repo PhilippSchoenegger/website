@@ -213,7 +213,7 @@ const homepageDescription = "Philipp Schoenegger — Futures Researcher at Micro
           <a href="https://x.com/SchoeneggerPhil" target="_blank" rel="noopener noreferrer">Twitter</a>
           <a href="https://www.linkedin.com/in/philipp-schoenegger-755117211/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-          <a href="mailto:contact.schoenegger@gmail.com">Email</a>
+          <a id="contact-email" href="#" aria-label="Email Philipp Schoenegger">Email</a>
         </div>
       </div>
     </footer>
@@ -1152,6 +1152,14 @@ const homepageDescription = "Philipp Schoenegger — Futures Researcher at Micro
       
       // Load from URL on page load
       loadFromURL();
+
+      // Wire up the contact email link without exposing the address as a substring in the source HTML
+      const emailLink = document.getElementById('contact-email');
+      if (emailLink instanceof HTMLAnchorElement) {
+        const user = ['contact', 'schoenegger'].join('.');
+        const domain = ['gmail', 'com'].join('.');
+        emailLink.href = 'mailto:' + user + '@' + domain;
+      }
     }
     
     document.addEventListener('DOMContentLoaded', init);

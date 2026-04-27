@@ -27,3 +27,6 @@ pnpm-debug.log*
 
 # CV drafts (local only)
 cv/
+
+# Claude Code session/config (local only)
+.claude/
