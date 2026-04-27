@@ -638,6 +638,7 @@ a:hover {
   margin-bottom: var(--space-sm);
   letter-spacing: -0.01em;
   line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .chapter-period {
