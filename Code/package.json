@@ -11,8 +11,8 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
     "@types/js-yaml": "^4.0.9",
-    "astro": "^6.1.9",
+    "astro": "^6.2.1",
     "js-yaml": "^4.1.1",
-    "marked": "^18.0.2"
+    "marked": "^18.0.3"
   }
 }
