@@ -21,6 +21,7 @@ export interface Publication {
   url?: string;
   abstract?: string;
   featured?: boolean;
+  featuredOrder?: number;
 }
 
 export interface NavItem {

@@ -19,7 +19,7 @@ site:
 
     My current work focuses on the future impacts of advanced artificial intelligence. This includes judgemental forecasting, frontier safety analysis, economic modelling, AI security and privacy research, large-scale data analysis of AI usage, and strategy and policy gaming exercises.
 
-    I have published 40 papers (peer-reviewed articles, preprints, book chapters, etc), which have been cited more than 1,900 times with an h-index of 16 and an i10-index of 20.
+    I have published 42 papers (peer-reviewed articles, preprints, book chapters, etc), which have been cited 2,034 times with an h-index of 16 and an i10-index of 23.
 
     Connect on [Twitter](https://x.com/SchoeneggerPhil), [LinkedIn](https://www.linkedin.com/in/philipp-schoenegger-755117211/), [Google Scholar](https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate), or reach out via email at contact.schoenegger&#64;gmail.com.
 
@@ -37,7 +37,7 @@ sections:
       
       My work has been published specialist journals such as [Journal of Behavioral and Experimental Economics](https://www.sciencedirect.com/science/article/abs/pii/S2214804323000149), [Transactions on Machine Learning Research](https://openreview.net/pdf?id=bbhdeL8EUX), and [Environmental Psychology](https://www.sciencedirect.com/science/article/pii/S0272494424000616), as well as generalist journals like [Science Advances](https://doi.org/10.1126/sciadv.adp1528) and [Nature Communications](https://doi.org/10.1038/s41467-021-27668-9). 
       
-      So far, I have published 40 papers (peer-reviewed articles, preprints, book chapters, etc), which have been cited more than 1,900 times with an h-index of 16 and an i10-index of 20. We have also filed one US patent application. See my [Google Scholar](https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate) for a full list of publications.
+      So far, I have published 42 papers (peer-reviewed articles, preprints, book chapters, etc), which have been cited 2,034 times with an h-index of 16 and an i10-index of 23. We have also filed one US patent application. See my [Google Scholar](https://scholar.google.com/citations?hl=en&user=kDAq8DcAAAAJ&view_op=list_works&sortby=pubdate) for a full list of publications.
 
       There has also been some media coverage of my work in outlets such as [Forbes](https://www.forbes.com/sites/tomasgorny/2024/12/02/should-businesses-trust-ai-to-predict-customer-behaviors/), [BigThink](https://bigthink.com/thinking/anti-natalism-psychopaths-having-children-immoral/), [Süddeutsche Zeitung](https://www.sueddeutsche.de/politik/ethik-einsicht-und-konsequenz-1.4378347), [The Times](https://www.thetimes.co.uk/article/ethics-professors-don-t-walk-the-walk-d7n6097m8), [Psychology Today](https://www.psychologytoday.com/us/blog/unique-everybody-else/202109/are-dark-triad-traits-adaptive), and [Die Zeit](https://www.zeit.de/2021/49/liberalismus-corona-klima-fdp-friedrich-august-von-hayek/komplettansicht). I have also presented my research at governmental agencies like the [UK Ministry of Defence](https://www.gov.uk/government/organisations/ministry-of-defence), academic institutions like [King's College London](https://www.kcl.ac.uk/) and [INSEAD](https://www.insead.edu/), and business conferences like the [TBD Conference](https://www.thetbdconference.com/).
 
@@ -48,7 +48,7 @@ sections:
         intro: |
           My work in artificial intelligence is largely situated at the intersection of AI and social science and has been published in journals such as [Transactions on Machine Learning Research](https://openreview.net/pdf?id=bbhdeL8EUX) and [ACM Transactions on Interactive Intelligent Systems](https://doi.org/10.1145/3707649).
 
-          In my papers on AI, I focus on four sets of questions: First, how well AI systems can perform in a set of relevant tasks such as real-world geopolitical and economic forecasting, personality estimation, and persuasion. Second, how AI systems can be improved through posttraining methods such as reinforcement learning from verifiable outcomes, prompt engineering, and composable adapter architectures for personalisation. Third, frontier safety and security risks of advanced AI systems, including verifiable agent-to-agent communication protocols and risks from AI systems that elicit consciousness attribution from users. Fourth, how people actually use conversational AI in practice, drawing on large-scale analyses of usage patterns including dedicated work on health-related queries.
+          In my papers on AI, I focus on four sets of questions: First, how well AI systems can perform in a set of relevant tasks such as real-world geopolitical and economic forecasting, personality estimation, and persuasion. Second, how AI systems can be improved through posttraining methods such as reinforcement learning from verifiable outcomes, prompt engineering, and composable adapter architectures for personalisation. Third, frontier safety and security risks of advanced AI systems, including multi-tool agent chains, verifiable agent-to-agent communication, and risks from systems that elicit consciousness attribution from users. Fourth, how people actually use conversational AI in practice, drawing on large-scale analyses of usage patterns including dedicated work on health-related queries.
     
         children:
           - id: ai-evaluations
@@ -127,6 +127,7 @@ sections:
                 abstract: "Large language model performance can be improved in a large number of ways. Many such techniques, like fine-tuning or advanced tool usage, are time-intensive and expensive. Although prompt engineering is significantly cheaper and often works for simpler tasks, it remains unclear whether prompt engineering suffices for more complex domains like forecasting. Here we show that small prompt modifications rarely boost forecasting accuracy beyond a minimal baseline. In our first study, we tested 38 prompts across Claude 3.5 Sonnet, Claude 3.5 Haiku, GPT-4o, and Llama 3.1 405B. In our second, we introduced compound prompts and prompts from external sources, also including the reasoning models o1 and o1-mini. Our results show that most prompts lead to negligible gains, although references to base rates yield slight benefits. Surprisingly, some strategies showed strong negative effects on accuracy: especially encouraging the model to engage in Bayesian reasoning. These results suggest that, in the context of complex tasks like forecasting, basic prompt refinements alone offer limited gains, implying that more robust or specialized techniques may be required for substantial performance improvements in AI forecasting."
               - year: 2026
                 featured: true
+                featuredOrder: 3
                 title: "Separable Expert Architecture: Toward Privacy-Preserving LLM Personalization via Composable Adapters and Deletable User Proxies"
                 journal: "arXiv Preprint arXiv:2604.21571"
                 coauthors: "Chris Schneider, Ben Bariach"
@@ -136,21 +137,25 @@ sections:
           - id: ai-frontier-safety
             title: Frontier Safety & Security
             intro: |
-              My work on frontier safety and security focuses on emerging risks from advanced AI systems and on technical mechanisms for making multiagent AI safer and more reliable.
+              My work on frontier safety and security focuses on emerging risks from advanced AI systems and technical mechanisms for making multiagent and multi-tool AI safer and more reliable.
 
-              In our work on Seemingly Conscious AI (SCAI), we develop a unified framework connecting empirical hallmarks of consciousness attribution to a structured taxonomy of risks from AI systems that lead users to perceive them as conscious. We identify five hallmarks of SCAI spanning affective capacity, anthropomorphic features, autonomous action, self-reflective behaviour, and social-interactive behaviour, and develop a taxonomy of risks spanning individual harms (such as emotional dependence and autonomy erosion) and societal-level harms (such as human status erosion and political strife). An accompanying expert survey suggests that risks to individuals are already observable and high-probability, while societal risks, though lower-probability, carry high potential severity and path-dependence.
-
-              In other work, we propose a certification protocol for verifiable agent-to-agent communication, addressing the challenge that multiagent AI systems lack methods to verify shared understanding of terms. Based on a stimulus-meaning model, agents are tested on shared observable events and terms are certified when empirical disagreement falls below a statistical threshold. In simulations, core-guarded reasoning reduces disagreement by 72-96%, and by 51% in a validation with fine-tuned language models.
+              In our work on Seemingly Conscious AI, we identify five hallmarks that lead users to perceive AI systems as conscious and develop a taxonomy of individual and societal risks. In related technical work, we propose both a certification protocol for verifiable agent-to-agent communication and a two-phase security approach that composes per-tool policies before execution and tracks data sensitivity at runtime.
             publications:
               - year: 2026
                 featured: true
+                featuredOrder: 2
                 title: "Seemingly Conscious AI Risks"
                 journal: "Available at SSRN"
                 coauthors: "Ben Bariach, Michael Bhaskar, Mustafa Suleyman"
                 url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6588659"
                 abstract: "AI systems are increasingly designed in ways that lead users to perceive them as conscious. This paper provides a unified framework connecting empirical hallmarks of consciousness attribution to a structured risk taxonomy of Seemingly Conscious AI (SCAI), AI systems that exhibit hallmarks which elicit consciousness attribution from users. We survey the empirical literature to identify five such hallmarks of SCAI, spanning affective capacity, anthropomorphic features, autonomous action, self-reflective behavior, and social-interactive behavior. These provide observable, system-level proxies for this inherently subjective phenomenon, informing its design and enabling its empirical study. Drawing on this foundation, we develop a taxonomy of SCAI risks spanning risks to individuals, including emotional dependence and autonomy erosion, and societal-level harms, including human status erosion and political strife. We complement this conceptual analysis with an expert survey to assess the likelihood of each risk category. We find that risks to individuals, particularly emotional dependence and autonomy erosion, are already observable and rated as high probability, while societal risks, at a low probability, carry high potential severity and path-dependence. The single perceptual mechanism of consciousness attribution is shown to generate this heterogeneous risk surface. We then discuss the implications of these risks and map the multidisciplinary research gaps in this nascent field to inform its research agenda."
               - year: 2026
-                featured: true
+                title: "Securing Multi-Tool AI Agent Chains With Dynamic, Real-Time Compositional Policies"
+                journal: "arXiv Preprint arXiv:2607.03423"
+                coauthors: "Chris Schneider, Kriti Faujdar, Ben Bariach"
+                url: "https://arxiv.org/abs/2607.03423"
+                abstract: "AI agents increasingly chain multiple tools at runtime, creating security risks that per-tool guardrails cannot address. We propose the Dynamic Security Control Compositor (DSCC), which first combines per-tool policies into the most restrictive effective policy and then tracks the sensitivity of data used during the session. Evaluation on 32 tools governed by 16 NIST SP 800-53-aligned policies shows that the approach blocks incompatible combinations before execution and revokes sessions when accumulated exposure would make a later call violate policy."
+              - year: 2026
                 title: "Verifiable Semantics for Agent-to-Agent Communication"
                 journal: "arXiv Preprint arXiv:2602.16424"
                 coauthors: "Matt Carlson, Chris Schneider, Chris Daly"
@@ -160,10 +165,18 @@ sections:
           - id: ai-usage
             title: AI Usage
             intro: |
-              My work on AI usage analyses large-scale data from conversational AI products to understand how people actually use these systems in practice. With teams at Microsoft AI, we conducted a descriptive analysis of Copilot usage patterns throughout 2025, examining temporal and modal dynamics of how users interact with AI assistants. We find that usage patterns vary significantly by device type and context, with mobile users focusing on health-related topics consistently across time, while desktop users exhibit work and technology-related queries that align with business hours. These findings highlight the integration of AI into various facets of daily life, serving as both a professional tool and a personal companion.
+              My work on AI usage analyses large-scale conversational AI data to understand how people use these systems in practice. Across 37.5 million Copilot conversations, we find that usage varies by device and context: mobile users focus more on health, while desktop use centres on work and technology during business hours.
 
-              In a related study focused specifically on health-related queries, we analyse over 500,000 de-identified health conversations with Microsoft Copilot. Using a hierarchical intent taxonomy validated against expert human annotation, we find that nearly one in five conversations involve personal symptom assessment or condition discussion, that one in seven personal health queries concern someone other than the user (such as a child, a parent, or a partner), and that personal symptom and emotional health queries increase markedly during evening and nighttime hours when traditional healthcare is most limited. These patterns have direct implications for platform-specific design, safety considerations, and the responsible development of health AI.
+              Our health research first analyses more than 500,000 conversations to characterize what people ask, who they ask about, and how queries vary by device and time. A global follow-up analyses 1.7 million health-related conversations across 109 countries and regions, finding that institutional trust predicts usage intensity, while development and health-system characteristics predict the composition of queries.
             publications:
+              - year: 2026
+                featured: true
+                featuredOrder: 1
+                title: "Global analysis of country-level factors associated with chatbot usage for health"
+                journal: "Nature Health"
+                coauthors: "Beatriz Costa-Gomes, Pavel Tolmachev, Lukas Wiedemann, Xiaoxuan Liu, Deborah Morgan, Viknesh Sounderajah, Christopher Kelly, Michael Bhaskar, Dominic King, Mustafa Suleyman"
+                url: "https://www.nature.com/articles/s44360-026-00174-2"
+                abstract: "Consumer chatbots are often used for health, but the pattern of use across countries is not well understood. Using 1.7 million de-identified Microsoft Copilot health conversations spanning 109 countries and regions, we examine both the relative frequency of health conversations and the mix of eight user intents. The predictors differ across these outcomes: weaker confidence in hospitals is linked to greater health use, whereas development, demographics, and health-system conditions are more closely linked to whether queries concern broad information or specific clinical and navigation needs."
               - year: 2026
                 title: "Public Use of a Generalist LLM Chatbot for Health Queries"
                 journal: "Nature Health"
