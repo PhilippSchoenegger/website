@@ -9,10 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/sitemap": "^3.7.3",
     "@types/js-yaml": "^4.0.9",
     "astro": "^6.1.9",
     "js-yaml": "^4.1.1",
-    "marked": "^18.0.2"
+    "marked": "^18.0.6"
   }
 }
